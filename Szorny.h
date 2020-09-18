@@ -8,14 +8,13 @@ using namespace std;
 class Szorny
 {
 public:
-	Szorny(string a, int b, int c):nev(a),hp(b),dmg(c) {}
+	Szorny(string nev, int hp, int dmg):nev(nev),hp(hp),dmg(dmg) {}
 	int getDmg()const;
 	int getHp()const;
 	string getName()const;
-	void kiir()const;
-	void tamad(Szorny &);
+	void tamad(Szorny &)const;
 private:
-    string nev;
+    const string nev;
 	int hp;
 	int dmg;
 

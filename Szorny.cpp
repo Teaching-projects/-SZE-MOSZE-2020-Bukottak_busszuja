@@ -9,7 +9,7 @@ int Szorny::getHp()const {
 	return hp;
 }
 
-string Szorny::getName()const {
+std::string Szorny::getName()const {
 	return nev;
 }
 

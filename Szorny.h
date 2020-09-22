@@ -14,6 +14,6 @@ public:
 private:
     const std::string nev;
 	int hp;
-	int dmg;
+	const int dmg;
 
 };

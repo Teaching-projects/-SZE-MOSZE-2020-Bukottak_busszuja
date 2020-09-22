@@ -2,9 +2,8 @@
 #include <stdexcept>
 #include <string>
 
-int sti(char* c)
-{
-std::string arg = c;
+int sti(char* c) {
+    std::string arg = c;
     try {
         std::size_t pos;
         int x = std::stoi(arg, &pos);

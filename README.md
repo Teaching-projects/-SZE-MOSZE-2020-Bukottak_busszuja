@@ -1,1 +1,4 @@
 # -SZE-MOSZE-2020-Bukottak_busszuja
+
+A feladat objektum-orientált módon történő megoldásához egy Szörny osztályt definiáltunk. Ennek van 3 kívülről nem módosítható paramétere(név,életpont,sebzés), amit kontruktorral lehet megadni. Kívülről ezeket az adattagokat külön függvényekkel le lehet kérni, továbbá van az osztálynak egy darab a kiiratásért felelős függvénye. A Szörnynek egyelőre az egyetlen képessége, hogy képes rátámadni egy másik szörnyre. Ha meghívjuk ezt a függvényt, akkor a támadó szörny a sebzését levonja a megtámadott szörny életpontjából, aki azonnal vissza támad. Addig csökkenti a 2 szörny egymás életpontját, amíg az el nem fogy. A kiiratás függvényt használva lekövethetjük a teljes csatát. Végül elágazások segítségével arra rávizsgálunk, hogy melyik szörny is nyert és kiírjuk a kimenetre az eredményt.
+Végül a main-ben létrehozunk 2 Szörny objektumot és az egyikkel megtámadjuk a másikat.

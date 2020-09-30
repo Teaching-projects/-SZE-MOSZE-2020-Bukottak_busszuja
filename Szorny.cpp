@@ -18,15 +18,17 @@ void Szorny::tamad(Szorny & a)const {
 	if (a.hp < 0) a.hp = 0;
 }
 
-void Szorny::parseUnit(std::ifstream & f) {
+Szorny Szorny::parseUnit(std::string fajlnev) {
+	int hp, dmg;
+	std::string nev;
 	std::vector<std::string> v;
+	std::ifstream f(fajlnev);
 	std::string sor = "";
 	while (!f.eof()) {
 		getline(f, sor);
 		v.push_back(sor);
 	}
 	f.close();
-	sor = "";
 	for (int i = 12; i < v[1].size() - 2; i++) {
 		sor = sor + v[1][i];
 	}
@@ -43,5 +45,6 @@ void Szorny::parseUnit(std::ifstream & f) {
 	}
 	j = stoi(sor);
 	dmg = j;
+	return Szorny(nev, hp, dmg);
 }
-
+	

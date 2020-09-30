@@ -20,9 +20,11 @@ int sti(char* c)
     return 0;
 }
 
-int main(int argc, char **argv) {
-    Szorny s1;
-    Szorny s2;
+void kiir(const Szorny &s) {
+	std::cout << s.getName() << ": HP: " << s.getHp() << ", DMG: " << s.getDmg() << std::endl;
+}
+
+int main(int argc,char ** argv) {
     try {
         std::ifstream f1, f2;
         f1.open(argv[1]);
@@ -30,9 +32,8 @@ int main(int argc, char **argv) {
         if (!f1.good() || !f2.good())
             throw 56;
         else {
-            s1.parseUnit(f1);
-            s2.parseUnit(f2);
-
+			Szorny s1 = Szorny::parseUnit(argv[1]);
+			Szorny s2 = Szorny::parseUnit(argv[1]);
             while (s1.getHp() > 0 && s2.getHp() > 0) {
                 s1.tamad(s2);
                 if (s1.getHp() > 0 && s2.getHp() > 0) {
@@ -47,7 +48,7 @@ int main(int argc, char **argv) {
         }
     } catch (int e) {
         std::cout << "Nem letezo fajl lett megadva!" << std::endl;
-
+		return 0;
     }
 }
 

@@ -8,12 +8,11 @@ class Szorny
 {
 public:
 	Szorny(std::string nev, int hp, int dmg) :nev(nev), hp(hp), dmg(dmg) {}
-	Szorny(){}
 	int getDmg()const;
 	int getHp()const;
 	std::string getName()const;
 	void tamad(Szorny &)const;
-	void parseUnit(std::ifstream &);
+	static Szorny parseUnit(const std::string);
 private:
 	std::string nev;
 	int hp;

@@ -1,6 +1,6 @@
-Sotetvarazslo wins. Remained HP: 10
-Hosarkany wins. Remained HP: 12
-Sotetvarazslo wins. Remained HP: 40
-Sotetvarazslo wins. Remained HP: 58
-Sotetvarazslo wins. Remained HP: 10
-Arnykiraly wins. Remained HP: 20
+Sotetvarazslo wins. Remaining HP: 10
+Hosarkany wins. Remaining HP: 12
+Sotetvarazslo wins. Remaining HP: 40
+Sotetvarazslo wins. Remaining HP: 58
+Sotetvarazslo wins. Remaining HP: 10
+Arnykiraly wins. Remaining HP: 20

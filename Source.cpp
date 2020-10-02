@@ -24,29 +24,23 @@ void kiir(const Szorny &s) {
 	std::cout << s.getName() << ": HP: " << s.getHp() << ", DMG: " << s.getDmg() << std::endl;
 }
 
-int main(int argc,char ** argv) {
-    try {
-        std::ifstream f1, f2;
-        f1.open(argv[1]);
-        f2.open(argv[2]);
-        if (!f1.good() || !f2.good())
-            throw 56;
-        else {
-			Szorny s1 = Szorny::parseUnit(argv[1]);
-			Szorny s2 = Szorny::parseUnit(argv[2]);
-            while (s1.getHp() > 0 && s2.getHp() > 0) {
-                s1.tamad(s2);
-                if (s1.getHp() > 0 && s2.getHp() > 0) {
-                    s2.tamad(s1);
-                }
-            }
-            if (s1.getHp() == 0) std::cout << s2.getName() << " wins. Remained HP: " << s2.getHp() << std::endl;
-            if (s2.getHp() == 0) std::cout << s1.getName() << " wins. Remained HP: " << s1.getHp() << std::endl;
+int main(int argc, char ** argv) {
+	try {
+		Szorny s1 = Szorny::parseUnit(argv[1]);
+		Szorny s2 = Szorny::parseUnit(argv[2]);
+		while (s1.getHp() > 0 && s2.getHp() > 0) {
+			s1.tamad(s2);
+			if (s2.getHp() > 0) {
+				s2.tamad(s1);
+			}
+		}
+		if (s1.getHp() == 0) std::cout << s2.getName() << " wins. Remained HP: " << s2.getHp() << std::endl;
+		if (s2.getHp() == 0) std::cout << s1.getName() << " wins. Remained HP: " << s1.getHp() << std::endl;
 
-            return 0;
+		return 0;
 
-        }
-    } catch (int e) {
+	}
+     catch (int e) {
         std::cout << "Nem letezo fajl lett megadva!" << std::endl;
 		return 0;
     }

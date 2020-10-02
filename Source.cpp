@@ -34,14 +34,19 @@ int main(int argc, char ** argv) {
 				s2.tamad(s1);
 			}
 		}
-		if (s1.getHp() == 0) std::cout << s2.getName() << " wins. Remained HP: " << s2.getHp() << std::endl;
-		if (s2.getHp() == 0) std::cout << s1.getName() << " wins. Remained HP: " << s1.getHp() << std::endl;
+		if (s1.getHp() == 0) std::cout << s2.getName() << " wins. Remaining HP: " << s2.getHp() << std::endl;
+		if (s2.getHp() == 0) std::cout << s1.getName() << " wins. Remaining HP: " << s1.getHp() << std::endl;
 
 		return 0;
 
 	}
      catch (int e) {
-        std::cout << "Nem letezo fajl lett megadva!" << std::endl;
+        switch(e) {
+            case 56: std::cout << "File does not exist!" << std::endl;
+                break;
+            case 57: std::cout << "Invalid character value!!" << std::endl;
+                break;
+        }
 		return 0;
     }
 }

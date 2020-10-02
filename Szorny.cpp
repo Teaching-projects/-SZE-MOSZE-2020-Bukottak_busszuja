@@ -19,35 +19,61 @@ void Szorny::tamad(Szorny & a)const {
 }
 
 Szorny Szorny::parseUnit(std::string fajlnev) {
-	int hp, dmg;
-	std::string nev;
-	std::vector<std::string> v;
-	std::ifstream f(fajlnev);
-	if (!f.good()) throw 56;
-	else {
-		std::string sor = "";
-		while (!f.eof()) {
-			getline(f, sor);
-			v.push_back(sor);
-		}
-		f.close();
-		for (int i = 12; i < v[1].size() - 2; i++) {
-			sor = sor + v[1][i];
-		}
-		nev = sor;
-		sor = "";
-		for (int i = 9; i < v[2].size() - 1; i++) {
-			sor = sor + v[2][i];
-		}
-		int j = stoi(sor);
-		hp = j;
-		sor = "";
-		for (int i = 10; i < v[3].size(); i++) {
-			sor = sor + v[3][i];
-		}
-		j = stoi(sor);
-		dmg = j;
-		return Szorny(nev, hp, dmg);
-	}
+	int hp, dmg, i, keyv;
+    std::string name;
+    std::string::size_type found;
+    std::ifstream f(fajlnev);
+    if (!f.good()) throw 56;
+    else {
+        std::string sor = "";
+        std::string tmp;
+
+        while (!f.eof()) {
+            getline(f, sor);
+            keyv = 0;
+            found = sor.find('"');
+            if (found!=std::string::npos) {
+                i = found+1;
+                tmp = "";
+                while (sor[i]!='"') {
+                    tmp = tmp+sor[i];
+                    i++;
+                }
+
+                if (tmp == "name") keyv = 1;
+                if (tmp == "hp") keyv = 2;
+                if (tmp == "dmg") keyv = 3;
+            }
+
+            found = sor.find(':');
+            if (found!=std::string::npos) {
+                i = found+1;
+                tmp = "";
+                while (sor[i]!=',' && i!=sor.size()) {
+                    if (sor[i]=='"' || sor[i]==' ') {
+                        i++;
+                    } else {
+                        tmp = tmp+sor[i];
+                        i++;
+                    }
+                }
+
+                switch(keyv) {
+                    case 1: name = tmp;
+                        break;
+                    case 2: hp = stoi(tmp);
+                        break;
+                    case 3: dmg = stoi(tmp);
+                        break;
+                    default: throw 57;
+                        break;
+
+                }
+            }
+        }
+        f.close();
+
+        return Szorny(name, hp, dmg);
+    }
 }
-	
+

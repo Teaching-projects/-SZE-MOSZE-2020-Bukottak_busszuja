@@ -1,8 +1,18 @@
 #include "Szorny.h"
 
+Szorny::Szorny(std::string nev, int hp, int dmg){
+    this->nev = nev;
+    this->maxhp = hp;
+    this->hp = maxhp;
+    this->dmg = dmg;
+}
 
 int Szorny::getDmg()const {
 	return dmg;
+}
+
+int Szorny::getMaxHp()const {
+	return hp;
 }
 
 int Szorny::getHp()const {
@@ -13,7 +23,7 @@ std::string Szorny::getName()const {
 	return nev;
 }
 
-void Szorny::tamad(Szorny & a)const {
+void Szorny::tamad(Szorny & a) {
 	a.hp = a.hp - this->dmg;
 	if (a.hp < 0) a.hp = 0;
 }

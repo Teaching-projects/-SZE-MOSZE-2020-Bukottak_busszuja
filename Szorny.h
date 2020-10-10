@@ -1,8 +1,6 @@
 #pragma once
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<vector>
+#include "Jsonparser.h"
+
 
 class Szorny
 {
@@ -12,7 +10,7 @@ public:
 	int getHp()const;
 	std::string getName()const;
 	void tamad(Szorny &)const;
-	static Szorny parseUnit(const std::string);
+	static Szorny parseUnit(Jsonparser &);
 private:
 	std::string nev;
 	int hp;

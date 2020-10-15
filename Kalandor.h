@@ -11,7 +11,7 @@ public:
 	int getXp() const;
 	int getLvl() const;
 	void tamad(Szorny &);
-private:
+	Kalandor& operator=(const Szorny&);
 	int xp;
 	int lvl;
 	void lvlUp(int xptoLvl);

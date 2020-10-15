@@ -1,12 +1,10 @@
 #include "Szorny.h"
 #include "Kalandor.h"
 
-#include <string>
-
-int main(int argc, char ** argv) {
+int main(int argc, char **argv) {
 	try {
-		Kalandor s1 = Kalandor::parseUnit(argv[1]);
 		Szorny s2 = Szorny::parseUnit(argv[2]);
+		Kalandor s1(Szorny::parseUnit(argv[1]));
 		while (s1.getHp() > 0 && s2.getHp() > 0) {
 			s1.tamad(s2);
 			if (s2.getHp() > 0) {

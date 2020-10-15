@@ -39,3 +39,15 @@ void Kalandor::tamad(Szorny & a) {
 	xpGain();
 	if (a.hp < 0) a.hp = 0;
 }
+
+Kalandor& Kalandor::operator=(const Szorny &szorny) {
+    this->maxhp = szorny.getMaxHp();
+    this->hp = szorny.getHp();
+    this->dmg = szorny.getDmg();
+    this->nev = szorny.getName();
+    this->xp = 0;
+    this->lvl = 1;
+    return *this;
+}
+
+

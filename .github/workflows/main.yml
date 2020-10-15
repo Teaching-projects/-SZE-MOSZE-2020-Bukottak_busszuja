@@ -15,6 +15,7 @@ jobs:
       
       - uses: actions/checkout@v2
       - run: g++ -Wall *.cpp
+      - run: chmod +x harc.sh
       - run: ./harc.sh 
       - run: diff kimenetek.txt jo_kimenetek.txt
       

@@ -1,6 +1,7 @@
 {
   "name" : "Hosarkany",
   "hp" : 300,
-  "dmg" : 30
+  "dmg" : 30,
+  "speed" : 2.4
 }
 

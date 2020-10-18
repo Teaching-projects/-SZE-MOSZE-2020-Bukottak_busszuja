@@ -6,15 +6,16 @@
 
 class Kalandor : public Szorny {
 public:
-	Kalandor(std::string nev, int hp, int dmg);
-	Kalandor(Szorny sz);
+	Kalandor(const std::string& nev, int hp, int dmg, int xp=0, int lvl=1) : Szorny(nev, hp, dmg), xp(xp), lvl(lvl) {};
+	Kalandor(const Szorny& sz) : Szorny(sz.getName(), sz.getHp(), sz.getDmg()), xp(0), lvl(1) {};
 	int getXp() const;
 	int getLvl() const;
 	void tamad(Szorny &);
 	Kalandor& operator=(const Szorny&);
+private:
 	int xp;
 	int lvl;
 	void lvlUp(int xptoLvl);
-	void xpGain();
+	void xpGain(int gain);
 
 };

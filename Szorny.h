@@ -11,7 +11,7 @@ protected:
 	int dmg;
     friend class Kalandor;
 public:
-	Szorny(std::string nev, int hp, int dmg);
+	Szorny(std::string nev, int hp, int dmg) : nev(nev), maxhp(hp), hp(maxhp), dmg(dmg) {};
 	int getDmg()const;
 	int getMaxHp() const;
 	int getHp()const;

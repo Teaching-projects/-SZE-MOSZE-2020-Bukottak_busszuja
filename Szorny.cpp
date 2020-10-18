@@ -1,12 +1,5 @@
 #include "Szorny.h"
 
-Szorny::Szorny(std::string nev, int hp, int dmg){
-    this->nev = nev;
-    this->maxhp = hp;
-    this->hp = maxhp;
-    this->dmg = dmg;
-}
-
 int Szorny::getDmg()const {
 	return dmg;
 }

@@ -3,14 +3,6 @@
 
 #define XPTOLVL 100
 
-Kalandor::Kalandor(std::string nev, int hp, int dmg) : Szorny(nev, hp, dmg) {
-    lvl = 1;
-    xp = 0;
-}
-
-Kalandor::Kalandor(Szorny sz)
-	: Szorny(sz.getName(), sz.getHp(), sz.getDmg()), xp(0), lvl(1){}
-
 int Kalandor::getXp()const {
 	return xp;
 }
@@ -27,8 +19,8 @@ void Kalandor::lvlUp(int xptoLvl) {
     dmg = floor(dmg*1.1);
 }
 
-void Kalandor::xpGain() {
-    xp += dmg;
+void Kalandor::xpGain(int gain) {
+    xp += gain;
     while (xp >= XPTOLVL) {
         lvlUp(XPTOLVL);
     }
@@ -36,17 +28,19 @@ void Kalandor::xpGain() {
 
 void Kalandor::tamad(Szorny & a) {
 	a.hp = a.hp - this->dmg;
-	xpGain();
+	int gain = dmg;
 	if (a.hp < 0) a.hp = 0;
+	if (dmg > a.hp) gain = a.hp;
+	xpGain(gain);
 }
 
 Kalandor& Kalandor::operator=(const Szorny &szorny) {
-    this->maxhp = szorny.getMaxHp();
-    this->hp = szorny.getHp();
-    this->dmg = szorny.getDmg();
-    this->nev = szorny.getName();
-    this->xp = 0;
-    this->lvl = 1;
+    maxhp = szorny.getMaxHp();
+    hp = szorny.getHp();
+    dmg = szorny.getDmg();
+    nev = szorny.getName();
+    xp = 0;
+    lvl = 1;
     return *this;
 }
 

@@ -26,7 +26,7 @@ void Kalandor::xpGain(int gain) {
     }
 }
 
-void Kalandor::tamad(Szorny & a) {
+void Kalandor::tamad(Szorny& a) {
     int gain = dmg;
 	if (dmg > a.hp) gain = a.hp;
 	a.hp = a.hp - this->dmg;

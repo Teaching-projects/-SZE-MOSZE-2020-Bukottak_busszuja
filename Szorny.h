@@ -21,6 +21,7 @@ class Szorny {
         int hp;                                                                                                             ///< A szörny életpontjai
         int dmg;                                                                                                            ///< A szörny ütésének erõsege
         double speed;                                                                                                       ///< A szörny ütéseinek gyorsasága
+        virtual void tamad(Szorny&);                                                                                          ///< Egy darab ütést visz be
         friend class Kalandor;
     public:
         Szorny(std::string nev, int hp, int dmg, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), speed(speed) {}   ///< Szörny osztály konstruktora
@@ -32,5 +33,5 @@ class Szorny {
         static Szorny parseUnit(const std::string &filename);                                                               ///< Beolvassa a szörny értékeit
         Szorny& operator=(const Szorny&);                                                                                   ///< Lehetővé teszi egy szörny értékeinek beállítását egy másikéra
         Szorny(const Szorny& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), speed(s2.speed) {};                ///< Lehetővé teszi egy szörny létrehozását egy másiknak a lemásolásával
-        void tamad(Szorny &)const;                                                                                          ///< Egy darab ütést visz be
+        static void harc(Szorny &,Szorny &);                                                                                ///< A parancsori argumentumban megadott két hõst harcoltatja
 };

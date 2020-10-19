@@ -39,6 +39,7 @@ Kalandor& Kalandor::operator=(const Szorny &szorny) {
     hp = szorny.getHp();
     dmg = szorny.getDmg();
     nev = szorny.getName();
+    speed = szorny.getSpeed();
     xp = 0;
     lvl = 1;
     return *this;

@@ -1,15 +1,5 @@
 #include "Szorny.h"
 
-double gcd(double a, double b)
-{
-	if (a < b)
-		return gcd(b, a);
-	if (fabs(b) < 0.001)
-		return a;
-	else
-		return (gcd(b, a - floor(a / b) * b));
-}
-
 int Szorny::getDmg()const {
 	return dmg;
 }
@@ -37,6 +27,7 @@ void Szorny::tamad(Szorny & a)const {
 
 Szorny Szorny::parseUnit(const std::string &fajlnev) {
     int hp, dmg, keyv;
+    double speed;
     std::string name;
     std::string::size_type found;
     std::ifstream f(fajlnev);
@@ -98,29 +89,10 @@ Szorny Szorny::parseUnit(const std::string &fajlnev) {
 }
 
 Szorny& Szorny::operator=(const Szorny &szorny) {
-    this->maxhp = szorny.getMaxHp();
-    this->hp = szorny.getHp();
-    this->dmg = szorny.getDmg();
-    this->nev = szorny.getName();
+    maxhp = szorny.getMaxHp();
+    hp = szorny.getHp();
+    dmg = szorny.getDmg();
+    nev = szorny.getName();
+    speed = szorny.getSpeed();
     return *this;
-}
-
-void Szorny::harc(Szorny & s1,Szorny & s2) {
-	double szamlalo = 0;
-	double lepes = gcd(s1.getSpeed(), s2.getSpeed());
-	s1.tamad(s2);
-	if (s2.getHp() > 0) {
-		s2.tamad(s1);
-	}
-	while ((s1.getHp() > 0) && (s2.getHp()>0)) {
-		szamlalo = szamlalo + lepes;
-		if (gcd(szamlalo, s1.getSpeed()) == s1.getSpeed() && gcd(szamlalo, s2.getSpeed()) == s2.getSpeed()) {
-			s1.tamad(s2);
-			if (s2.getHp() > 0) s2.tamad(s1);
-		}
-		else if (gcd(szamlalo, s1.getSpeed()) == s1.getSpeed())s1.tamad(s2);
-		else if (gcd(szamlalo, s2.getSpeed()) == s2.getSpeed())s2.tamad(s1);
-	}
-	if (s1.getHp() == 0) std::cout << s2.getName() << " wins. Remaining HP: " << s2.getHp() << std::endl;
-	if (s2.getHp() == 0) std::cout << s1.getName() << " wins. Remaining HP: " << s1.getHp() << ", current level: " << s1.getLvl() << ", current experience: " << s1.getXp() << std::endl;
 }

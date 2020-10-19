@@ -32,4 +32,3 @@ jobs:
 
       - name: Valgrind memory check
         run: valgrind --leak-check=full --error-exitcode=1 ./output
-

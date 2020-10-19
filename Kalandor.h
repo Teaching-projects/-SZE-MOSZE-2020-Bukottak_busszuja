@@ -10,11 +10,11 @@ class Kalandor : public Szorny {
         Kalandor(const Szorny& sz) : Szorny(sz.getName(), sz.getHp(), sz.getDmg(), sz.getSpeed()), xp(0), lvl(1) {};
         int getXp() const;
         int getLvl() const;
-        void tamad(Szorny&);
         Kalandor& operator=(const Szorny&);
-    private:
+    protected:
         int xp;
         int lvl;
         void lvlUp(int xptoLvl);
         void xpGain(int gain);
+        void tamad(Szorny&);
 };

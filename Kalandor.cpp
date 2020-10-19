@@ -27,11 +27,11 @@ void Kalandor::xpGain(int gain) {
 }
 
 void Kalandor::tamad(Szorny & a) {
-	a.hp = a.hp - this->dmg;
-	int gain = dmg;
-	if (a.hp < 0) a.hp = 0;
+    int gain = dmg;
 	if (dmg > a.hp) gain = a.hp;
+	a.hp = a.hp - this->dmg;
 	xpGain(gain);
+	if (a.hp < 0) a.hp = 0;
 }
 
 Kalandor& Kalandor::operator=(const Szorny &szorny) {

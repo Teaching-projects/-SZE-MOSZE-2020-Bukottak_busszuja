@@ -19,8 +19,9 @@ void Szorny::tamad(Szorny & a)const {
 }
 
 Szorny Szorny::parseUnit(Jsonparser & json) {
-	std::string name = json.getErtek("name");
-	int hp = stoi(json.getErtek("hp"));
-	int dmg = stoi(json.getErtek("dmg"));
+	std::string nevp = "name"; std::string hpp = "hp"; std::string dmgg = "dmg";
+	std::string name = json.getErtek(nevp);
+	int hp = stoi(json.getErtek(hpp));
+	int dmg = stoi(json.getErtek(dmgg));
 	return Szorny(name,hp,dmg);
 }

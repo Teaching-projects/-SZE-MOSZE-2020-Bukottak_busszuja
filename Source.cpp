@@ -47,11 +47,11 @@ int main(int argc, char ** argv) {
 	}
 	catch (int e) {
 		switch (e) {
-		case 56: std::cout << "File does not exist!" << std::endl;
+		case MYFILEERROR: std::cout << "File does not exist!" << std::endl;
 			break;
-		case 57: std::cout << "Invalid character value!!" << std::endl;
+		case MYINVALIDVALUE: std::cout << "Invalid character value!!" << std::endl;
 			break;
 		}
 		return 0;
 	}
-}
+	}

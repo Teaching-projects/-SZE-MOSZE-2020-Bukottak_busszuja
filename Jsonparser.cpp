@@ -1,55 +1,52 @@
 #include "Jsonparser.h"
+#include <set>
 
-Jsonparser::Jsonparser(std::ifstream & f) {
-	int keyv, i;
+
+void Jsonparser::Jsonprsr(std::ifstream & f) {
+	std::set<std::string> keys;
+	keys.insert("name");
+	keys.insert("dmg");
+	keys.insert("hp");
+
+	std::string::size_type i;
 	std::string::size_type found;
 	if (!f.good()) throw MYFILEERROR;
 	else {
 		std::string sor = "";
-		std::string tmp;
+		std::string key;
+		std::string value;
 
 		while (!f.eof()) {
 			getline(f, sor);
-			keyv = 0;
 			found = sor.find('"');
 			if (found != std::string::npos) {
 				i = found + 1;
-				tmp = "";
+				key = "";
 				while (sor[i] != '"') {
-					tmp = tmp + sor[i];
+					key = key + sor[i];
 					i++;
 				}
 
-				if (tmp == "name") keyv = 1;
-				if (tmp == "hp") keyv = 2;
-				if (tmp == "dmg") keyv = 3;
+				if (keys.find(key) == keys.end()) throw INVALID_VALUE;
+
 			}
 
 			found = sor.find(':');
 			if (found != std::string::npos) {
 				i = found + 1;
-				tmp = "";
+				value = "";
 				while (sor[i] != ',' && i != sor.size()) {
 					if (sor[i] == '"' || sor[i] == ' ') {
 						i++;
 					}
 					else {
-						tmp = tmp + sor[i];
+						value = value + sor[i];
 						i++;
 					}
 				}
 
-				switch (keyv) {
-				case 1: m["name"] = tmp;
-					break;
-				case 2: m["hp"] = tmp;
-					break;
-				case 3: m["dmg"] = tmp;
-					break;
-				default: throw MYINVALIDVALUE;
-					break;
+				m[key] = value;
 
-				}
 			}
 		}
 		f.close();
@@ -57,15 +54,18 @@ Jsonparser::Jsonparser(std::ifstream & f) {
 	}
 }
 
-
-Jsonparser::Jsonparser(const char * fajlnev) {
-std::ifstream f(fajlnev);
-Jsonparser::Jsonparser(f);
+Jsonparser::Jsonparser(std::ifstream& f) {
+	Jsonprsr(f);
 }
 
-Jsonparser::Jsonparser(std::string & szoveg) {
+Jsonparser::Jsonparser(const char* fajlnev) {
+	std::ifstream f(fajlnev);
+	Jsonprsr(f);
+}
+
+Jsonparser::Jsonparser(std::string& szoveg) {
 	std::ifstream f(szoveg);
-	Jsonparser::Jsonparser(f);
+	Jsonprsr(f);
 }
 
 

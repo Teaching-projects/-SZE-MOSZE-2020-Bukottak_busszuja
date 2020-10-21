@@ -49,7 +49,7 @@ int main(int argc, char ** argv) {
 		switch (e) {
 		case MYFILEERROR: std::cout << "File does not exist!" << std::endl;
 			break;
-		case MYINVALIDVALUE: std::cout << "Invalid character value!!" << std::endl;
+		case INVALID_VALUE: std::cout << "Invalid character value!!" << std::endl;
 			break;
 		}
 		return 0;

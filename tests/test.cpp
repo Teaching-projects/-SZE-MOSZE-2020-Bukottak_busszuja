@@ -9,7 +9,9 @@ TEST(Jsontest, Fajlvaltozo) {
 	Jsonparser eredmeny("Hosarkany", "300", "30");
 	std::ifstream f("Hosarkany.json");
 	Jsonparser beolvasas(f);
-	EXPECT_EQ(eredmeny,beolvasas);
+	bool egyenlo = false;
+	if (eredmeny == beolvasas)egyenlo = true;
+	EXPECT_EQ(egyenlo, true);
 }
 
 TEST(Jsontest, Szoveg) {

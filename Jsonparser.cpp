@@ -60,12 +60,12 @@ Jsonparser::Jsonparser(std::ifstream & f) {
 
 Jsonparser::Jsonparser(const char * fajlnev) {
 std::ifstream f(fajlnev);
-this->Jsonparser::Jsonparser(f);
+Jsonparser::Jsonparser(f);
 }
 
 Jsonparser::Jsonparser(std::string & szoveg) {
 	std::ifstream f(szoveg);
-	this->Jsonparser::Jsonparser(f);
+	Jsonparser::Jsonparser(f);
 }
 
 

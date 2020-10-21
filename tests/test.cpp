@@ -16,9 +16,7 @@ TEST(Jsontest, Szoveg) {
 	Jsonparser eredmeny("Sotetvarazslo", "250", "40");
 	std::string szoveg = "Sotetvarazslo.json";
 	Jsonparser beolvasas(szoveg);
-	bool egyenlo = false;
-	if (eredmeny == beolvasas)egyenlo = true;
-	EXPECT_EQ(egyenlo, true);
+	EXPECT_EQ(eredmeny == beolvasas, true);
 }
 
 
@@ -26,9 +24,7 @@ TEST(Jsontest, Fajlnev) {
 	Jsonparser eredmeny("Arnykiraly", "200", "48");
 	const char * fajlnev = "Arnykiraly.json";
 	Jsonparser beolvasas(fajlnev);
-	bool egyenlo = false;
-	if (eredmeny == beolvasas)egyenlo = true;
-	EXPECT_EQ(egyenlo, true);
+	EXPECT_EQ(eredmeny == beolvasas, true);
 }
 
 

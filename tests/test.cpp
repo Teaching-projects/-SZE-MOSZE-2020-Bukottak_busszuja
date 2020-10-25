@@ -6,25 +6,28 @@ using namespace std;
 
 
 TEST(Jsontest, Fajlvaltozo) {
-	Jsonparser eredmeny("Hosarkany", "300", "30");
 	std::ifstream f("Hosarkany.json");
 	Jsonparser beolvasas(f);
-	EXPECT_EQ(eredmeny == beolvasas, true);
+	EXPECT_EQ(beolvasas.getErtek("name"), "Hosarkany");
+	EXPECT_EQ(beolvasas.getErtek("hp"), "300");
+	EXPECT_EQ(beolvasas.getErtek("dmg"), "30");
 }
 
 TEST(Jsontest, Szoveg) {
-	Jsonparser eredmeny("Sotetvarazslo", "250", "40");
 	std::string szoveg = "Sotetvarazslo.json";
 	Jsonparser beolvasas(szoveg);
-	EXPECT_EQ(eredmeny == beolvasas, true);
+	EXPECT_EQ(beolvasas.getErtek("name"), "Sotetvarazslo");
+	EXPECT_EQ(beolvasas.getErtek("hp"), "250");
+	EXPECT_EQ(beolvasas.getErtek("dmg"), "40");
 }
 
 
 TEST(Jsontest, Fajlnev) {
-	Jsonparser eredmeny("Arnykiraly", "200", "48");
 	const char * fajlnev = "Arnykiraly.json";
 	Jsonparser beolvasas(fajlnev);
-	EXPECT_EQ(eredmeny == beolvasas, true);
+	EXPECT_EQ(beolvasas.getErtek("name"), "Arnykiraly");
+	EXPECT_EQ(beolvasas.getErtek("hp"), "200");
+	EXPECT_EQ(beolvasas.getErtek("dmg"), "48");
 }
 
 

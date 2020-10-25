@@ -22,9 +22,14 @@ void Jsonparser::Jsonprsr(std::ifstream & f) {
 			if (found != std::string::npos) {
 				i = found + 1;
 				key = "";
-				while (sor[i] != '"') {
-					key = key + sor[i];
-					i++;
+				while (sor[i] != '"' && sor[i] != ':') {
+					if (sor[i] == '"' || sor[i] == ' ') {
+						i++;
+					}
+					else {
+						key = key + sor[i];
+						i++;
+					}
 				}
 
 				if (keys.find(key) == keys.end()) throw INVALID_VALUE;
@@ -69,19 +74,11 @@ Jsonparser::Jsonparser(std::string& szoveg) {
 }
 
 
-Jsonparser::Jsonparser(std::string name, std::string hp, std::string dmg) {
-	m["name"] = name;
-	m["hp"] = hp;
-	m["dmg"] = dmg;
-}
-
-
-
 Jsonparser::~Jsonparser()
 {
 	m.clear();
 }
 
-std::string Jsonparser::getErtek(std::string & kulcs) {
+std::string Jsonparser::getErtek(const std::string & kulcs) {
 	return m[kulcs];
 }

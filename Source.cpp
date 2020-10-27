@@ -4,8 +4,8 @@
 
 int main(int argc, char **argv) {
 	try {
-		Jsonparser f1(argv[1]);
 		std::ifstream f(argv[2]);
+		Jsonparser f1(argv[1]);
 		Jsonparser f2(f);
 		Szorny s2 = Szorny::parseUnit(f2);
 		Kalandor s1(Szorny::parseUnit(f1));

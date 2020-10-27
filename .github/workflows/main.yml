@@ -22,7 +22,7 @@ jobs:
           path: report.txt
 
       - name: Build
-        run: g++ -Wall -Werror -std=c++17 *.cpp -g output
+        run: g++ -std=c++17 *.cpp -Wall -Wextra -g
 
       - name: generate output
         run: ./harc.sh 

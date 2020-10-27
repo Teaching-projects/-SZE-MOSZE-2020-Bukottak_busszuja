@@ -64,7 +64,7 @@ Jsonparser::Jsonparser(std::ifstream& f) {
 	Jsonprsr(f);
 }
 
-Jsonparser::Jsonparser(const std::string fajlnev) {
+Jsonparser::Jsonparser(std::string fajlnev) {
 	std::ifstream f(fajlnev);
 	Jsonprsr(f);
 }

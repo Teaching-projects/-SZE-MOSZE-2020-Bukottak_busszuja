@@ -11,7 +11,7 @@ class Jsonparser {
 public:
 	Jsonparser(std::ifstream &);
 	Jsonparser(std::string& szoveg);
-	Jsonparser(char *);
+	Jsonparser(const char *);
 	~Jsonparser();
 	std::string getErtek(const std::string &);
 private:

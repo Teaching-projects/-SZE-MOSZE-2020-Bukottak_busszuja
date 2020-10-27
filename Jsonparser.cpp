@@ -7,6 +7,7 @@ void Jsonparser::Jsonprsr(std::ifstream & f) {
 	keys.insert("name");
 	keys.insert("dmg");
 	keys.insert("hp");
+	keys.insert("speed");
 
 	std::string::size_type i;
 	std::string::size_type found;

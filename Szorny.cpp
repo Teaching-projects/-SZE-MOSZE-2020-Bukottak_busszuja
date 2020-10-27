@@ -40,7 +40,7 @@ Szorny Szorny::parseUnit(Jsonparser & json) {
 	std::string name = json.getErtek("name");
 	int hp = stoi(json.getErtek("hp"));
 	int dmg = stoi(json.getErtek("dmg"));
-  double speed = stod(json.getErtek("speed"));
+  	double speed = stod(json.getErtek("speed"));
 	return Szorny(name,hp,dmg,speed);
 }
 

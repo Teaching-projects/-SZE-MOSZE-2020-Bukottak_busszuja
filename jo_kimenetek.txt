@@ -1,6 +1,6 @@
-Sotetvarazslo wins. Remaining HP: 10
-Hosarkany wins. Remaining HP: 12
-Sotetvarazslo wins. Remaining HP: 40
-Sotetvarazslo wins. Remaining HP: 58
-Sotetvarazslo wins. Remaining HP: 10
-Arnykiraly wins. Remaining HP: 20
+Hosarkany wins. Remaining HP: 323, current level: 3, current experience: 50
+Hosarkany wins. Remaining HP: 363, current level: 3, current experience: 0
+Sotetvarazslo wins. Remaining HP: 332, current level: 4, current experience: 0
+Sotetvarazslo wins. Remaining HP: 302, current level: 3, current experience: 0
+Arnykiraly wins. Remaining HP: 202, current level: 3, current experience: 50
+Arnykiraly wins. Remaining HP: 266, current level: 4, current experience: 0

@@ -1,0 +1,15 @@
+bin/*
+obj/*
+*.cbp
+*.layout
+*.depend
+*.gitignore
+harcwin.sh
+kimenetek.txt
+
+# Object file
+*.o
+
+# Ada Library Information
+*.ali
+DOCS/

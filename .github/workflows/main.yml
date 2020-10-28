@@ -26,8 +26,5 @@ jobs:
       - name: generate output
         run: ./harc.sh 
 
-      - name: I/O test
-        run: diff kimenetek.txt jo_kimenetek.txt
-
       - name: Valgrind memory check
         run: valgrind --leak-check=full --error-exitcode=1 ./output

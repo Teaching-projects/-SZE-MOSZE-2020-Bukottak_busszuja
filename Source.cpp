@@ -6,8 +6,8 @@ int main(int argc, char **argv) {
 	try {
 		std::string f1 = argv[2];
 		std::ifstream f(argv[1]);
-		Jsonparser f2(f);
-		Jsonparser f3(f1);
+		Jsonparser f2(f1);
+		Jsonparser f3(f);
 		Szorny s2 = Szorny::parseUnit(f2);
 		Kalandor s1(Szorny::parseUnit(f3));
         	Szorny::harc(s1, s2);

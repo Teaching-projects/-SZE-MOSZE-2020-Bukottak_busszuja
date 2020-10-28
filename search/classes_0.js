@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kalandor',['Kalandor',['../classKalandor.html',1,'']]]
+  ['jsonparser',['Jsonparser',['../classJsonparser.html',1,'']]]
 ];

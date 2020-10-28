@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['parseunit',['parseUnit',['../classSzorny.html#adf372ba09265a49addd5f35661889ce5',1,'Szorny']]]
+  ['operator_3d',['operator=',['../classSzorny.html#a66efec659d7eb34a20a8019330c1e7ce',1,'Szorny']]]
 ];

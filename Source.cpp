@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv) {
 	try {
-		std::string f1 = argv[1];
+		std::string f1 = argv[2];
 		std::ifstream f(argv[2]);
 		Jsonparser f2(f);
 		Jsonparser f3(f1);

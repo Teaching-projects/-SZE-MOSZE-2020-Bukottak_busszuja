@@ -13,6 +13,7 @@
 #include<fstream>
 #include<vector>
 #include <cmath>
+#include "Jsonparser.h"  
 
 class Szorny {
     protected:
@@ -30,7 +31,7 @@ class Szorny {
         int getHp()const;                                                                                                   ///< Lekéri a szörny HP-ját
         double getSpeed()const;                                                                                             ///< Lekéri a szörny atackspeedjét
         std::string getName()const;                                                                                         ///< Lekéri a szörny nevét
-        static Szorny parseUnit(const std::string &filename);                                                               ///< Beolvassa a szörny értékeit
+        static Szorny parseUnit(Jsonparser &);                                                               ///< Beolvassa a szörny értékeit
         Szorny& operator=(const Szorny&);                                                                                   ///< Lehetővé teszi egy szörny értékeinek beállítását egy másikéra
         Szorny(const Szorny& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), speed(s2.speed) {};                ///< Lehetővé teszi egy szörny létrehozását egy másiknak a lemásolásával
         static void harc(Szorny &,Szorny &);                                                                                ///< A parancsori argumentumban megadott két hõst harcoltatja

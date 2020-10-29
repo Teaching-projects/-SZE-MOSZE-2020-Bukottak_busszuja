@@ -13,7 +13,7 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install -y valgrind && sudo apt-get install -y cppcheck
       - name: CPPCheck Static Code Analysis
-        run: make cppcheck
+        run: make sca
 
       - name: Upload CPPCheck report as artifact
         uses: actions/upload-artifact@v2
@@ -31,4 +31,4 @@ jobs:
         run: diff kimenetek.txt jo_kimenetek.txt
 
       - name: Valgrind memory check
-        run: make valgrind
+        run: make memtest

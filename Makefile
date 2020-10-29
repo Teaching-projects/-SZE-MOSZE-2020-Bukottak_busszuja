@@ -15,19 +15,19 @@ build: $(OBJS)
 Jsonparser.o: Jsonparser.cpp Jsonparser.h
 	$(CC) $(CFLAGS) -c Jsonparser.cpp
 
-Szorny.o: Szorny.cpp Szorny.h
+Szorny.o: Szorny.cpp Szorny.h Jsonparser.h
 	$(CC) $(CFLAGS) -c Szorny.cpp
 
-Kalandor.o: Kalandor.cpp Kalandor.h
+Kalandor.o: Kalandor.cpp Kalandor.h Szorny.h Jsonparser.h
 	$(CC) $(CFLAGS) -c Kalandor.cpp
 
 Source.o: Source.cpp Szorny.h Kalandor.h
 	$(CC) $(CFLAGS) -c Source.cpp
 
-cppcheck:
+sca:
 	cppcheck $(CPPFILES) $(CPPCFLAGS)
 
-valgrind:
+memtest:
 	valgrind $(VLGRNDFLAGS) $(VLGRNDPARAM)
 	
 unittest:

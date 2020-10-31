@@ -40,6 +40,32 @@ TEST(Jsontest, Whitespace_test) {
 	EXPECT_EQ(beolvasas.getErtek("speed"), "1.7");
 }
 
+TEST(Jsontest, Kulcssorrend_test) {
+	std::ifstream f("Kardvadasz.json");
+	Jsonparser beolvasas(f);
+	EXPECT_EQ(beolvasas.getErtek("name"), "Kardvadasz");
+	EXPECT_EQ(beolvasas.getErtek("hp"), "280");
+	EXPECT_EQ(beolvasas.getErtek("dmg"), "48");
+	EXPECT_EQ(beolvasas.getErtek("speed"), "2.1");
+}
+
+TEST(Jsontest, Idezojelfuggetlenseg_test) {
+	std::ifstream f("Arnykiraly.json");
+	Jsonparser beolvasas(f);
+	EXPECT_EQ(beolvasas.getErtek("name"), "Arnykiraly");
+	EXPECT_EQ(beolvasas.getErtek("hp"), "200");
+	EXPECT_EQ(beolvasas.getErtek("dmg"), "48");
+	EXPECT_EQ(beolvasas.getErtek("speed"), "2.3");
+}
+
+TEST(Jsontest, Tobb_kevesebb_idozejel_test) {
+	std::ifstream f("Sotetvarazslo.json");
+	Jsonparser beolvasas(f);
+	EXPECT_EQ(beolvasas.getErtek("name"), "Sotetvarazslo");
+	EXPECT_EQ(beolvasas.getErtek("hp"), "250");
+	EXPECT_EQ(beolvasas.getErtek("dmg"), "40");
+	EXPECT_EQ(beolvasas.getErtek("speed"), "2.0");
+}
 
 int main(int argc, char ** argv) {
 	::testing::InitGoogleTest(&argc, argv);

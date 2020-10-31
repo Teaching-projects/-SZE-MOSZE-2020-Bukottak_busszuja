@@ -1,3 +1,6 @@
+#ifndef JSONPARSER_H
+#define JSONPARSER_H
+
 #include<iostream>
 #include<iostream>
 #include <map>
@@ -19,3 +22,5 @@ private:
 	void Jsonprsr(std::ifstream &);
 	std::map<std::string, std::string> m;
 };
+
+#endif

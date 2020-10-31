@@ -12,8 +12,9 @@ public:
 	Jsonparser(std::ifstream &);
 	Jsonparser(std::string& szoveg);
 	Jsonparser(const char *);
-	~Jsonparser();
+    ~Jsonparser();
 	std::string getErtek(const std::string &);
+	int getSize()const;
 private:
 	void Jsonprsr(std::ifstream &);
 	std::map<std::string, std::string> m;

@@ -1,6 +1,7 @@
 {
-  "name" : "Arnykiraly",
-  "hp" : 200,
-  "dmg" : 48
+  "name : Arnykiraly",
+  "hp : 200",
+  "dmg : 48",
+  "speed": 2.3	
 }
 

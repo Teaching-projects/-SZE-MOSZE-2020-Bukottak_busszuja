@@ -2,7 +2,6 @@
 #include<iostream>
 #include<string>
 #include<fstream>
-#include "gtest/gtest.h"
 #include "Szorny.h"
 
 class Kalandor : public Szorny {

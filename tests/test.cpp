@@ -1,5 +1,5 @@
-#include "../Szorny.h"
-#include "../Kalandor.h"
+#include"../Jsonparser.cpp"
+#include "../Kalandor.cpp"
 #include "gtest/gtest.h"
 
 

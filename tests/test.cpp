@@ -1,3 +1,4 @@
+#include "../Jsonparser.cpp"
 #include"../Szorny.cpp"
 #include "gtest/gtest.h"
 

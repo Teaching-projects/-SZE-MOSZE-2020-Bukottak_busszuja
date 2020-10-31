@@ -5,6 +5,7 @@
 #include<string>
 #include<fstream>
 #include "Szorny.h"
+#include "gtest/gtest.h"
 
 class Kalandor : public Szorny {
 public:

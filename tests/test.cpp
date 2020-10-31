@@ -151,14 +151,6 @@ TEST(Szornytest,Kalandor_Szorny_different_test) {
 	EXPECT_EQ(tipuss,"class Szorny");
 }
 
-TEST(Szornytest, Levelup_Xpgain_test) {
-	Kalandor s1("Hosarkany", 300, 30, 2.4, 90, 1);
-	Szorny s2("Sotetvarazslo", 250, 40, 2.0);
-	s1.tamad(s2);
-	Kalandor s3("Hosarkany", 330, 33, 2.4, 20, 2);
-	EXPECT_EQ(s3 == s1, true);
-}
-
 
 int main(int argc, char ** argv) {
 	::testing::InitGoogleTest(&argc, argv);

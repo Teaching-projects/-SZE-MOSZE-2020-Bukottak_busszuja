@@ -31,6 +31,14 @@ TEST(Jsonparsertest, Fajlnev) {
 	EXPECT_EQ(beolvasas.getErtek("dmg"), "48");
 	EXPECT_EQ(beolvasas.getErtek("speed"), "2.3");
 }
+TEST(Jsontest, Whitespace_test) {
+	std::ifstream f("Atoksarkany.json");
+	Jsonparser beolvasas(f);
+	EXPECT_EQ(beolvasas.getErtek("name"), "Atoksarkany");
+	EXPECT_EQ(beolvasas.getErtek("hp"), "260");
+	EXPECT_EQ(beolvasas.getErtek("dmg"), "45");
+	EXPECT_EQ(beolvasas.getErtek("speed"), "1.7");
+}
 
 
 int main(int argc, char ** argv) {

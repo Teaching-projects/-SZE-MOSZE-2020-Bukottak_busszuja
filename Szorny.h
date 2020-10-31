@@ -1,5 +1,6 @@
-﻿#pragma once
-#pragma once
+﻿#ifndef SZORNY_H
+#define SZORNY_H
+
 #include<iostream>
 #include<string>
 #include<fstream>
@@ -33,5 +34,7 @@ public:
 		return (this->dmg == other.getDmg()&& this->hp == other.getHp()&& this->nev == other.getName() && round(this->speed) == round(other.getSpeed()));
 	}
 };
+
+#endif
 
 

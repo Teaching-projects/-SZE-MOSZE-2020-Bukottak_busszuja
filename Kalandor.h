@@ -1,4 +1,6 @@
-#pragma once
+#ifndef KALANDOR_H
+#define KALANDOR_H
+
 #include<iostream>
 #include<string>
 #include<fstream>
@@ -21,3 +23,5 @@ protected:
 	void xpGain(int gain);
 	void tamad(Szorny&);
 };
+
+#endif

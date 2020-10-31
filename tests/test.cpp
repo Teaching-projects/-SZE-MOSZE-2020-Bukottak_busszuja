@@ -146,8 +146,10 @@ TEST(Szornytest,Kalandor_Szorny_different_test) {
 	Kalandor s1(Szorny::parseUnit(f));
 	std::string tipusk=typeid(s1).name();
 	std::string tipuss = typeid(s2).name();
-	EXPECT_EQ(tipusk,"class Kalandor");
-	EXPECT_EQ(tipuss,"class Szorny");
+        tipusk.erase(0,1);
+	tipuss.erase(0,1);
+	EXPECT_EQ(tipusk,"Kalandor");
+	EXPECT_EQ(tipuss,"Szorny");
 }
 
 

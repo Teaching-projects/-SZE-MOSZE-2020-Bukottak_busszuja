@@ -1,4 +1,4 @@
-#include"../Jsonparser.cpp"
+#include"../Szorny.cpp"
 #include "gtest/gtest.h"
 
 
@@ -85,6 +85,12 @@ TEST(Maintest, Tobb_kevesebb_adat_test) {
 	catch (int e) {
 		EXPECT_EQ(e, INVALID_VALUE);
 	}
+}
+
+TEST(Szornytest, Lko_test) {
+	EXPECT_EQ(round(gcd(2.4,1.6)),round(0.8));
+	EXPECT_EQ(round(gcd(2.2, 4.4)), round(2.2));
+	EXPECT_EQ(round(gcd(1.3, 1.1)), round(0.1));
 }
 
 int main(int argc, char ** argv) {

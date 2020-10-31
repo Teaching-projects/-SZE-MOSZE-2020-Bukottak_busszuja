@@ -66,6 +66,26 @@ TEST(Jsontest, Tobb_kevesebb_idozejel_test) {
 	EXPECT_EQ(beolvasas.getErtek("dmg"), "40");
 	EXPECT_EQ(beolvasas.getErtek("speed"), "2.0");
 }
+TEST(Maintest, Nem_letezo_fajl_test) {
+	std::ifstream f("Lathatatlan.json");
+	try {
+		Jsonparser f1(f);
+	}
+	catch (int e) {
+		EXPECT_EQ(e, MYFILEERROR);
+	}
+}
+
+
+TEST(Maintest, Tobb_kevesebb_adat_test) {
+	std::ifstream f("Exodia.json");
+	try {
+		Jsonparser f1(f);
+	}
+	catch (int e) {
+		EXPECT_EQ(e, INVALID_VALUE);
+	}
+}
 
 int main(int argc, char ** argv) {
 	::testing::InitGoogleTest(&argc, argv);

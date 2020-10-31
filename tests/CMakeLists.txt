@@ -1,11 +1,18 @@
 cmake_minimum_required(VERSION 3.17)
 
-project(Bukottak_tesztje)
+project(Bukott_test)
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
+get_filename_component(PARENT_DIR ../ ABSOLUTE)
+include_directories(${PARENT_DIR})
 
-add_executable( runTests test.cpp )
-target_link_libraries(runTests gtest gtest_main pthread)
-target_compile_features(runTests PRIVATE cxx_std_17)
+file(GLOB TEST_SOURCES ./*.cpp)
+file(GLOB SOURCES ../*.cpp)
+
+list(REMOVE_ITEM SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../Source.cpp")
+
+add_executable(tests ${TEST_SOURCES} ${SOURCES})
+target_compile_features(tests PRIVATE cxx_std_17)
+target_link_libraries(tests ${GTEST_LIBRARIES} pthread)

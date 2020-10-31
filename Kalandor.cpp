@@ -1,6 +1,5 @@
 #include "Kalandor.h"
 #include <math.h>
-#include "gtest/gtest.h"
 
 #define XPTOLVL 100
 

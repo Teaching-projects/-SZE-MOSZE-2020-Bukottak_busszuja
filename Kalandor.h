@@ -20,5 +20,4 @@ protected:
 	void lvlUp(int xptoLvl);
 	void xpGain(int gain);
 	void tamad(Szorny&);
-	FRIEND_TEST(Szornytest, Levelup_Xpgain_test);
 };

@@ -1,5 +1,4 @@
 #include "Szorny.h"
-#include "Jsonparser.h"
 
 double gcd(double a, double b)
 {

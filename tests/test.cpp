@@ -1,6 +1,4 @@
 #include "../Jsonparser.cpp"
-#include "../Szorny.cpp"
-#include "../Kalandor.cpp"
 #include "gtest/gtest.h"
 
 

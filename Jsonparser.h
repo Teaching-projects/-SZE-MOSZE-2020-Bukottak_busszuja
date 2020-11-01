@@ -1,3 +1,12 @@
+/**
+ * \class Jasonparser
+ *
+ * \brief Jasonparser class
+ *
+ * \author Haban Andras, Tranta Mate, Toth Norbert
+ *
+ * Created on: 2020/10/27 13:14
+*/
 #include<iostream>
 #include<iostream>
 #include <map>
@@ -9,12 +18,12 @@
 
 class Jsonparser {
 public:
-	Jsonparser(std::ifstream &);
-	Jsonparser(std::string& szoveg);
-	Jsonparser(const char *);
-	~Jsonparser();
-	std::string getErtek(const std::string &);
+	Jsonparser(std::ifstream &);	///< a jasonparser fajlvaltozval mukodo konstruktora
+	Jsonparser(std::string& szoveg);	///< a jasonparser stringel mukodo konstruktora
+	Jsonparser(const char *);	///< a jasonparser fajlnevel mukodo konstruktora
+	~Jsonparser();	///< a jason parser destruktora
+	std::string getErtek(const std::string &);	///< fugveny ami paramaterkent megadott kulcshoz ad erteket
 private:
-	void Jsonprsr(std::ifstream &);
-	std::map<std::string, std::string> m;
+	void Jsonprsr(std::ifstream &);	///< a fo fugveny amit a konstruktorok meghivnak
+	std::map<std::string, std::string> m;	///< map valtozo ami tarolja a kulcsokat es hozzajuk tartozo ertekeket
 };

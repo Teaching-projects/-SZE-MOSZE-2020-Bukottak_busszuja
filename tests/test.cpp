@@ -4,8 +4,6 @@
 #include "gtest/gtest.h"
 
 
-using namespace std;
-
 TEST(Jsonparsertest, Fajlvaltozo) {
 	std::ifstream f("Hosarkany.json");
 	Jsonparser beolvasas(f);
@@ -106,9 +104,9 @@ TEST(Szornytest, parseUnit_test) {
 	Szorny s1 = Szorny::parseUnit(beolvasas1);
 	Szorny s2 = Szorny::parseUnit(beolvasas2);
 	Szorny s3 = Szorny::parseUnit(beolvasas3);
-	EXPECT_EQ(s1==s2, true);
-	EXPECT_EQ(s3 == s2, true);
-	EXPECT_EQ(s1==eredmeny,true);
+	EXPECT_TRUE(s1==eredmeny);
+	EXPECT_TRUE(s2==eredmeny);
+	EXPECT_TRUE(s3==eredmeny);
 }
 
 TEST(Szornytest, harcfunction_Kalandorwin_output_test) {
@@ -157,7 +155,7 @@ TEST(Szornytest, Levelup_Xpgain_test) {
 	Szorny s2("Sotetvarazslo", 250, 40, 2.0);
 	s1.tamad(s2);
 	Kalandor s3("Hosarkany", 330, 33, 2.4, 20, 2);
-	EXPECT_EQ(s3==s1, true);
+	EXPECT_TRUE(s3==s1);
 }
 
 

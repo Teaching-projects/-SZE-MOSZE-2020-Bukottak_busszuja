@@ -1,33 +1,35 @@
-#include "../Jsonparser.cpp"
+#include "../JSON.cpp"
 #include "gtest/gtest.h"
 
 
-using namespace std;
 
 
 TEST(Jsontest, Fajlvaltozo) {
 	std::ifstream f("Hosarkany.json");
-	Jsonparser beolvasas(f);
+	JSON beolvasas(f);
 	EXPECT_EQ(beolvasas.getErtek("name"), "Hosarkany");
-	EXPECT_EQ(beolvasas.getErtek("hp"), "300");
-	EXPECT_EQ(beolvasas.getErtek("dmg"), "30");
+	EXPECT_EQ(beolvasas.getErtek("health_points"), "300");
+	EXPECT_EQ(beolvasas.getErtek("damage"), "30");
+	EXPECT_EQ(beolvasas.getErtek("attack_cooldown"),"2.4");
 }
 
 TEST(Jsontest, Szoveg) {
 	std::string szoveg = "Sotetvarazslo.json";
-	Jsonparser beolvasas(szoveg);
+	JSON beolvasas(szoveg);
 	EXPECT_EQ(beolvasas.getErtek("name"), "Sotetvarazslo");
-	EXPECT_EQ(beolvasas.getErtek("hp"), "250");
-	EXPECT_EQ(beolvasas.getErtek("dmg"), "40");
+	EXPECT_EQ(beolvasas.getErtek("health_points"), "250");
+	EXPECT_EQ(beolvasas.getErtek("damage"), "40");
+	EXPECT_EQ(beolvasas.getErtek("attack_cooldown"),"2.0");
 }
 
 
 TEST(Jsontest, Fajlnev) {
 	const char * fajlnev = "Arnykiraly.json";
-	Jsonparser beolvasas(fajlnev);
+	JSON beolvasas(fajlnev);
 	EXPECT_EQ(beolvasas.getErtek("name"), "Arnykiraly");
-	EXPECT_EQ(beolvasas.getErtek("hp"), "200");
-	EXPECT_EQ(beolvasas.getErtek("dmg"), "48");
+	EXPECT_EQ(beolvasas.getErtek("health_points"), "200");
+	EXPECT_EQ(beolvasas.getErtek("damage"), "48");
+	EXPECT_EQ(beolvasas.getErtek("attack_cooldown"),"2.3");
 }
 
 

@@ -40,27 +40,27 @@ Szorny Szorny::parseUnit(Jsonparser & json) {
 	std::string name = json.getErtek("name");
 	int hp = stoi(json.getErtek("hp"));
 	int dmg = stoi(json.getErtek("dmg"));
-  	double speed = stod(json.getErtek("speed"));
-	return Szorny(name,hp,dmg,speed);
+	double speed = stod(json.getErtek("speed"));
+	return Szorny(name, hp, dmg, speed);
 }
 
 Szorny& Szorny::operator=(const Szorny &szorny) {
-    maxhp = szorny.getMaxHp();
-    hp = szorny.getHp();
-    dmg = szorny.getDmg();
-    nev = szorny.getName();
-    speed = szorny.getSpeed();
-    return *this;
+	maxhp = szorny.getMaxHp();
+	hp = szorny.getHp();
+	dmg = szorny.getDmg();
+	nev = szorny.getName();
+	speed = szorny.getSpeed();
+	return *this;
 }
 
-void Szorny::harc(Szorny &s1,Szorny &s2) {
+void Szorny::harc(Szorny &s1, Szorny &s2) {
 	double szamlalo = 0;
 	double lepes = gcd(s1.getSpeed(), s2.getSpeed());
 	s1.tamad(s2);
 	if (s2.getHp() > 0) {
 		s2.tamad(s1);
 	}
-	while ((s1.getHp() > 0) && (s2.getHp()>0)) {
+	while ((s1.getHp() > 0) && (s2.getHp() > 0)) {
 		szamlalo = szamlalo + lepes;
 		if (gcd(szamlalo, s1.getSpeed()) == s1.getSpeed() && gcd(szamlalo, s2.getSpeed()) == s2.getSpeed()) {
 			s1.tamad(s2);
@@ -70,4 +70,5 @@ void Szorny::harc(Szorny &s1,Szorny &s2) {
 		else if (gcd(szamlalo, s2.getSpeed()) == s2.getSpeed())s2.tamad(s1);
 	}
 }
+
 

@@ -1,7 +1,7 @@
 name: JsonParser Tests
 on: push
 jobs:
-  build_and_test:
+  unit_tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -10,4 +10,4 @@ jobs:
       - name: cmake
         run: cd tests && cmake . && make
       - name: Teszt futtatas
-        run: cd tests && ./runTests
+        run: make unittest

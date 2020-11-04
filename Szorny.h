@@ -3,17 +3,21 @@
  *
  * \brief Szorny class
  *
- * \author Haban Andras, Tranta Mate, To�th Norbert
+ * \author Haban Andras, Tranta Mate, To�th Norbert
  *
  * Created on: 2020/10/14 17:15
 */
-#pragma once
+#ifndef SZORNY_H
+#define SZORNY_H
+
 #include<iostream>
 #include<string>
 #include<fstream>
 #include<vector>
 #include <cmath>
 #include "Jsonparser.h"  
+
+double gcd(double a, double b);
 
 class Szorny {
     protected:
@@ -35,4 +39,11 @@ class Szorny {
         Szorny& operator=(const Szorny&);                                                                                   ///< Lehetove teszi egy szorny ertekeinek beallitasat egy masikera
         Szorny(const Szorny& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), speed(s2.speed) {};                ///< Lehetove teszi egy szorny letrehozasat egy masiknak a lemasolasaval
         static void harc(Szorny &,Szorny &);                                                                                ///< A parancsori argumentumban megadott két hõst harcoltatja
+        bool operator ==(const Szorny & other)const {
+		    return (this->dmg == other.getDmg()&& this->hp == other.getHp()&& this->nev == other.getName() && round(this->speed) == round(other.getSpeed()));
+	      }
 };
+
+#endif
+
+

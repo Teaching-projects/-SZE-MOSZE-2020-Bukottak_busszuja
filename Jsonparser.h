@@ -1,3 +1,4 @@
+
 /**
  * \class Jasonparser
  *
@@ -7,6 +8,10 @@
  *
  * Created on: 2020/10/27 13:14
 */
+
+#ifndef JSONPARSER_H
+#define JSONPARSER_H
+
 #include<iostream>
 #include<iostream>
 #include <map>
@@ -23,7 +28,12 @@ public:
 	Jsonparser(const char *);	///< a jasonparser fajlnevel mukodo konstruktora
 	~Jsonparser();	///< a jason parser destruktora
 	std::string getErtek(const std::string &);	///< fugveny ami paramaterkent megadott kulcshoz ad erteket
+  int getSize()const;  ///< fuggveny,ami visszaadja a meretet a map-nek
+
 private:
 	void Jsonprsr(std::ifstream &);	///< a fo fugveny amit a konstruktorok meghivnak
 	std::map<std::string, std::string> m;	///< map valtozo ami tarolja a kulcsokat es hozzajuk tartozo ertekeket
 };
+
+#endif
+

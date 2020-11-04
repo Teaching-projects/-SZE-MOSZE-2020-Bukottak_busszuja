@@ -78,6 +78,7 @@ void JSON::Jsonprsr(std::ifstream& f) {
                         foundkey = i;
                     }
                     if (key == "name") {
+                        value.erase(0,1);
                         std::string::size_type tmp = value.find(',');
                         if (tmp != std::string::npos) {
                             value.erase(tmp);

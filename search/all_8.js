@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['parseunit',['parseUnit',['../classSzorny.html#a8e7849c8fefc8e18d7045b5a6fe6e4ac',1,'Szorny']]]
+  ['nev',['nev',['../classSzorny.html#a203228c488f0801c089bcbb05f80c42f',1,'Szorny']]]
 ];

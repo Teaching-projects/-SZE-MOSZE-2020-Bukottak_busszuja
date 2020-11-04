@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_3d',['operator=',['../classSzorny.html#a66efec659d7eb34a20a8019330c1e7ce',1,'Szorny']]]
+  ['harc',['harc',['../classSzorny.html#a036eb2ba20b6e1c752e5d740510e044d',1,'Szorny']]]
 ];

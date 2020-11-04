@@ -6,7 +6,7 @@
 
 TEST(Jsontest, Fajlvaltozo) {
 	std::ifstream f("Hosarkany.json");
-	JSON beolvasas(f);
+	JSON beolvasas = JSON::parseFromFile(f);
 	EXPECT_EQ(beolvasas.getErtek("name"), "Hosarkany");
 	EXPECT_EQ(beolvasas.getErtek("health_points"), "300");
 	EXPECT_EQ(beolvasas.getErtek("damage"), "30");
@@ -15,7 +15,7 @@ TEST(Jsontest, Fajlvaltozo) {
 
 TEST(Jsontest, Szoveg) {
 	std::string szoveg = "Sotetvarazslo.json";
-	JSON beolvasas(szoveg);
+	JSON beolvasas = JSON::parseFromFile(szoveg);
 	EXPECT_EQ(beolvasas.getErtek("name"), "Sotetvarazslo");
 	EXPECT_EQ(beolvasas.getErtek("health_points"), "250");
 	EXPECT_EQ(beolvasas.getErtek("damage"), "40");
@@ -24,8 +24,8 @@ TEST(Jsontest, Szoveg) {
 
 
 TEST(Jsontest, Fajlnev) {
-	const char * fajlnev = "Arnykiraly.json";
-	JSON beolvasas(fajlnev);
+        const char * fajlnev="Arnykiraly.json";
+	JSON beolvasas = JSON::parseFromFile(fajlnev);
 	EXPECT_EQ(beolvasas.getErtek("name"), "Arnykiraly");
 	EXPECT_EQ(beolvasas.getErtek("health_points"), "200");
 	EXPECT_EQ(beolvasas.getErtek("damage"), "48");

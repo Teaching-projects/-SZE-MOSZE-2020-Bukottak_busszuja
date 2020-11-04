@@ -25,7 +25,7 @@ class Kalandor : public Szorny {
         int getLvl() const; ///< lekeri az aktualis szintjet a kalandorak
         Kalandor& operator=(const Szorny&); ///< a fuggveny arra valo hogy egyenloseget lehessen teni szorny es kalandor kozott
         bool operator ==(const Kalandor & other)const {
-		    return (this->lvl==other.getLvl() &&this->xp ==other.getXp() &&this->dmg == other.getDmg() && this->hp == other.getHp() && this->nev == other.getName() && round(this->speed) == round(other.getSpeed()))
+		    return (this->lvl==other.getLvl() &&this->xp ==other.getXp() &&this->dmg == other.getDmg() && this->hp == other.getHp() && this->nev == other.getName() && round(this->speed) == round(other.getSpeed()));
         }
     protected:
         int xp; 	///< A kalandor tapasztalat pontjai egesz ertek visszateressel

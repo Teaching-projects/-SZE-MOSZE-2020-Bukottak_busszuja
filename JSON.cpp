@@ -69,13 +69,19 @@ void JSON::Jsonprsr(std::ifstream& f) {
 
                         if (sor[i] == '"') {
                             i++;
-                        } else if ((sor[i] == ' ' || sor[i] == ',') && (key != "monsters" && key != "lore")) {
+                        } else if ((sor[i] == ' ' || sor[i] == ',') && (key != "monsters" && key != "lore" && key != "name")) {
                             i++;
                         } else {
                             value = value + sor[i];
                             i++;
                         }
                         foundkey = i;
+                    }
+                    if (key == "name") {
+                        std::string::size_type tmp = value.find(',');
+                        if (tmp != std::string::npos) {
+                            value.erase(tmp);
+                        }
                     }
 
                     m[key] = value;

@@ -1,7 +1,7 @@
 /**
  * \class kalandor
  *
- * \brief kalandor class
+ * \brief kalandor class a szorny osztalytol abban kulonbozik hogy kepes szintlepesre
  *
  * \author Haban Andras, Tranta Mate, Toth Norbert
  *
@@ -21,9 +21,9 @@ class Kalandor : public Szorny {
         int getLvl() const; ///< lekeri az aktualis szintjet a kalandorak
         Kalandor& operator=(const Szorny&); ///< a fuggveny arra valo hogy egyenloseget lehessen teni szorny es kalandor kozott
     protected:
-        int xp; 	///< A kalandor tapasztalat pontjai
-        int lvl;	///< A kalandor szint erteke	
-        void lvlUp(int xptoLvl);	///< A szintlepest intezo fuggveny 
-        void xpGain(int gain);	///< tapasztalat növekedést intezo függvény
-        void tamad(Szorny&);	///< egy darab ütést visz be
+        int xp; 	///< A kalandor tapasztalat pontjai egesz ertek visszateressel
+        int lvl;	///< A kalandor szint erteke egész ertek visszateressel
+        void lvlUp(int xptoLvl);	///< A szintlepest intezo fuggveny, ha eleri az xp az xptolvl-t szintet lép
+        void xpGain(int gain);	///< tapasztalat növekedést intezo függvény, az xp-t gain=dmg egész ertekkel noveli
+        void tamad(Szorny&);	///< egy darab ütést visz be, parametére egy szorny objektum
 };

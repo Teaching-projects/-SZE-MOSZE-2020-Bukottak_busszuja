@@ -26,12 +26,12 @@ class Szorny {
         friend class Kalandor;
     public:
         Szorny(std::string nev, int hp, int dmg, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), speed(speed) {}   ///< Szorny osztaly konstruktora
-        int getDmg()const;                                                                                                  ///< Lekeri a szorny sebzeset
-        int getMaxHp() const;                                                                                               ///< Lekeri a szorny maximum HP-jat
-        int getHp()const;                                                                                                   ///< Lekeri a szorny HP-jat
-        double getSpeed()const;                                                                                             ///< Lekeri a szorny atackspeedjet
-        std::string getName()const;                                                                                         ///< Lekeri a szorny nevet
-        static Szorny parseUnit(Jsonparser &);                                                               ///< Beolvassa a szorny ertekeit
+        int getDmg()const;                                                                                                  ///< Lekeri a szorny sebzeset egesz ertek visszateressel
+        int getMaxHp() const;                                                                                               ///< Lekeri a szorny maximum HP-jat egesz ertek visszateressel
+        int getHp()const;                                                                                                   ///< Lekeri a szorny HP-jat egesz ertek visszateressel
+        double getSpeed()const;                                                                                             ///< Lekeri a szorny atackspeedjet lebegopontos ertek visszateressel
+        std::string getName()const;                                                                                         ///< Lekeri a szorny nevet string visszateressel
+        static Szorny parseUnit(Jsonparser &);                                                               ///< Beolvassa a szorny ertekeit, parameternek egy jsonparser objektumot var name,hp,dmg,speed visszateressel
         Szorny& operator=(const Szorny&);                                                                                   ///< Lehetove teszi egy szorny ertekeinek beallitasat egy masikera
         Szorny(const Szorny& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), speed(s2.speed) {};                ///< Lehetove teszi egy szorny letrehozasat egy masiknak a lemasolasaval
         static void harc(Szorny &,Szorny &);                                                                                ///< A parancsori argumentumban megadott két hõst harcoltatja

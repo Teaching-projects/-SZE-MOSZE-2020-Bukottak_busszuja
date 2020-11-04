@@ -24,7 +24,7 @@ void Jsonparser::Jsonprsr(std::ifstream & f) {
 				i = found + 1;
 				key = "";
 				while (sor[i] != '"' && sor[i] != ':') {
-					if (sor[i] == '"' || sor[i] == ' ') {
+					if (sor[i] == '"' || sor[i] == ' ' || sor[i] == '\t') {
 						i++;
 					}
 					else {
@@ -42,7 +42,7 @@ void Jsonparser::Jsonprsr(std::ifstream & f) {
 				i = found + 1;
 				value = "";
 				while (sor[i] != ',' && i != sor.size()) {
-					if (sor[i] == '"' || sor[i] == ' ') {
+					if (sor[i] == '"' || sor[i] == ' ' || sor[i] == '\t') {
 						i++;
 					}
 					else {
@@ -82,4 +82,8 @@ Jsonparser::~Jsonparser()
 
 std::string Jsonparser::getErtek(const std::string & kulcs) {
 	return m[kulcs];
+}
+
+int Jsonparser::getSize()const {
+	return m.size();
 }

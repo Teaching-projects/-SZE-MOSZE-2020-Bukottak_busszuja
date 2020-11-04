@@ -1,7 +1,7 @@
 {
   "name" : "Hosarkany",
-  "hp" : 300,
-  "dmg" : 30,
-  "speed" : 2.4
+  "health_points" : 300,
+  "damage" : 30,
+  "attack_cooldown" : 2.4
 }
 

@@ -1,6 +1,7 @@
 {
   "name" : "Arnykiraly",
-  "hp" : 200,
-  "dmg" : 48
+  "health_points" : 200,
+  "damage" : 48,
+  "attack_cooldown" : 1.6
 }
 

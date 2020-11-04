@@ -2,19 +2,24 @@
 #include<iostream>
 #include<string>
 #include<fstream>
-#include "Szorny.h"
+#include "Monster.h"
 
-class Kalandor : public Szorny {
+class Hero : public Monster {
     public:
-        Kalandor(const std::string& nev, int hp, int dmg, double speed, int xp=0, int lvl=1) : Szorny(nev, hp, dmg, speed), xp(xp), lvl(lvl) {};
-        Kalandor(const Szorny& sz) : Szorny(sz.getName(), sz.getHp(), sz.getDmg(), sz.getSpeed()), xp(0), lvl(1) {};
+        Hero(const std::string& nev, int hp, int dmg, double speed, int xpPerLvl, int hpPerLvl, int dmgPerLvl, double speedPerLvl, int xp=0, int lvl=1) : Monster(nev, hp, dmg, speed), xpPerLvl(xpPerLvl), hpPerLvl(hpPerLvl), dmgPerLvl(dmgPerLvl), speedPerLvl(speedPerLvl), xp(xp), lvl(lvl) {};
+        //Hero(const Monster& sz) : Monster(sz.getName(), sz.getHealthPoints(), sz.getDamage(), sz.getAttackCoolDown()), xp(0), lvl(1) {};
         int getXp() const;
-        int getLvl() const;
-        Kalandor& operator=(const Szorny&);
+        int getLevel() const;
+        static Hero parse(const std::string& json);
+        Hero& operator=(const Monster&);
     protected:
+        int xpPerLvl;
+        int hpPerLvl;
+        int dmgPerLvl;
+        double speedPerLvl;
         int xp;
         int lvl;
-        void lvlUp(int xptoLvl);
+        void lvlUp();
         void xpGain(int gain);
-        void tamad(Szorny&);
+        void tamad(Monster*);
 };

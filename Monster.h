@@ -13,26 +13,27 @@
 #include<fstream>
 #include<vector>
 #include <cmath>
-#include "Jsonparser.h"  
+#include "JSON.h"
 
-class Szorny {
+class Monster {
     protected:
         std::string nev;                                                                                                    ///< A szörny neve
         int maxhp;                                                                                                          ///< A szörny maximum életpontja
         int hp;                                                                                                             ///< A szörny életpontjai
         int dmg;                                                                                                            ///< A szörny ütésének erõsege
         double speed;                                                                                                       ///< A szörny ütéseinek gyorsasága
-        virtual void tamad(Szorny&);                                                                                          ///< Egy darab ütést visz be
-        friend class Kalandor;
+        virtual void tamad(Monster* );                                                                                          ///< Egy darab ütést visz be
+        friend class Hero;
     public:
-        Szorny(std::string nev, int hp, int dmg, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), speed(speed) {}   ///< Szörny osztály konstruktora
-        int getDmg()const;                                                                                                  ///< Lekéri a szörny sebzését
-        int getMaxHp() const;                                                                                               ///< Lekéri a szörny maximum HP-ját
-        int getHp()const;                                                                                                   ///< Lekéri a szörny HP-ját
-        double getSpeed()const;                                                                                             ///< Lekéri a szörny atackspeedjét
+        Monster(std::string nev, int hp, int dmg, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), speed(speed) {}   ///< Szörny osztály konstruktora
+        int getDamage()const;                                                                                                  ///< Lekéri a szörny sebzését
+        int getMaxHealthPoints() const;                                                                                               ///< Lekéri a szörny maximum HP-ját
+        int getHealthPoints()const;                                                                                                   ///< Lekéri a szörny HP-ját
+        double getAttackCoolDown()const;                                                                                             ///< Lekéri a szörny atackspeedjét
         std::string getName()const;                                                                                         ///< Lekéri a szörny nevét
-        static Szorny parseUnit(Jsonparser &);                                                               ///< Beolvassa a szörny értékeit
-        Szorny& operator=(const Szorny&);                                                                                   ///< Lehetővé teszi egy szörny értékeinek beállítását egy másikéra
-        Szorny(const Szorny& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), speed(s2.speed) {};                ///< Lehetővé teszi egy szörny létrehozását egy másiknak a lemásolásával
-        static void harc(Szorny &,Szorny &);                                                                                ///< A parancsori argumentumban megadott két hõst harcoltatja
+        static Monster parse(const std::string& json);                                                               ///< Beolvassa a szörny értékeit
+        Monster& operator=(const Monster&);                                                                                   ///< Lehetővé teszi egy szörny értékeinek beállítását egy másikéra
+        Monster(const Monster& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), speed(s2.speed) {};                ///< Lehetővé teszi egy szörny létrehozását egy másiknak a lemásolásával
+        void fightTilDeath(Monster&);
+        bool isAlive() const;                                                                               ///< A parancsori argumentumban megadott két hõst harcoltatja
 };

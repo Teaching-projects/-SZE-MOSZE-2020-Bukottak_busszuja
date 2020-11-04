@@ -1,17 +1,33 @@
-#include "Jsonparser.h"
+#include "JSON.h"
 #include <set>
 
 
-void Jsonparser::Jsonprsr(std::ifstream & f) {
+void JSON::Jsonprsr(std::ifstream& f) {
 	std::set<std::string> keys;
 	keys.insert("name");
-	keys.insert("dmg");
-	keys.insert("hp");
-	keys.insert("speed");
+	keys.insert("damage");
+	keys.insert("health_points");
+	keys.insert("attack_cooldown");
+    keys.insert("monsters");
+
+    keys.insert("base_damage");
+	keys.insert("base_health_points");
+	keys.insert("base_attack_cooldown");
+    keys.insert("experience_per_level");
+    keys.insert("health_point_bonus_per_level");
+	keys.insert("damage_bonus_per_level");
+	keys.insert("cooldown_multiplier_per_level");
+	keys.insert("hero");
+    keys.insert("lore");
+	keys.insert("race");
+
 
 	std::string::size_type i;
-	std::string::size_type found;
-	if (!f.good()) throw MYFILEERROR;
+	std::string::size_type j;
+	std::string::size_type foundkey = 0;
+    std::string::size_type foundvalue = 0;
+	std::string errMsg;
+	if (!f.good()) { throw ParseException("File does not exist!"); }
 	else {
 		std::string sor = "";
 		std::string key;
@@ -19,67 +35,105 @@ void Jsonparser::Jsonprsr(std::ifstream & f) {
 
 		while (!f.eof()) {
 			getline(f, sor);
-			found = sor.find('"');
-			if (found != std::string::npos) {
-				i = found + 1;
-				key = "";
-				while (sor[i] != '"' && sor[i] != ':') {
-					if (sor[i] == '"' || sor[i] == ' ') {
-						i++;
-					}
-					else {
-						key = key + sor[i];
-						i++;
-					}
-				}
+			j = 0;
+			foundkey = 0;
+			foundvalue = 0;
+			while (sor[j] != '}' && j != sor.size()) {
+                if (sor.find('"',foundkey+1) != std::string::npos) {
+                    foundkey = sor.find('"',foundkey);
+                    i = foundkey + 1;
+                    key = "";
+                    while (sor[i] != '"' && sor[i] != ':') {
+                        if (sor[i] == '"' || sor[i] == ' ') {
+                            i++;
+                        }
+                        else {
+                            key = key + sor[i];
+                            i++;
+                        }
+                    }
 
-				if (keys.find(key) == keys.end()) throw INVALID_VALUE;
+                    /*if (keys.find(key) == keys.end()) {
+                            std::cerr << key << std::endl;
+                            errMsg = "Error in file: incorrect value.";
+                            throw ParseException(errMsg);
+                    }*/
 
-			}
+                }
 
-			found = sor.find(':');
-			if (found != std::string::npos) {
-				i = found + 1;
-				value = "";
-				while (sor[i] != ',' && i != sor.size()) {
-					if (sor[i] == '"' || sor[i] == ' ') {
-						i++;
-					}
-					else {
-						value = value + sor[i];
-						i++;
-					}
-				}
+                if (sor.find(':',foundvalue+1) != std::string::npos) {
+                    foundvalue = sor.find(':',foundvalue);
+                    i = foundvalue + 1;
+                    value = "";
+                    while (((sor[i] != ',') || (sor[i+1] != '"')) && ((sor[i] != ',') || (sor[i+1] != ' ') || (sor[i+2] != '"')) && (i != sor.size())) {
 
-				m[key] = value;
+                        if (sor[i] == '"') {
+                            i++;
+                        } else if ((sor[i] == ' ' || sor[i] == ',') && (key != "monsters" && key != "lore")) {
+                            i++;
+                        } else {
+                            value = value + sor[i];
+                            i++;
+                        }
+                        foundkey = i;
+                    }
 
+                    m[key] = value;
+                }
+                    if (sor.find(',',foundkey) != std::string::npos) {
+                        foundkey = sor.find(',',foundkey);
+                        foundvalue = foundkey;
+                        j += foundkey+1;
+                    } else {
+                        j = sor.size();
+                    }
+                    if (key == "monsters") j = sor.size();
 			}
 		}
 		f.close();
-
 	}
 }
 
-Jsonparser::Jsonparser(std::ifstream& f) {
+JSON::JSON(std::ifstream& f) {
 	Jsonprsr(f);
 }
 
-Jsonparser::Jsonparser(const char * fajlnev) {
+JSON::JSON(const char* fajlnev) {
 	std::ifstream f(fajlnev);
 	Jsonprsr(f);
 }
 
-Jsonparser::Jsonparser(std::string& szoveg) {
+JSON::JSON(const std::string& szoveg) {
 	std::ifstream f(szoveg);
 	Jsonprsr(f);
 }
 
 
-Jsonparser::~Jsonparser()
+JSON::~JSON()
 {
 	m.clear();
 }
 
-std::string Jsonparser::getErtek(const std::string & kulcs) {
+std::string JSON::getErtek(const std::string& kulcs) {
 	return m[kulcs];
+}
+
+JSON JSON::parseFromFile(std::ifstream& f) {
+	JSON object(f);
+	return object;
+}
+
+JSON JSON::parseFromFile(const std::string& szoveg) {
+	JSON object(szoveg);
+	return object;
+}
+
+JSON JSON::parseFromFile(const char * fajlnev) {
+	JSON object(fajlnev);
+	return object;
+}
+
+const int JSON::count(const std::string& key){
+    if (m.find(key) != m.end()) return 1;
+    else return 0;
 }

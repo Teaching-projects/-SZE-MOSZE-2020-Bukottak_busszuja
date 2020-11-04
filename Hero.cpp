@@ -1,45 +1,59 @@
-#include "Kalandor.h"
+#include "Hero.h"
 #include <math.h>
 
 #define XPTOLVL 100
 
-int Kalandor::getXp()const {
+int Hero::getXp()const {
 	return xp;
 }
 
-int Kalandor::getLvl()const {
+int Hero::getLevel()const {
 	return lvl;
 }
 
-void Kalandor::lvlUp(int xptoLvl) {
-    xp = xp-xptoLvl;
+void Hero::lvlUp() {
+    xp = xp-xpPerLvl;
     lvl++;
-    maxhp = floor(maxhp*1.1);
+    maxhp += hpPerLvl;
     hp = maxhp;
-    dmg = floor(dmg*1.1);
+    dmg += dmgPerLvl;
+    speed *= speedPerLvl;
 }
 
-void Kalandor::xpGain(int gain) {
+void Hero::xpGain(int gain) {
     xp += gain;
-    while (xp >= XPTOLVL) {
-        lvlUp(XPTOLVL);
+    while (xp >= xpPerLvl) {
+        lvlUp();
     }
 }
 
-void Kalandor::tamad(Szorny& a) {
+void Hero::tamad(Monster* a) {
     int gain = dmg;
-	if (dmg > a.hp) gain = a.hp;
-	a.hp = a.hp - this->dmg;
+	if (dmg > a->hp) gain = a->hp;
+	a->hp = a->hp - this->dmg;
 	xpGain(gain);
-	if (a.hp < 0) a.hp = 0;
+	if (a->hp < 0) a->hp = 0;
 }
 
-Kalandor& Kalandor::operator=(const Szorny &szorny) {
-    maxhp = szorny.getMaxHp();
-    hp = szorny.getHp();
-    dmg = szorny.getDmg();
+Hero Hero::parse(const std::string& json) {
+    JSON parsedJSON = JSON::parseFromFile(json);
+	std::string name = parsedJSON.getErtek("name");
+	int hp = stoi(parsedJSON.getErtek("base_health_points"));
+	int dmg = stoi(parsedJSON.getErtek("base_damage"));
+	int xpPerLvl = stoi(parsedJSON.getErtek("experience_per_level"));
+	int hpPerLvl = stoi(parsedJSON.getErtek("health_point_bonus_per_level"));
+	int dmgPerLvl = stoi(parsedJSON.getErtek("damage_bonus_per_level"));
+  	double speed = stod(parsedJSON.getErtek("base_attack_cooldown"));
+  	double speedPerLvl = stod(parsedJSON.getErtek("cooldown_multiplier_per_level"));
+	return Hero(name , hp, dmg, speed, xpPerLvl, hpPerLvl, dmgPerLvl, speedPerLvl);
+}
+
+Hero& Hero::operator=(const Monster &szorny) {
+    maxhp = szorny.getMaxHealthPoints();
+    hp = szorny.getHealthPoints();
+    dmg = szorny.getDamage();
     nev = szorny.getName();
-    speed = szorny.getSpeed();
+    speed = szorny.getAttackCoolDown();
     xp = 0;
     lvl = 1;
     return *this;

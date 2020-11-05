@@ -36,16 +36,29 @@ void Hero::tamad(Monster* a) {
 }
 
 Hero Hero::parse(const std::string& json) {
+    std::vector <std::string> keysNeeded {"experience_per_level","health_point_bonus_per_level", "damage_bonus_per_level",
+							 "cooldown_multiplier_per_level","name", "base_health_points", "base_damage", "base_attack_cooldown"};
     JSON parsedJSON = JSON::parseFromFile(json);
-	std::string name = parsedJSON.getErtek("name");
-	int hp = stoi(parsedJSON.getErtek("base_health_points"));
-	int dmg = stoi(parsedJSON.getErtek("base_damage"));
-	int xpPerLvl = stoi(parsedJSON.getErtek("experience_per_level"));
-	int hpPerLvl = stoi(parsedJSON.getErtek("health_point_bonus_per_level"));
-	int dmgPerLvl = stoi(parsedJSON.getErtek("damage_bonus_per_level"));
-  	double speed = stod(parsedJSON.getErtek("base_attack_cooldown"));
-  	double speedPerLvl = stod(parsedJSON.getErtek("cooldown_multiplier_per_level"));
-	return Hero(name , hp, dmg, speed, xpPerLvl, hpPerLvl, dmgPerLvl, speedPerLvl);
+
+    bool okay = true;
+    	for (auto key : keysNeeded)
+        	if(!parsedJSON.count(key))
+			okay = false;
+
+	if (okay) {
+
+        std::string name = parsedJSON.get<std::string>("name");
+        int hp = parsedJSON.get<int>("base_health_points");
+        int dmg = parsedJSON.get<int>("base_damage");
+        int xpPerLvl = parsedJSON.get<int>("experience_per_level");
+        int hpPerLvl = parsedJSON.get<int>("health_point_bonus_per_level");
+        int dmgPerLvl = parsedJSON.get<int>("damage_bonus_per_level");
+        double speed = parsedJSON.get<double>("base_attack_cooldown");
+        double speedPerLvl = parsedJSON.get<double>("cooldown_multiplier_per_level");
+
+        return Hero(name , hp, dmg, speed, xpPerLvl, hpPerLvl, dmgPerLvl, speedPerLvl);
+	}
+	else throw JSON::ParseException("Incorrect attributes in " + json + "!");
 }
 
 Hero& Hero::operator=(const Monster &szorny) {

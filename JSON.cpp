@@ -53,12 +53,6 @@ void JSON::Jsonprsr(std::ifstream& f) {
                         }
                     }
 
-                    /*if (keys.find(key) == keys.end()) {
-                            std::cerr << key << std::endl;
-                            errMsg = "Error in file: incorrect value.";
-                            throw ParseException(errMsg);
-                    }*/
-
                 }
 
                 if (sor.find(':',foundvalue+1) != std::string::npos) {
@@ -84,8 +78,17 @@ void JSON::Jsonprsr(std::ifstream& f) {
                             value.erase(tmp);
                         }
                     }
+                    if (key == "damage" || key == "health_points" || key == "base_health_points" || key == "base_damage" || key == "experience_per_level" || key == "health_point_bonus_per_level" || key == "damage_bonus_per_level") {
+                        int tmp = stoi(value);
+                        m[key] = tmp;
+                    } else if (key == "attack_cooldown" || key == "base_attack_cooldown" || key == "cooldown_multiplier_per_level") {
+                        std::cerr << stod(value) << std::endl;
+                        double tmp = stod(value);
+                        m[key] = tmp;
+                    } else {
+                        m[key] = value;
+                    }
 
-                    m[key] = value;
                 }
                     if (sor.find(',',foundkey) != std::string::npos) {
                         foundkey = sor.find(',',foundkey);
@@ -119,10 +122,6 @@ JSON::JSON(const std::string& szoveg) {
 JSON::~JSON()
 {
 	m.clear();
-}
-
-std::string JSON::getErtek(const std::string& kulcs) {
-	return m[kulcs];
 }
 
 JSON JSON::parseFromFile(std::ifstream& f) {

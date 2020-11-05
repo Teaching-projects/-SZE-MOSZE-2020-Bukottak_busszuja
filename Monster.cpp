@@ -27,12 +27,24 @@ void Monster::tamad(Monster* a) {
 
 
 Monster Monster::parse(const std::string& json) {
+    std::vector <std::string> keysNeeded {"name", "health_points", "damage", "attack_cooldown"};
     JSON parsedJSON = JSON::parseFromFile(json);
-	std::string name = parsedJSON.getErtek("name");
-	int hp = stoi(parsedJSON.getErtek("health_points"));
-	int dmg = stoi(parsedJSON.getErtek("damage"));
-  	double speed = stod(parsedJSON.getErtek("attack_cooldown"));
-	return Monster(name ,hp ,dmg ,speed);
+
+    bool okay = true;
+    	for (auto key : keysNeeded)
+        	if(!parsedJSON.count(key))
+			okay = false;
+
+	if (okay) {
+
+        std::string name = parsedJSON.get<std::string>("name");
+        int hp = parsedJSON.get<int>("health_points");
+        int dmg = parsedJSON.get<int>("damage");
+        double speed = parsedJSON.get<double>("attack_cooldown");
+
+        return Monster(name ,hp ,dmg ,speed);
+	}
+	else throw JSON::ParseException("Incorrect attributes in " + json + "!");
 }
 
 Monster& Monster::operator=(const Monster &szorny) {

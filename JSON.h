@@ -6,6 +6,7 @@
 #include<iostream>
 #include<iostream>
 #include <map>
+#include <variant>
 #include<fstream>
 #include<string>
 
@@ -22,7 +23,8 @@ public:
 	const int count(const std::string& key);
 
     template <class T> T get(const std::string& key){
-        return m[key];
+        if (!count(key)) throw ParseException("Key does not exist in map!");
+        else return std::get<T>(m[key]);
     }
 
     class ParseException : public std::runtime_error{
@@ -32,7 +34,7 @@ public:
 
 private:
 	void Jsonprsr(std::ifstream &);
-	std::map<std::string, std::string> m;
+	std::map <std::string, std::variant<std::string, int, double>> m;
 };
 
 #endif

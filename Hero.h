@@ -7,7 +7,6 @@
 class Hero : public Monster {
     public:
         Hero(const std::string& nev, int hp, int dmg, double speed, int xpPerLvl, int hpPerLvl, int dmgPerLvl, double speedPerLvl, int xp=0, int lvl=1) : Monster(nev, hp, dmg, speed), xpPerLvl(xpPerLvl), hpPerLvl(hpPerLvl), dmgPerLvl(dmgPerLvl), speedPerLvl(speedPerLvl), xp(xp), lvl(lvl) {};
-        //Hero(const Monster& sz) : Monster(sz.getName(), sz.getHealthPoints(), sz.getDamage(), sz.getAttackCoolDown()), xp(0), lvl(1) {};
         int getXp() const;
         int getLevel() const;
         static Hero parse(const std::string& json);

@@ -18,7 +18,7 @@ TEST(Jsontest, Szoveg) {
 	EXPECT_EQ(beolvasas.get<std::string>("name"), "Sotetvarazslo");
 	EXPECT_EQ(beolvasas.get<int>("health_points"), 250);
 	EXPECT_EQ(beolvasas.get<int>("damage"), 40);
-	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 2);
+	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 2.0);
 }
 
 

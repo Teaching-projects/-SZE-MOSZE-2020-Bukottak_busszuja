@@ -3,105 +3,52 @@
 
 
 void JSON::Jsonprsr(std::ifstream& f) {
-	std::set<std::string> keys;
-	keys.insert("name");
-	keys.insert("damage");
-	keys.insert("health_points");
-	keys.insert("attack_cooldown");
-    keys.insert("monsters");
 
-    keys.insert("base_damage");
-	keys.insert("base_health_points");
-	keys.insert("base_attack_cooldown");
-    keys.insert("experience_per_level");
-    keys.insert("health_point_bonus_per_level");
-	keys.insert("damage_bonus_per_level");
-	keys.insert("cooldown_multiplier_per_level");
-	keys.insert("hero");
-    keys.insert("lore");
-	keys.insert("race");
-
-
-	std::string::size_type i;
-	std::string::size_type j;
-	std::string::size_type foundkey = 0;
-    std::string::size_type foundvalue = 0;
-	std::string errMsg;
 	if (!f.good()) { throw ParseException("File does not exist!"); }
 	else {
 		std::string sor = "";
-		std::string key;
-		std::string value;
+		std::string jsonstring = "";
 
 		while (!f.eof()) {
 			getline(f, sor);
-			j = 0;
-			foundkey = 0;
-			foundvalue = 0;
-			while (sor[j] != '}' && j != sor.size()) {
-                if (sor.find('"',foundkey+1) != std::string::npos) {
-                    foundkey = sor.find('"',foundkey);
-                    i = foundkey + 1;
-                    key = "";
-                    while (sor[i] != '"' && sor[i] != ':') {
-                        if (sor[i] == '"' || sor[i] == ' ') {
-                            i++;
-                        }
-                        else {
-                            key = key + sor[i];
-                            i++;
-                        }
-                    }
-
-                }
-
-                if (sor.find(':',foundvalue+1) != std::string::npos) {
-                    foundvalue = sor.find(':',foundvalue);
-                    i = foundvalue + 1;
-                    value = "";
-                    while (((sor[i] != ',') || (sor[i+1] != '"')) && ((sor[i] != ',') || (sor[i+1] != ' ') || (sor[i+2] != '"')) && (i != sor.size())) {
-
-                        if (sor[i] == '"') {
-                            i++;
-                        } else if ((sor[i] == ' ' || sor[i] == ',') && (key != "monsters" && key != "lore" && key != "name")) {
-                            i++;
-                        } else {
-                            value = value + sor[i];
-                            i++;
-                        }
-                        foundkey = i;
-                    }
-                    if (key == "name") {
-                        value.erase(0,1);
-                        std::string::size_type tmp = value.find(',');
-                        if (tmp != std::string::npos) {
-                            value.erase(tmp);
-                        }
-                    }
-                    if (key == "damage" || key == "health_points" || key == "base_health_points" || key == "base_damage" || key == "experience_per_level" || key == "health_point_bonus_per_level" || key == "damage_bonus_per_level") {
-                        int tmp = stoi(value);
-                        m[key] = tmp;
-                    } else if (key == "attack_cooldown" || key == "base_attack_cooldown" || key == "cooldown_multiplier_per_level") {
-                        std::cerr << stod(value) << std::endl;
-                        double tmp = stod(value);
-                        m[key] = tmp;
-                    } else {
-                        m[key] = value;
-                    }
-
-                }
-                    if (sor.find(',',foundkey) != std::string::npos) {
-                        foundkey = sor.find(',',foundkey);
-                        foundvalue = foundkey;
-                        j += foundkey+1;
-                    } else {
-                        j = sor.size();
-                    }
-                    if (key == "monsters") j = sor.size();
-			}
+			jsonstring += sor;
 		}
-		f.close();
-	}
+
+		static const std::regex parseRegex("\\s*\"([\\w]*)\"\\s*:\\s*\"?([\\s\\w\\.]*)\"?\\s*[,}]\\s*");
+        std::smatch matches;
+        std::string errMsg;
+        if (jsonstring.substr(0,1) != "{"){
+            errMsg = "Error in file: missing opening {.";
+            throw ParseException(errMsg);
+        }
+        else if (jsonstring.substr(jsonstring.size()-1, 1) != "}"){
+            errMsg = "Error in file: missing ending }.";
+            throw ParseException(errMsg);
+        }
+
+        while(std::regex_search(jsonstring, matches, parseRegex)){
+            if (matches[1] == "") {
+                errMsg = "Error in file: incorrect key.";
+                throw ParseException(errMsg);
+            }
+
+            else if (matches[2] == "") {
+                errMsg = "Error in file: incorrect value.";
+                throw ParseException(errMsg);
+            }
+
+            else
+            {
+                std::string value = matches[2];
+                if (!value.empty() && std::all_of(value.begin(), value.end(), [](char c){return std::isdigit(c);})) m[matches[1]] = std::stoi(value);
+                else if (!value.empty() && std::all_of(value.begin(), value.end(), [](char c){return ((std::isdigit(c) || c == '.') ? true : false);})) m[matches[1]] = std::stod(value);
+                else m[matches[1]] = value;
+                jsonstring = matches.suffix().str();
+            }
+        }
+    }
+
+    f.close();
 }
 
 JSON::JSON(std::ifstream& f) {

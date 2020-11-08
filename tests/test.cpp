@@ -42,7 +42,7 @@ TEST(Jsontest, Kulcssorrend_test) {
 }
 
 TEST(Jsontest, Whitespace_test) {
-	std::ifstream f("Exodia.json");
+	std::ifstream f("tests/Exodia.json");
 	JSON beolvasas = JSON::parseFromFile(f);
 	EXPECT_EQ(beolvasas.get<std::string>("name"), "Atoksarkany");
 	EXPECT_EQ(beolvasas.get<int>("health_points"), 260);

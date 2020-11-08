@@ -55,7 +55,7 @@ TEST(Exceptiontest,Nem_letezo_fajl_test){
 }
 
 TEST(unittests, parseTest){
-    ASSERT_NO_THROW(Hero::parse("Dark_Wanderer.json"));
+    ASSERT_NO_THROW(Hero::parse("Langpallos.json"));
     ASSERT_NO_THROW(Monster::parse("Zombie.json"));
 }
 

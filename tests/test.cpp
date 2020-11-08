@@ -50,6 +50,16 @@ TEST(Jsontest, Whitespace_test) {
 	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 1.7);
 }
 
+TEST(Maintest, Nem_letezo_fajl_test) {
+	std::string vart = "The provided scenario file is not accessible.";
+	testing::internal::CaptureStdout();
+	std::ifstream file;
+   	file.open("Lathatatlan.json");
+   	if(!file.good())bad_exit(2);
+	std::string output = testing::internal::GetCapturedStdout();
+	EXPECT_EQ(vart, output);
+}
+
 
 
 int main(int argc, char ** argv) {

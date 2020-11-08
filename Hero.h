@@ -11,7 +11,10 @@ class Hero : public Monster {
         int getLevel() const;
         static Hero parse(const std::string& json);
         Hero& operator=(const Monster&);
-    protected:
+    	bool operator ==(const Hero & other)const {
+			return (this->hp == other.getHealthPoints() && this->dmg == other.getDamage() && this->nev == other.getName() && this->speed == other.getAttackCoolDown() && this->maxhp == other.getMaxHealthPoints()&& this->dmgPerLvl==other.dmgPerLvl && this->hpPerLvl==other.hpPerLvl && this->xpPerLvl==other.xpPerLvl && this->speedPerLvl==other.speedPerLvl);
+		}
+     protected:
         int xpPerLvl;
         int hpPerLvl;
         int dmgPerLvl;

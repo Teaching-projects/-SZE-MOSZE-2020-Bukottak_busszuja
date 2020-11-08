@@ -63,7 +63,12 @@ TEST(Unittest,Monster_parse_test){
 Monster monster{Monster::parse("Sotetvarazslo.json")};
 Monster monster1("Sotetvarazslo", 250, 40, 2.0);
 EXPECT_TRUE(monster==monster1);
+}
 
+TEST(Unittest,Hero_parse_test){
+Hero hero{Hero::parse("Langpallos.json")};
+Hero hero1("Langpallos", 180, 11, 9.1, 100, 3, 2, 0.8,0,1);
+EXPECT_TRUE(hero==hero1);
 }
 
 

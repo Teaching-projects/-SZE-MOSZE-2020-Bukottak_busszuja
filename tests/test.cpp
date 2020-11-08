@@ -47,7 +47,7 @@ TEST(Jsontest, Fajlnev) {
 }
 
 TEST(Jsontest, Whitespace_test) {
-	std::ifstream f("Atoksarkany.json");
+	std::ifstream f("tests/Atoksarkany.json");
 	JSON beolvasas = JSON::parseFromFile(f);
 	EXPECT_EQ(beolvasas.get<std::string>("name"), "Atoksarkany");
 	EXPECT_EQ(beolvasas.get<int>("health_points"), 260);
@@ -58,7 +58,9 @@ TEST(Jsontest, Whitespace_test) {
 TEST(Maintest, Nem_letezo_fajl_test) {
 	std::string vart = "The provided scenario file is not accessible.";
 	testing::internal::CaptureStdout();
-	if (!std::filesystem::exists("Lathatatlan.json") bad_exit(2);
+	std::ifstream file;
+   	file.open("Lathatatlan.json");
+	if (!file.good()) bad_exit(2);
 	std::string output = testing::internal::GetCapturedStdout();
 	EXPECT_EQ(vart, output);
 		}

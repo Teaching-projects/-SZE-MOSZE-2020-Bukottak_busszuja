@@ -36,4 +36,7 @@ class Monster {
         Monster(const Monster& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), speed(s2.speed) {};                ///< Lehetővé teszi egy szörny létrehozását egy másiknak a lemásolásával
         void fightTilDeath(Monster&);
         bool isAlive() const;                                                                               ///< A parancsori argumentumban megadott két hõst harcoltatja
+	bool operator ==(const Monster & other)const {
+			return (this->hp == other.getHealthPoints() && this->dmg == other.getDamage() && this->nev == other.getName() && this->speed == other.getAttackCoolDown() && this->maxhp==other.getMaxHealthPoints());
+		}
 };

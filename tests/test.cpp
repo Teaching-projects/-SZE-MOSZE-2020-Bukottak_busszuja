@@ -54,9 +54,16 @@ TEST(Exceptiontest,Nem_letezo_fajl_test){
     ASSERT_THROW(JSON::parseFromFile("Lathatatlan.json"), JSON::ParseException);
 }
 
-TEST(unittests, parseTest){
+TEST(Exceptiontest,Nincs_hibauzenet_test){
     ASSERT_NO_THROW(Hero::parse("Langpallos.json"));
     ASSERT_NO_THROW(Monster::parse("Hosarkany.json"));
+}
+
+TEST(Unittest,Monster_parse_test){
+Monster monster{Monster::parse("Sotetvarazslo.json")};
+Monster monster1("Sotetvarazslo", 250, 40, 2.0);
+EXPECT_TRUE(monster==monster1);
+
 }
 
 

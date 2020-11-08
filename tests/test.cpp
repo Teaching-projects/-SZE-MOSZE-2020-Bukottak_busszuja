@@ -45,8 +45,8 @@ TEST(Jsontest, Whitespace_test) {
 	std::ifstream f("Obelisk.json");
 	JSON beolvasas = JSON::parseFromFile(f);
 	EXPECT_EQ(beolvasas.get<std::string>("name"), "Obelisk");
-	EXPECT_EQ(beolvasas.get<int>("health_points"), 400);
 	EXPECT_EQ(beolvasas.get<int>("damage"), 80);
+	EXPECT_EQ(beolvasas.get<int>("health_points"), 400);
 	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 1.4);
 }
 

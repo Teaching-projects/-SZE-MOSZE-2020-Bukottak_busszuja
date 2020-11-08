@@ -3,6 +3,20 @@
 #include "Hero.h"
 #include "gtest/gtest.h"
 
+const std::map<int,std::string> error_messages = {
+    { 1 , "Bad number of arguments. Only a single scenario file should be provided." },
+    { 2 , "The provided scenario file is not accessible." },
+    { 3 , "The provided scenario file is invalid." },
+    { 4 , "JSON parsing error." }
+};
+
+void bad_exit(int exitcode){
+    std::cerr
+        << (error_messages.count(exitcode) ? error_messages.at(exitcode) : "Unknown error")
+        << std::endl;
+    exit(exitcode);
+}
+
 
 TEST(Jsontest, Fajlvaltozo) {
 	std::ifstream f("Hosarkany.json");

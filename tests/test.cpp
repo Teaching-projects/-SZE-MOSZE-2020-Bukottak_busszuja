@@ -41,6 +41,15 @@ TEST(Jsontest, Kulcssorrend_test) {
 	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 2.1);
 }
 
+TEST(Jsontest, Whitespace_test) {
+	std::ifstream f("Atoksarkany.json");
+	JSON beolvasas = JSON::parseFromFile(f);
+	EXPECT_EQ(beolvasas.get<std::string>("name"), "Atoksarkany");
+	EXPECT_EQ(beolvasas.get<int>("health_points"), 260);
+	EXPECT_EQ(beolvasas.get<int>("damage"), 45);
+	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 1.7);
+}
+
 
 
 int main(int argc, char ** argv) {

@@ -1,0 +1,7 @@
+{
+  "name" : Exodia,
+  "health_points" : 10000,
+  "damage" : 48,
+  "attack_cooldown": 2.3,
+  "tipus":Isten		
+}

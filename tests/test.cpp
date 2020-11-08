@@ -71,7 +71,6 @@ Hero hero1("Langpallos", 180, 11, 9.1, 100, 3, 2, 0.8,0,1);
 EXPECT_TRUE(hero==hero1);
 }
 
-
 int main(int argc, char ** argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();

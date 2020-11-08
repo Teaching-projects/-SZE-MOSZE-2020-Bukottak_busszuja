@@ -35,7 +35,7 @@ TEST(Jsontest, Fajlnev) {
 TEST(Jsontest, Kulcssorrend_test) {
 	std::ifstream f("Kardvadasz.json");
 	JSON beolvasas = JSON::parseFromFile(f);
-	EXPECT_EQ(beolvasas.getErtek("name"), "Kardvadasz");
+	EXPECT_EQ(beolvasas.get<std::string>("name"), "Kardvadasz");
 	EXPECT_EQ(beolvasas.get<int>("health_points"), 280);
 	EXPECT_EQ(beolvasas.get<int>("damage"), 48);
 	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 2.1);

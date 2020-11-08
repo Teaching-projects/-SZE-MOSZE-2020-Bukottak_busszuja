@@ -71,6 +71,12 @@ Hero hero1("Langpallos", 180, 11, 9.1, 100, 3, 2, 0.8,0,1);
 EXPECT_TRUE(hero==hero1);
 }
 
+TEST(Unittest,Badscenrio_test){
+JSON scenario = JSON::parseFromFile("badscenario.json");
+if (!(scenario.count("hero") && scenario.count("monsters")))std::cout << "The provided scenario file is invalid.";
+EXPECT_EQ(1,1);
+}
+
 int main(int argc, char ** argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();

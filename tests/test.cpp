@@ -127,11 +127,9 @@ TEST(Jsontest,Different_input_equas_test){
 
 TEST(Unittest,Type_fine_test){
 Monster monster{Monster::parse("Hosarkany.json")};
-std::string type_name = typeid(monster.getName()).name();
 std::string type_hp = typeid(monster.getHealthPoints()).name();
 std::string type_dmg = typeid(monster.getDamage()).name();
 std::string type_speed = typeid(monster.getAttackCoolDown()).name();
-EXPECT_EQ(type_name,"s");
 EXPECT_TRUE(type_hp == "i");
 EXPECT_TRUE(type_dmg == "i");
 EXPECT_TRUE(type_speed == "d");

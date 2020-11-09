@@ -108,6 +108,23 @@ Hero hero1("Langpallos", 183, 13, 7.28, 100, 3, 2, 0.8, 1, 2);
 EXPECT_TRUE(hero1==hero);
 }
 
+TEST(Jsontest,Different_input_equas_test){
+	std::ifstream f("Hosarkany.json");
+	std::string szoveg = "Hosarkany.json";
+	const char * fajlnev = "Hosarkany.json";
+	JSON beolvasas1 = JSON::parseFromFile(f);
+	JSON beolvasas2 = JSON::parseFromFile(f);
+	JSON beolvasas3 = JSON::parseFromFile(f);
+	EXPECT_EQ(beolvasas1.get<std::string>("name"), beolvasas2.get<std::string>("name"));
+	EXPECT_EQ(beolvasas3.get<std::string>("name"), beolvasas2.get<std::string>("name"));
+	EXPECT_EQ(beolvasas1.get<int>("health_points"), beolvasas2.get<int>("health_points"));
+	EXPECT_EQ(beolvasas3.get<int>("health_points"), beolvasas2.get<int>("health_points"));
+	EXPECT_EQ(beolvasas1.get<int>("damage"),beolvasas2.get<int>("damage"));
+	EXPECT_EQ(beolvasas3.get<int>("damage"),beolvasas2.get<int>("damage"));
+	EXPECT_EQ(beolvasas1.get<double>("attack_cooldown"),beolvasas2.get<double>("attack_cooldown"));
+	EXPECT_EQ(beolvasas3.get<double>("attack_cooldown"),beolvasas2.get<double>("attack_cooldown"));
+}
+
 
 int main(int argc, char ** argv) {
 	::testing::InitGoogleTest(&argc, argv);

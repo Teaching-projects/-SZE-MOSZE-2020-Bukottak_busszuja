@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['harc',['harc',['../classSzorny.html#a036eb2ba20b6e1c752e5d740510e044d',1,'Szorny']]],
-  ['hp',['hp',['../classSzorny.html#a4ff009e810e74adba20056d1e64f7b89',1,'Szorny']]]
+  ['hero',['Hero',['../classHero.html',1,'']]],
+  ['hp',['hp',['../classMonster.html#a8f5512ea0cd543721acb551d3d963486',1,'Monster']]]
 ];

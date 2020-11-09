@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nev',['nev',['../classSzorny.html#a203228c488f0801c089bcbb05f80c42f',1,'Szorny']]]
+  ['operator_3d',['operator=',['../classMonster.html#aa824afb3c7bfbc25e3d67fe9a9209d22',1,'Monster']]]
 ];

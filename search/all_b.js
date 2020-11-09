@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['speed',['speed',['../classSzorny.html#a9dfbaf820c8c5c404b718fcd9f27b866',1,'Szorny']]],
-  ['szorny',['Szorny',['../classSzorny.html',1,'Szorny'],['../classSzorny.html#a92aae95371cc46713460468311778d6d',1,'Szorny::Szorny()']]]
+  ['tamad',['tamad',['../classHero.html#aca822246a50e359de8d8a1959cd9c464',1,'Hero::tamad()'],['../classMonster.html#ac71efa8bad17096978be098287c2748e',1,'Monster::tamad()']]]
 ];

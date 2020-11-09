@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['operator_3d',['operator=',['../classKalandor.html#aa07a396e4f0ebb5e783789bdba4c4545',1,'Kalandor::operator=()'],['../classSzorny.html#a66efec659d7eb34a20a8019330c1e7ce',1,'Szorny::operator=()']]]
+  ['parse',['parse',['../classMonster.html#ad16b0342a5353a6cd3c09b4b435f119a',1,'Monster']]],
+  ['parseexception',['ParseException',['../classJSON_1_1ParseException.html',1,'JSON']]]
 ];

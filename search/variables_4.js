@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['nev',['nev',['../classSzorny.html#a203228c488f0801c089bcbb05f80c42f',1,'Szorny']]]
+  ['speed',['speed',['../classMonster.html#a8709dc4cbcfaf8221244fdc8fb883d87',1,'Monster']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['maxhp',['maxhp',['../classSzorny.html#a62daca1e96b535fa19db5d59e3e405c1',1,'Szorny']]]
+  ['nev',['nev',['../classMonster.html#ab3aec29c23ad83994fcfc6d1b54a052f',1,'Monster']]]
 ];

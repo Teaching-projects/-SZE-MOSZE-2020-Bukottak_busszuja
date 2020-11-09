@@ -20,7 +20,6 @@ public:
 	static JSON parseFromFile(const std::string&);
 	static JSON parseFromFile(const char *);
 	~JSON();
-	std::string getErtek(const std::string &);
 	const int count(const std::string& key);
 
     template <class T> T get(const std::string& key){

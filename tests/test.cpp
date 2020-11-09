@@ -132,14 +132,10 @@ std::string type_hp = typeid(monster.getHealthPoints()).name();
 std::string type_dmg = typeid(monster.getDamage()).name();
 std::string type_speed = typeid(monster.getAttackCoolDown()).name();
 std::cout<<type_name<<std::endl;
-std::cout<<type_hp<<std::endl;
-std::cout<<type_speed<<std::endl;
-std::cout<<type_dmg<<std::endl;
-EXPECT_TRUE(true);
 EXPECT_TRUE(type_name =="string");
-EXPECT_TRUE(type_hp == "integer");
-EXPECT_TRUE(type_dmg == "integer");
-EXPECT_TRUE(type_speed == "double");
+EXPECT_TRUE(type_hp == "i");
+EXPECT_TRUE(type_dmg == "i");
+EXPECT_TRUE(type_speed == "d");
 }
 
 

@@ -83,8 +83,8 @@ EXPECT_EQ(vart, output);
 TEST(Unittest, Hero_Monster_different_test) {
 Hero hero {Hero::parse("Langpallos.json")};
 Monster monster{Monster::parse("Hosarkany.json")};
-std::string tipush = typeid(monster).name();
-std::string tipusm = typeid(hero).name();
+std::string tipush = typeid(hero).name();
+std::string tipusm = typeid(monster).name();
 tipush.erase(0, 1);
 tipusm.erase(0, 1);
 EXPECT_EQ(tipush, "Hero");

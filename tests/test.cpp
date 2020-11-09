@@ -95,9 +95,8 @@ TEST(Unittest,Fight_function_test){
 Hero hero {Hero::parse("Langpallos.json")};
 Monster monster{Monster::parse("Hosarkany.json")};
 hero.fightTilDeath(monster);
-if (hero.isAlive())std::cout << "Langpallos nyert" << std::endl;
-if (monster.isAlive())std::cout << "Hosarkany nyert" << std::endl;
-EXPECT_EQ(1,1);
+EXPECT_TRUE(monster.isAlive());
+EXPECT_FALSE(hero.isAlive());
 }
 
 int main(int argc, char ** argv) {

@@ -125,6 +125,18 @@ TEST(Jsontest,Different_input_equas_test){
 	EXPECT_EQ(beolvasas3.get<double>("attack_cooldown"),beolvasas2.get<double>("attack_cooldown"));
 }
 
+TEST(Unittest,Type_fine_test){
+Monster monster{Monster::parse("Hosarkany.json")};
+std::string type_name = typeid(monster.getName()).name();
+std::string type_hp = typeid(monster.getHealthPoints()).name();
+std::string type_dmg = typeid(monster.getDamage()).name();
+std::string type_speed = typeid(monster.getAttackCoolDown()).name();
+EXPECT_TRUE(type_name =="string");
+EXPECT_TRUE(type_hp == "integer");
+EXPECT_TRUE(type_dmg == "integer");
+EXPECT_TRUE(type_speed == "double");
+}
+
 
 int main(int argc, char ** argv) {
 	::testing::InitGoogleTest(&argc, argv);

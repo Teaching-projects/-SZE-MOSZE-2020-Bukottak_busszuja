@@ -1,6 +1,6 @@
 {
-  "speed" : "2.1",
-  "dmg" : 48,
+  "attack_cooldown" : "2.1",
+  "damage" : 48,
   "name" : "Kardvadasz",
-  "hp" : 280
+  "health_points" : 280
 }

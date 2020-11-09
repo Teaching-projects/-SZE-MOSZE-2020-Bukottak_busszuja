@@ -3,9 +3,5 @@ IFS=$'\n'
 
 rm kimenetek.txt
 
-./output units/Hosarkany.json units/Sotetvarazslo.json >> kimenetek.txt
-./output units/Hosarkany.json units/Arnykiraly.json >> kimenetek.txt 
-./output units/Sotetvarazslo.json units/Hosarkany.json >> kimenetek.txt 
-./output units/Sotetvarazslo.json units/Arnykiraly.json >> kimenetek.txt 
-./output units/Arnykiraly.json units/Sotetvarazslo.json >> kimenetek.txt 
-./output units/Arnykiraly.json units/Hosarkany.json >> kimenetek.txt
+./output scenario1.json >> scenario_1_output.txt
+./output scenario2.json >> scenario_2_output.txt 

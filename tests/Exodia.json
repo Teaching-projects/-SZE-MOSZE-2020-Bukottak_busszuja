@@ -1,7 +1,6 @@
 {
-  "name" : Exodia,
-  "hp" : 10000,
-  "dmg" : 48,
-  "speed": 2.3,
-  "tipus":Isten		
+  "name" : "Atoksarkany",
+  "health_points" 		 :       260,
+  "damage" : 45	,
+	"attack_cooldown"  : 1.7	
 }

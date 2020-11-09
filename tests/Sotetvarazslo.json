@@ -1,7 +1,7 @@
 {
-  "name" : "Sotetvarazslo,
-  "hp : "250",
-  "dmg" : 40"
-  "speed" : 2.0
+  "name" : "Sotetvarazslo",
+  "health_points" : 250,
+  "damage" : 40,
+  "attack_cooldown" : 2.0
 }
 

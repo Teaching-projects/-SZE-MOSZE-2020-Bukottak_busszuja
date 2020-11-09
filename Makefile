@@ -1,27 +1,27 @@
-OBJS := Jsonparser.o Szorny.o Kalandor.o Source.o
+OBJS := JSON.o Monster.o Hero.o Source.o
 CFLAGS := -std=c++17 -Wall -Werror -g
-CC := g++
+CC := g++-10
 
-CPPFILES := Jsonparser.cpp Szorny.cpp Kalandor.cpp Source.cpp
+CPPFILES := JSON.cpp Monster.cpp Hero.cpp Source.cpp
 CPPCFLAGS := --enable=all 2> report.txt && cat report.txt && if grep -q "(warning)" "./report.txt"; then exit 1; fi && if grep -q "(error)" "./report.txt"; then exit 1; fi
 
-TESTFILES:= Units/Arnykiraly.json Units/Sotetvarazslo.json
+TESTFILES:= scenario1.json
 VLGRNDFLAGS:= --leak-check=full --error-exitcode=3
 VLGRNDPARAM:=  ./output $(TESTFILES)
 
 build: $(OBJS)
 	$(CC) $(CFLAGS) -o output $(OBJS)
 
-Jsonparser.o: Jsonparser.cpp Jsonparser.h
-	$(CC) $(CFLAGS) -c Jsonparser.cpp
+JSON.o: JSON.cpp JSON.h
+	$(CC) $(CFLAGS) -c JSON.cpp
 
-Szorny.o: Szorny.cpp Szorny.h Jsonparser.h
-	$(CC) $(CFLAGS) -c Szorny.cpp
+Monster.o: Monster.cpp Monster.h JSON.h
+	$(CC) $(CFLAGS) -c Monster.cpp
 
-Kalandor.o: Kalandor.cpp Kalandor.h Szorny.h Jsonparser.h
-	$(CC) $(CFLAGS) -c Kalandor.cpp
+Hero.o: Hero.cpp Hero.h Monster.h JSON.h
+	$(CC) $(CFLAGS) -c Hero.cpp
 
-Source.o: Source.cpp Szorny.h Kalandor.h
+Source.o: Source.cpp Monster.h Hero.h
 	$(CC) $(CFLAGS) -c Source.cpp
 
 sca:

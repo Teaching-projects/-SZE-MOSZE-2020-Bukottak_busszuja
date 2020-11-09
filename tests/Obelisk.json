@@ -1,6 +1,6 @@
 {
   "name" : "Obelisk",
-  "dmg" : 80
-  "hp" : 400,
-  "speed" : 1.4	
+  "health_points" :  260,
+  "damage" : 45,
+  "attack_cooldown" : 1.7
 }

@@ -1,161 +1,138 @@
-#include "Jsonparser.h"
-#include "Szorny.h"
-#include "Kalandor.h"
+#include "JSON.h"
+#include "Monster.h"
+#include "Hero.h"
 #include "gtest/gtest.h"
 
 
-TEST(Jsonparsertest, Fajlvaltozo) {
+TEST(Jsontest, Fajlvaltozo) {
 	std::ifstream f("Hosarkany.json");
-	Jsonparser beolvasas(f);
-	EXPECT_EQ(beolvasas.getErtek("name"), "Hosarkany");
-	EXPECT_EQ(beolvasas.getErtek("hp"), "300");
-	EXPECT_EQ(beolvasas.getErtek("dmg"), "30");
-	EXPECT_EQ(beolvasas.getErtek("speed"), "2.4");
+	JSON beolvasas = JSON::parseFromFile(f);
+	EXPECT_EQ(beolvasas.get<std::string>("name"), "Hosarkany");
+	EXPECT_EQ(beolvasas.get<int>("health_points"), 300);
+	EXPECT_EQ(beolvasas.get<int>("damage"), 30);
+	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 2.4);
 }
 
-TEST(Jsonparsertest, Szoveg) {
+TEST(Jsontest, Szoveg) {
 	std::string szoveg = "Sotetvarazslo.json";
-	Jsonparser beolvasas(szoveg);
-	EXPECT_EQ(beolvasas.getErtek("name"), "Sotetvarazslo");
-	EXPECT_EQ(beolvasas.getErtek("hp"), "250");
-	EXPECT_EQ(beolvasas.getErtek("dmg"), "40");
-	EXPECT_EQ(beolvasas.getErtek("speed"), "2.0");
+	JSON beolvasas = JSON::parseFromFile(szoveg);
+	EXPECT_EQ(beolvasas.get<std::string>("name"), "Sotetvarazslo");
+	EXPECT_EQ(beolvasas.get<int>("health_points"), 250);
+	EXPECT_EQ(beolvasas.get<int>("damage"), 40);
+	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 2.0);
 }
 
 
-TEST(Jsonparsertest, Fajlnev) {
+TEST(Jsontest, Fajlnev) {
 	const char * fajlnev = "Arnykiraly.json";
-	Jsonparser beolvasas(fajlnev);
-	EXPECT_EQ(beolvasas.getErtek("name"), "Arnykiraly");
-	EXPECT_EQ(beolvasas.getErtek("hp"), "200");
-	EXPECT_EQ(beolvasas.getErtek("dmg"), "48");
-	EXPECT_EQ(beolvasas.getErtek("speed"), "2.3");
-}
-TEST(Jsontest, Whitespace_test) {
-	std::ifstream f("Atoksarkany.json");
-	Jsonparser beolvasas(f);
-	EXPECT_EQ(beolvasas.getErtek("name"), "Atoksarkany");
-	EXPECT_EQ(beolvasas.getErtek("hp"), "260");
-	EXPECT_EQ(beolvasas.getErtek("dmg"), "45");
-	EXPECT_EQ(beolvasas.getErtek("speed"), "1.7");
+	JSON beolvasas = JSON::parseFromFile(fajlnev);
+	EXPECT_EQ(beolvasas.get<std::string>("name"), "Arnykiraly");
+	EXPECT_EQ(beolvasas.get<int>("health_points"), 200);
+	EXPECT_EQ(beolvasas.get<int>("damage"), 48);
+	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 1.6);
 }
 
 TEST(Jsontest, Kulcssorrend_test) {
 	std::ifstream f("Kardvadasz.json");
-	Jsonparser beolvasas(f);
-	EXPECT_EQ(beolvasas.getErtek("name"), "Kardvadasz");
-	EXPECT_EQ(beolvasas.getErtek("hp"), "280");
-	EXPECT_EQ(beolvasas.getErtek("dmg"), "48");
-	EXPECT_EQ(beolvasas.getErtek("speed"), "2.1");
+	JSON beolvasas = JSON::parseFromFile(f);
+	EXPECT_EQ(beolvasas.get<std::string>("name"), "Kardvadasz");
+	EXPECT_EQ(beolvasas.get<int>("health_points"), 280);
+	EXPECT_EQ(beolvasas.get<int>("damage"), 48);
+	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 2.1);
 }
 
-TEST(Jsontest, Idezojelfuggetlenseg_test) {
-	std::ifstream f("Arnykiraly.json");
-	Jsonparser beolvasas(f);
-	EXPECT_EQ(beolvasas.getErtek("name"), "Arnykiraly");
-	EXPECT_EQ(beolvasas.getErtek("hp"), "200");
-	EXPECT_EQ(beolvasas.getErtek("dmg"), "48");
-	EXPECT_EQ(beolvasas.getErtek("speed"), "2.3");
+TEST(Jsontest, Whitespace_test) {
+	std::ifstream f("Obelisk.json");
+	JSON beolvasas = JSON::parseFromFile(f);
+	EXPECT_EQ(beolvasas.get<std::string>("name"), "Obelisk");
+	EXPECT_EQ(beolvasas.get<int>("damage"), 45);
+	EXPECT_EQ(beolvasas.get<int>("health_points"), 260);
+	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 1.7);
 }
 
-TEST(Jsontest, Tobb_kevesebb_idozejel_test) {
-	std::ifstream f("Sotetvarazslo.json");
-	Jsonparser beolvasas(f);
-	EXPECT_EQ(beolvasas.getErtek("name"), "Sotetvarazslo");
-	EXPECT_EQ(beolvasas.getErtek("hp"), "250");
-	EXPECT_EQ(beolvasas.getErtek("dmg"), "40");
-	EXPECT_EQ(beolvasas.getErtek("speed"), "2.0");
-}
-TEST(Maintest, Nem_letezo_fajl_test) {
-	std::ifstream f("Lathatatlan.json");
-	try {
-		Jsonparser f1(f);
-	}
-	catch (int e) {
-		EXPECT_EQ(e, MYFILEERROR);
-	}
+TEST(Exceptiontest,Nem_letezo_fajl_test){
+    ASSERT_THROW(JSON::parseFromFile("Lathatatlan.json"), JSON::ParseException);
 }
 
-
-TEST(Maintest, Tobb_kevesebb_adat_test) {
-	std::ifstream f("Exodia.json");
-	try {
-		Jsonparser f1(f);
-	}
-	catch (int e) {
-		EXPECT_EQ(e, INVALID_VALUE);
-	}
+TEST(Exceptiontest,Nincs_hibauzenet_test){
+    ASSERT_NO_THROW(Hero::parse("Langpallos.json"));
+    ASSERT_NO_THROW(Monster::parse("Hosarkany.json"));
 }
 
-TEST(Szornytest, Lko_test) {
-	EXPECT_EQ(round(gcd(2.4,1.6)),round(0.8));
-	EXPECT_EQ(round(gcd(2.2, 4.4)), round(2.2));
-	EXPECT_EQ(round(gcd(1.3, 1.1)), round(0.1));
+TEST(Unittest,Monster_parse_test){
+Monster monster{Monster::parse("Sotetvarazslo.json")};
+Monster monster1("Sotetvarazslo", 250, 40, 2.0);
+EXPECT_TRUE(monster==monster1);
 }
 
-TEST(Szornytest, parseUnit_test) {
-	std::ifstream f("Sotetvarazslo.json");
-	std::string szoveg = "Sotetvarazslo.json";
-	const char * fajlnev = "Sotetvarazslo.json";
-	Szorny eredmeny("Sotetvarazslo",250,40,2.0);
-	Jsonparser beolvasas1(f);
-	Jsonparser beolvasas2(szoveg);
-	Jsonparser beolvasas3(fajlnev);
-	Szorny s1 = Szorny::parseUnit(beolvasas1);
-	Szorny s2 = Szorny::parseUnit(beolvasas2);
-	Szorny s3 = Szorny::parseUnit(beolvasas3);
-	EXPECT_TRUE(s1==eredmeny);
-	EXPECT_TRUE(s2==eredmeny);
-	EXPECT_TRUE(s3==eredmeny);
+TEST(Unittest,Hero_parse_test){
+Hero hero{Hero::parse("Langpallos.json")};
+Hero hero1("Langpallos", 180, 11, 9.1, 100, 3, 2, 0.8,0,1);
+EXPECT_TRUE(hero==hero1);
 }
 
-TEST(Szornytest, harcfunction_Kalandorwin_output_test) {
-	std::string vart = "Sotetvarazslo wins. Remaining HP: 332, current level: 4, current experience: 0";
-	Jsonparser f("Hosarkany.json");
-	Jsonparser f1("Sotetvarazslo.json");
-	Szorny s2 = Szorny::parseUnit(f);
-	Kalandor s1(Szorny::parseUnit(f1));
-	Szorny::harc(s1, s2);
-	testing::internal::CaptureStdout();
-	if (s1.getHp() == 0) std::cout << s2.getName() << " wins. Remaining HP: " << s2.getHp();
-	if (s2.getHp() == 0) std::cout << s1.getName() << " wins. Remaining HP: " << s1.getHp() << ", current level: " << s1.getLvl() << ", current experience: " << s1.getXp();
-	std::string output = testing::internal::GetCapturedStdout();
-	EXPECT_EQ(vart, output);
-	}
-
-TEST(Szornytest, harcfunction_Szornywin_output_test) {
-	std::string vart = "Obelisk wins. Remaining HP: 340";
-	Jsonparser f1("Obelisk.json");
-	Jsonparser f("Hosarkany.json");
-	Szorny s2 = Szorny::parseUnit(f1);
-	Kalandor s1(Szorny::parseUnit(f));
-	Szorny::harc(s1, s2);
-	testing::internal::CaptureStdout();
-	if (s1.getHp() == 0) std::cout << s2.getName() << " wins. Remaining HP: " << s2.getHp();
-	if (s2.getHp() == 0) std::cout << s1.getName() << " wins. Remaining HP: " << s1.getHp() << ", current level: " << s1.getLvl() << ", current experience: " << s1.getXp();
-	std::string output = testing::internal::GetCapturedStdout();
-	EXPECT_EQ(vart, output);
+TEST(Unittest,Badscenario_exception_test){
+std::string vart = "The provided scenario file is invalid.";
+testing::internal::CaptureStdout();
+JSON scenario = JSON::parseFromFile("badscenario.json");
+if (!(scenario.count("hero") && scenario.count("monsters")))std::cout << "The provided scenario file is invalid.";
+std::string output = testing::internal::GetCapturedStdout();
+EXPECT_EQ(vart, output);
 }
 
-TEST(Szornytest,Kalandor_Szorny_different_test) {
-	Jsonparser f1("Obelisk.json");
-	Jsonparser f("Hosarkany.json");
-	Szorny s2 = Szorny::parseUnit(f1);
-	Kalandor s1(Szorny::parseUnit(f));
-	std::string tipusk=typeid(s1).name();
-	std::string tipuss = typeid(s2).name();
-        tipusk.erase(0,1);
-	tipuss.erase(0,1);
-	EXPECT_EQ(tipusk,"Kalandor");
-	EXPECT_EQ(tipuss,"Szorny");
+TEST(Unittest, Hero_Monster_different_test) {
+Hero hero {Hero::parse("Langpallos.json")};
+Monster monster{Monster::parse("Hosarkany.json")};
+std::string tipush = typeid(hero).name();
+std::string tipusm = typeid(monster).name();
+tipush.erase(0, 1);
+tipusm.erase(0, 1);
+EXPECT_EQ(tipush, "Hero");
+EXPECT_EQ(tipusm, "Monster");
 }
 
-TEST(Szornytest, Levelup_Xpgain_test) {
-	Kalandor s1("Hosarkany", 300, 30, 2.4, 90, 1);
-	Szorny s2("Sotetvarazslo", 250, 40, 2.0);
-	s1.tamad(s2);
-	Kalandor s3("Hosarkany", 330, 33, 2.4, 20, 2);
-	EXPECT_TRUE(s3==s1);
+TEST(Unittest,Fight_function_test){
+Hero hero {Hero::parse("Langpallos.json")};
+Monster monster{Monster::parse("Hosarkany.json")};
+hero.fightTilDeath(monster);
+EXPECT_TRUE(monster.isAlive());
+EXPECT_FALSE(hero.isAlive());
+}
+
+TEST(Unittest,Private_functions_test){
+Hero hero("Langpallos", 180, 11, 9.1, 100, 3, 2, 0.8, 90, 1);
+Monster monster{Monster::parse("Hosarkany.json")};
+Monster * mptr = &monster;
+hero.tamad(mptr);
+Hero hero1("Langpallos", 183, 13, 7.28, 100, 3, 2, 0.8, 1, 2);
+EXPECT_TRUE(hero1==hero);
+}
+
+TEST(Jsontest,Different_input_equas_test){
+	std::ifstream f("Hosarkany.json");
+	std::string szoveg = "Hosarkany.json";
+	const char * fajlnev = "Hosarkany.json";
+	JSON beolvasas1 = JSON::parseFromFile(f);
+	JSON beolvasas2 = JSON::parseFromFile(szoveg);
+	JSON beolvasas3 = JSON::parseFromFile(fajlnev);
+	EXPECT_EQ(beolvasas1.get<std::string>("name"), beolvasas2.get<std::string>("name"));
+	EXPECT_EQ(beolvasas3.get<std::string>("name"), beolvasas2.get<std::string>("name"));
+	EXPECT_EQ(beolvasas1.get<int>("health_points"), beolvasas2.get<int>("health_points"));
+	EXPECT_EQ(beolvasas3.get<int>("health_points"), beolvasas2.get<int>("health_points"));
+	EXPECT_EQ(beolvasas1.get<int>("damage"),beolvasas2.get<int>("damage"));
+	EXPECT_EQ(beolvasas3.get<int>("damage"),beolvasas2.get<int>("damage"));
+	EXPECT_EQ(beolvasas1.get<double>("attack_cooldown"),beolvasas2.get<double>("attack_cooldown"));
+	EXPECT_EQ(beolvasas3.get<double>("attack_cooldown"),beolvasas2.get<double>("attack_cooldown"));
+}
+
+TEST(Unittest,Type_fine_test){
+Monster monster{Monster::parse("Hosarkany.json")};
+std::string type_hp = typeid(monster.getHealthPoints()).name();
+std::string type_dmg = typeid(monster.getDamage()).name();
+std::string type_speed = typeid(monster.getAttackCoolDown()).name();
+EXPECT_TRUE(type_hp == "i");
+EXPECT_TRUE(type_dmg == "i");
+EXPECT_TRUE(type_speed == "d");
 }
 
 
@@ -163,3 +140,4 @@ int main(int argc, char ** argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
 }
+

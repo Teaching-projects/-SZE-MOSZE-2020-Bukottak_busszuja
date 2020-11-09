@@ -1,6 +1,6 @@
 {
   "name" : "Atoksarkany",
-  "hp" 		 :       260,
-  "dmg" : 45	,
-	"speed"  : 1.7
+  "health_points" 		 :       260,
+  "damage" : 45	,
+	"attack_cooldown"  : 1.7
 }

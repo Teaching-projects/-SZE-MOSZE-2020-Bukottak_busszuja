@@ -101,7 +101,7 @@ EXPECT_FALSE(hero.isAlive());
 
 TEST(Unittest,Private_functions_test){
 Hero hero("Langpallos", 180, 11, 9.1, 100, 3, 2, 0.8, 90, 1);
-Monster monster{Monster::parse("Hosarkany.json")};
+Monster * monster{Monster::parse("Hosarkany.json")};
 hero.tamad(monster);
 Hero hero1("Langpallos", 183, 13, 9.9, 100, 3, 2, 0.8, 1, 2);
 EXPECT_TRUE(hero==hero1);

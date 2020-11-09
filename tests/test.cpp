@@ -113,8 +113,8 @@ TEST(Jsontest,Different_input_equas_test){
 	std::string szoveg = "Hosarkany.json";
 	const char * fajlnev = "Hosarkany.json";
 	JSON beolvasas1 = JSON::parseFromFile(f);
-	JSON beolvasas2 = JSON::parseFromFile(f);
-	JSON beolvasas3 = JSON::parseFromFile(f);
+	JSON beolvasas2 = JSON::parseFromFile(szoveg);
+	JSON beolvasas3 = JSON::parseFromFile(fajlnev);
 	EXPECT_EQ(beolvasas1.get<std::string>("name"), beolvasas2.get<std::string>("name"));
 	EXPECT_EQ(beolvasas3.get<std::string>("name"), beolvasas2.get<std::string>("name"));
 	EXPECT_EQ(beolvasas1.get<int>("health_points"), beolvasas2.get<int>("health_points"));

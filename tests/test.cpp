@@ -91,6 +91,15 @@ EXPECT_EQ(tipush, "Hero");
 EXPECT_EQ(tipusm, "Monster");
 }
 
+TEST(Unittest,Fight_function_test){
+Hero hero {Hero::parse("Langpallos.json")};
+Monster monster{Monster::parse("Hosarkany.json")};
+hero.fightTilDeath(monster);
+if (hero.isAlive())std::cout << "Langpallos nyert" << std::endl;
+if (monster.isAlive())std::cout << "Hosarkany nyert" << std::endl;
+EXPECT_EQ(1,1);
+}
+
 int main(int argc, char ** argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();

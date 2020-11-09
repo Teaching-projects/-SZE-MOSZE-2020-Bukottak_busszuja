@@ -110,7 +110,7 @@ std::cout << hero.getName() << ": LVL" << hero.getLevel() << std::endl
 				<< "  DMG: " << hero.getDamage() << std::endl
 				<< "  ACD: " << hero.getAttackCoolDown() << std::endl
 				;
-EXPECT_TRUE(1,1);
+EXPECT_EQ(1,1);
 }
 
 

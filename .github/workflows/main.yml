@@ -23,9 +23,9 @@ jobs:
 
       - name: Build
         run: g++-9 -Wall -Werror -std=c++17 *.cpp -o output
-
-      - name: Make
-	run: make build
+	
+	- name: Make
+        run: make build
 
       - name: generate output
         run: ./harc.sh 

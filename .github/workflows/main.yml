@@ -20,10 +20,6 @@ jobs:
           name: report
           path: report.txt
 
-
-      - name: Build
-        run: g++-9 -Wall -Werror -std=c++17 *.cpp -o output
-
       - name: Make
         run: make build
 

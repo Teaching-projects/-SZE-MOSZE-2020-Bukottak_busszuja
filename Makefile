@@ -1,6 +1,6 @@
 OBJS := JSON.o Monster.o Hero.o Source.o
 CFLAGS := -std=c++17 -Wall -Werror -g
-CC := g++
+CC := g++-9
 
 CPPFILES := JSON.cpp Monster.cpp Hero.cpp Source.cpp
 CPPCFLAGS := --enable=all 2> report.txt && cat report.txt && if grep -q "(warning)" "./report.txt"; then exit 1; fi && if grep -q "(error)" "./report.txt"; then exit 1; fi

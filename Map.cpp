@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Map.h"
 #include<fstream>
 
@@ -9,8 +10,9 @@ Map::Map(const std::string & filename) {
 			getline(f, sor);
 			palya.push_back(sor);
 		}
+		f.close();
 	}
-	throw WrongIndexException("Nem letezo fajl lett megadva!");
+	else throw WrongIndexException("Nem letezo fajl lett megadva!");
 }
 
 void Map::kiir()const {
@@ -26,7 +28,7 @@ Map::~Map()
 
 
 Map::type Map::get(int x, int y) const {
-	if (y >= palya.size() || y < 0  || x<0 || x >= palya[y].length()) throw WrongIndexException("Nem letezo index lett megadva!");
+	if (y >= palya.size() || y < 0 || x < 0 || x >= palya[y].length()) throw WrongIndexException("Nem letezo index lett megadva!");
 	if (palya[y][x] == ' ') return Map::type::Free;
 	if (palya[y][x] == '#') return Map::type::Wall;
 }

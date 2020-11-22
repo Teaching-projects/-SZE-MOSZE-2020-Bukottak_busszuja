@@ -35,6 +35,28 @@ TEST(Jsontest, Fajlnev) {
 	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 1.6);
 }
 
+TEST(Jsontest, Kulcssorrend_test) {
+	std::ifstream f("Kardvadasz.json");
+	JSON beolvasas = JSON::parseFromFile(f);
+	EXPECT_EQ(beolvasas.get<std::string>("name"), "Kardvadasz");
+	EXPECT_EQ(beolvasas.get<int>("health_points"), 280);
+	EXPECT_EQ(beolvasas.get<int>("damage"), 48);
+	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 2.1);
+}
+
+TEST(Jsontest, Whitespace_test) {
+	std::ifstream f("Obelisk.json");
+	JSON beolvasas = JSON::parseFromFile(f);
+	EXPECT_EQ(beolvasas.get<std::string>("name"), "Obelisk");
+	EXPECT_EQ(beolvasas.get<int>("damage"), 45);
+	EXPECT_EQ(beolvasas.get<int>("health_points"), 260);
+	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 1.7);
+}
+
+TEST(Exceptiontest,Nem_letezo_fajl_test){
+    ASSERT_THROW(JSON::parseFromFile("Lathatatlan.json"), JSON::ParseException);
+}
+
 
 
 

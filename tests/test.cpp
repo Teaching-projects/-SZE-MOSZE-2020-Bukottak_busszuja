@@ -132,11 +132,11 @@ EXPECT_FALSE(hero.isAlive());
 
 
 TEST(Unittest,Hero_parse_test){
-Hero hos("Dark_Wanderer",30,3,1,1.1,20,5,1,1,0.9);
+Hero hos("Prince Aidan of Khanduras",30,3,1,1.1,20,5,1,1,0.9);
 Hero hero{ Hero::parse("Dark_Wanderer.json") };
 std::cout << hero.getHealthPoints() << "  " << hero.getDamage() << "  " << hero.getName() << "  " << hero.getDefense() << hero.getAttackCoolDown() << std::endl;
 std::cout << hero.getMaxHealthPoints() << "  " << hero.dmgPerLvl << "  " << hero.defPerLvl << " " << hero.hpPerLvl << " " << hero.speedPerLvl << std::endl;
-EXPECT_TRUE(true);
+EXPECT_TRUE(hos==hero);
 }
 
 

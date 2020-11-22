@@ -14,19 +14,21 @@
 #include<vector>
 #include <cmath>
 #include "JSON.h"
+#include "Damage.h"
 
 class Monster {
     protected:
         std::string nev;                                                                                                    ///< A szörny neve
         int maxhp;                                                                                                          ///< A szörny maximum életpontja
         int hp;                                                                                                             ///< A szörny életpontjai
-        int dmg;                                                                                                            ///< A szörny ütésének erõsege
+        Damage dmg;                                                                                                         ///< A szörny ütésének erõsege;
         double speed;                                                                                                       ///< A szörny ütéseinek gyorsasága
         virtual void tamad(Monster* );                                                                                          ///< Egy darab ütést visz be
         friend class Hero;
     public:
-        Monster(std::string nev, int hp, int dmg, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), speed(speed) {}   ///< Szörny osztály konstruktora
-        int getDamage()const;                                                                                                  ///< Lekéri a szörny sebzését
+        Monster(std::string nev, int hp, Damage dmg, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), speed(speed) {}   ///< Szörny osztály konstruktora
+        Damage getDamage()const;                                                                                                  ///< Lekéri a szörny sebzését
+        int getMagicalDamage()const;
         int getMaxHealthPoints() const;                                                                                               ///< Lekéri a szörny maximum HP-ját
         int getHealthPoints()const;                                                                                                   ///< Lekéri a szörny HP-ját
         double getAttackCoolDown()const;                                                                                             ///< Lekéri a szörny atackspeedjét

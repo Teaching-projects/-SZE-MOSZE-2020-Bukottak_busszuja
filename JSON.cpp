@@ -14,7 +14,7 @@ void JSON::Jsonprsr(std::ifstream& f) {
 			jsonstring += sor;
 		}
 
-		static const std::regex parseRegex("\\s*\"([\\w]*)\"\\s*:\\s*\"?([\\s\\w\\.]*)\"?\\s*[,}]\\s*");
+		static const std::regex parseRegex("\\s*\"([\\w-]*)\"\\s*:\\s*\"?([\\s\\w\\.-]*)\"?\\s*[,}]\\s*");
         std::smatch matches;
         std::string errMsg;
         if (jsonstring.substr(0,1) != "{"){

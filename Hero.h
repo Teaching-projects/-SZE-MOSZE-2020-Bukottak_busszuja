@@ -3,15 +3,15 @@
 #include<string>
 #include<fstream>
 #include<cmath>
-#include "gtest/gtest.h"
+//#include "gtest/gtest.h"
 #include "Monster.h"
 
 class Hero : public Monster {
     public:
-        Hero(const std::string& nev, int hp, int dmg, double speed, int xpPerLvl, int hpPerLvl, int dmgPerLvl, double speedPerLvl, int xp=0, int lvl=1) : Monster(nev, hp, dmg, speed), xpPerLvl(xpPerLvl), hpPerLvl(hpPerLvl), dmgPerLvl(dmgPerLvl), speedPerLvl(speedPerLvl), xp(xp), lvl(lvl) {};
+        Hero(const std::string& nev, int hp, Damage dmg, double speed, int xpPerLvl, int hpPerLvl, int dmgPerLvl, int mdmgPerLvl, double speedPerLvl, int xp=0, int lvl=1) : Monster(nev, hp, dmg, speed), xpPerLvl(xpPerLvl), hpPerLvl(hpPerLvl), dmgPerLvl(dmgPerLvl), mdmgPerLvl(mdmgPerLvl), speedPerLvl(speedPerLvl), xp(xp), lvl(lvl) {};
         int getXp() const;
         int getLevel() const;
-	FRIEND_TEST(Unittest,Private_functions_test);
+        //FRIEND_TEST(Unittest,Private_functions_test);
         static Hero parse(const std::string& json);
         Hero& operator=(const Monster&);
     	bool operator ==(const Hero & other)const {
@@ -21,6 +21,7 @@ class Hero : public Monster {
         int xpPerLvl;
         int hpPerLvl;
         int dmgPerLvl;
+        int mdmgPerLvl;
         double speedPerLvl;
         int xp;
         int lvl;

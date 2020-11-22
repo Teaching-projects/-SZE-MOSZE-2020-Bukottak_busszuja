@@ -1,3 +1,8 @@
+#ifndef MAP_H
+#define MAP_H
+
+
+
 #include<iostream>
 #include<vector>
 #include<string>
@@ -19,3 +24,4 @@ public:
 	};
 };
 
+#endif

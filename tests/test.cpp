@@ -1,6 +1,7 @@
 #include "JSON.h"
 #include "Monster.h"
 #include "Hero.h"
+#include "Map.h"
 #include "gtest/gtest.h"
 
 

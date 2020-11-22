@@ -121,10 +121,13 @@ EXPECT_EQ(tipush, "Hero");
 EXPECT_EQ(tipusm, "Monster");
 }
 
-TEST(Unittest,Hero_parse_test){
-Hero hero{Hero::parse("Dark_Wanderer.json")};
-Hero hos("Dark_Wanderer",30,3,1,1.1,20,5,1,1,0.9);
-EXPECT_TRUE(hero==hos);
+
+TEST(Unittest,Fight_function_test){
+Hero hero {Hero::parse("Dark_Wanderer.json")};
+Monster monster{Monster::parse("Hosarkany.json")};
+hero.fightTilDeath(monster);
+EXPECT_TRUE(monster.isAlive());
+EXPECT_FALSE(hero.isAlive());
 }
 
 

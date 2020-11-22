@@ -7,4 +7,6 @@
     "health_point_bonus_per_level" : 3,
     "damage_bonus_per_level" : 2,
     "cooldown_multiplier_per_level": 0.8
+    "base_defense" : 1,
+    "defense_bonus_per_level" : 1
 }

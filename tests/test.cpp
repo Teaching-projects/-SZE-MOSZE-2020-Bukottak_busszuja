@@ -57,6 +57,11 @@ TEST(Exceptiontest,Nem_letezo_fajl_test){
     ASSERT_THROW(JSON::parseFromFile("Lathatatlan.json"), JSON::ParseException);
 }
 
+TEST(Exceptiontest,Nincs_hibauzenet_test){
+    ASSERT_NO_THROW(Hero::parse("Dark_Wanderer.json"));
+    ASSERT_NO_THROW(Monster::parse("Hosarkany.json"));
+}
+
 
 TEST(Unittest,Monster_parse_test){
 Monster monster{Monster::parse("Sotetvarazslo.json")};

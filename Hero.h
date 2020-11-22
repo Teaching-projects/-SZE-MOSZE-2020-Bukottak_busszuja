@@ -8,6 +8,11 @@
 
 class Hero : public Monster {
     public:
+	int xpPerLvl;
+        int hpPerLvl;
+        int dmgPerLvl;
+        int defPerLvl;
+        double speedPerLvl;
         Hero(const std::string& nev, int hp, int dmg, int def, double speed, int xpPerLvl, int hpPerLvl, int dmgPerLvl, int defPerLvl, double speedPerLvl, int xp=0, int lvl=1) : Monster(nev, hp, dmg, def, speed), xpPerLvl(xpPerLvl), hpPerLvl(hpPerLvl), dmgPerLvl(dmgPerLvl), defPerLvl(defPerLvl), speedPerLvl(speedPerLvl), xp(xp), lvl(lvl) {};
         int getXp() const;
         int getLevel() const;
@@ -18,11 +23,6 @@ class Hero : public Monster {
 			return (this->hp == other.getHealthPoints() && this->dmg == other.getDamage() && this->def == other.getDefense() && this->nev == other.getName() && round(this->speed) == round(other.getAttackCoolDown()) && this->maxhp == other.getMaxHealthPoints() && this->dmgPerLvl==other.dmgPerLvl && this->defPerLvl==other.defPerLvl && this->hpPerLvl==other.hpPerLvl && this->xpPerLvl==other.xpPerLvl && this->speedPerLvl==other.speedPerLvl);
 		}
      protected:
-        int xpPerLvl;
-        int hpPerLvl;
-        int dmgPerLvl;
-        int defPerLvl;
-        double speedPerLvl;
         int xp;
         int lvl;
         void lvlUp();

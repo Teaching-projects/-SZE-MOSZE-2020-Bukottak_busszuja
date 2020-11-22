@@ -130,6 +130,15 @@ EXPECT_TRUE(monster.isAlive());
 EXPECT_FALSE(hero.isAlive());
 }
 
+TEST(Unittest,Private_functions_test){
+Hero hero("Langpallos", 180, 11,1, 9.1, 100, 3, 2,1, 0.8, 90, 1);
+Monster monster{Monster::parse("Hosarkany.json")};
+Monster * mptr = &monster;
+hero.tamad(mptr);
+Hero hero1("Langpallos", 183, 13,2, 7.28, 100, 3, 2,1, 0.8, 0, 2);
+EXPECT_TRUE(hero1==hero);
+}
+
 
 
 

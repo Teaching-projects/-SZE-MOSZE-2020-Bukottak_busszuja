@@ -137,9 +137,18 @@ EXPECT_TRUE(type_speed == "d");
 }
 
 TEST(Maptest, Getter_test) {
+	ASSERT_NO_THROW(Map("palya1.txt"));
 	Map palya("palya1.txt");
-	std::cout << palya.get(4, 1) << std::endl;
 	EXPECT_EQ(palya.get(4,1),1);
+	EXPECT_EQ(palya.get(4, 0), 0);
+}
+
+TEST(unittests, Exceptions_test) {
+	ASSERT_THROW(Map("Nemletezo_ivek.txt"), std::runtime_error);
+	Map test("palya1.txt");
+	ASSERT_THROW(test.get(-8,2), Map::WrongIndexException);
+	ASSERT_THROW(test.get(3,-2), Map::WrongIndexException);
+	ASSERT_THROW(test.get(300, 400), Map::WrongIndexException);
 }
 
 

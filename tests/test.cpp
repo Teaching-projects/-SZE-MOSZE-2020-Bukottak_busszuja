@@ -124,7 +124,7 @@ EXPECT_EQ(tipusm, "Monster");
 TEST(Unittest,Hero_parse_test){
 Hero hero{Hero::parse("Dark_Wanderer.json")};
 Hero hos("Dark_Wanderer",30,3,1,1.1,20,5,1,1,0.9);
-EXPECT_TRUE(hero==hero1);
+EXPECT_TRUE(hero==hos);
 }
 
 

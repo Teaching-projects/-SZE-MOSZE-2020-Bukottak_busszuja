@@ -136,6 +136,12 @@ EXPECT_TRUE(type_dmg == "i");
 EXPECT_TRUE(type_speed == "d");
 }
 
+TEST(Maptest, Getter_test) {
+	Map palya("palya1.txt");
+	std::cout << palya.get(4, 1) << std::endl;
+	EXPECT_EQ(palya.get(4,1),1);
+}
+
 
 int main(int argc, char ** argv) {
 	::testing::InitGoogleTest(&argc, argv);

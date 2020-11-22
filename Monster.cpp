@@ -4,6 +4,10 @@ int Monster::getDamage()const {
 	return dmg;
 }
 
+int Monster::getDefense()const {
+	return def;
+}
+
 int Monster::getMaxHealthPoints()const {
 	return maxhp;
 }
@@ -21,13 +25,13 @@ double Monster::getAttackCoolDown() const {
 }
 
 void Monster::tamad(Monster* a) {
-	a->hp = a->hp - this->dmg;
+    if (this->dmg > a->def) a->hp = a->hp - (this->dmg - a->def);
 	if (a->hp < 0) a->hp = 0;
 }
 
 
 Monster Monster::parse(const std::string& json) {
-    std::vector <std::string> keysNeeded {"name", "health_points", "damage", "attack_cooldown"};
+    std::vector <std::string> keysNeeded {"name", "health_points", "damage", "defense", "attack_cooldown"};
     JSON parsedJSON = JSON::parseFromFile(json);
 
     bool okay = true;
@@ -40,9 +44,10 @@ Monster Monster::parse(const std::string& json) {
         std::string name = parsedJSON.get<std::string>("name");
         int hp = parsedJSON.get<int>("health_points");
         int dmg = parsedJSON.get<int>("damage");
+        int def = parsedJSON.get<int>("defense");
         double speed = parsedJSON.get<double>("attack_cooldown");
 
-        return Monster(name ,hp ,dmg ,speed);
+        return Monster(name ,hp ,dmg ,def ,speed);
 	}
 	else throw JSON::ParseException("Incorrect attributes in " + json + "!");
 }
@@ -51,6 +56,7 @@ Monster& Monster::operator=(const Monster &szorny) {
     maxhp = szorny.getMaxHealthPoints();
     hp = szorny.getHealthPoints();
     dmg = szorny.getDamage();
+    def = szorny.getDefense();
     nev = szorny.getName();
     speed = szorny.getAttackCoolDown();
     return *this;

@@ -3,4 +3,5 @@ The hero died.
 Prince Aidan of Khanduras: LVL1
    HP: 0/30
   DMG: 3
+  DEF: 1
   ACD: 1.1

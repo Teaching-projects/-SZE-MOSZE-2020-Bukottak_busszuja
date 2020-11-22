@@ -109,12 +109,6 @@ EXPECT_TRUE(type_def == "i");
 EXPECT_TRUE(type_speed == "d");
 }
 
-TEST(Unittest,Hero_parse_test){
-Hero hero{Hero::parse("Dark_Wanderer.json")};
-Hero hero1("Dark_Wanderer", 30, 3,1, 1.1, 20, 5,1, 2,1, 1,0.9);
-Hero(const std::string& nev, int hp, int dmg, int def, double speed, int xpPerLvl, int hpPerLvl, int dmgPerLvl, int defPerLvl, double speedPerLvl, int xp=0, int lvl=1);
-EXPECT_TRUE(hero==hero1);
-}
 
 TEST(Unittest, Hero_Monster_different_test) {
 Hero hero {Hero::parse("Dark_Wanderer.json")};

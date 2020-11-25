@@ -1,6 +1,7 @@
 #include "JSON.h"
 #include "Monster.h"
 #include "Hero.h"
+#include "Map.h"
 #include "gtest/gtest.h"
 
 
@@ -133,6 +134,21 @@ std::string type_speed = typeid(monster.getAttackCoolDown()).name();
 EXPECT_TRUE(type_hp == "i");
 EXPECT_TRUE(type_dmg == "i");
 EXPECT_TRUE(type_speed == "d");
+}
+
+TEST(Maptest, Getter_test) {
+	ASSERT_NO_THROW(Map("palya1.txt"));
+	Map palya("palya1.txt");
+	EXPECT_EQ(palya.get(4,1),1);
+	EXPECT_EQ(palya.get(4, 0), 0);
+}
+
+TEST(unittests, Exceptions_test) {
+	ASSERT_THROW(Map("Nemletezo_ivek.txt"), std::runtime_error);
+	Map test("palya1.txt");
+	ASSERT_THROW(test.get(-8,2), Map::WrongIndexException);
+	ASSERT_THROW(test.get(3,-2), Map::WrongIndexException);
+	ASSERT_THROW(test.get(300, 400), Map::WrongIndexException);
 }
 
 

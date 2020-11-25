@@ -140,8 +140,7 @@ EXPECT_TRUE(hos==hero);
 TEST(Unittest,Private_functions_test){
 Hero hero("Langpallos", 180, 17,1, 9.1, 100, 3, 2,1, 0.8, 90, 1);
 Monster monster{Monster::parse("Hosarkany.json")};
-Monster * mptr = &monster;
-hero.tamad(mptr);
+hero.tamad(&monster);
 Hero hero1("Langpallos", 183, 19,2, 7.28, 100, 3, 2,1, 0.8, 4, 2);
 EXPECT_TRUE(hero==hero1);
 }

@@ -16,7 +16,8 @@
 
 class JSON {
 public:
-    typedef std::list<std::variant<std::string, int, double>> list;				///< Egy listát definiál, aminek szöveg, egész, vagy double tagja lehet
+  typedef std::list<std::variant<std::string, int, double>> list;				///< Egy listát definiál, aminek szöveg, egész, vagy double tagja lehet
+
 
 	JSON(std::ifstream &);
 	JSON(const std::string&);

@@ -1,6 +1,7 @@
 #include "JSON.h"
 #include "Monster.h"
 #include "Hero.h"
+#include "Map.h"
 #include "gtest/gtest.h"
 
 
@@ -10,6 +11,7 @@ TEST(Jsontest, Fajlvaltozo) {
 	EXPECT_EQ(beolvasas.get<std::string>("name"), "Hosarkany");
 	EXPECT_EQ(beolvasas.get<int>("health_points"), 300);
 	EXPECT_EQ(beolvasas.get<int>("damage"), 30);
+	EXPECT_EQ(beolvasas.get<int>("defense"), 3);
 	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 2.4);
 }
 
@@ -18,6 +20,7 @@ TEST(Jsontest, Szoveg) {
 	JSON beolvasas = JSON::parseFromFile(szoveg);
 	EXPECT_EQ(beolvasas.get<std::string>("name"), "Sotetvarazslo");
 	EXPECT_EQ(beolvasas.get<int>("health_points"), 250);
+	EXPECT_EQ(beolvasas.get<int>("defense"), 1);
 	EXPECT_EQ(beolvasas.get<int>("damage"), 40);
 	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 2.0);
 }
@@ -29,6 +32,7 @@ TEST(Jsontest, Fajlnev) {
 	EXPECT_EQ(beolvasas.get<std::string>("name"), "Arnykiraly");
 	EXPECT_EQ(beolvasas.get<int>("health_points"), 200);
 	EXPECT_EQ(beolvasas.get<int>("damage"), 48);
+	EXPECT_EQ(beolvasas.get<int>("defense"), 2);
 	EXPECT_EQ(beolvasas.get<double>("attack_cooldown"), 1.6);
 }
 
@@ -55,20 +59,15 @@ TEST(Exceptiontest,Nem_letezo_fajl_test){
 }
 
 TEST(Exceptiontest,Nincs_hibauzenet_test){
-    ASSERT_NO_THROW(Hero::parse("Langpallos.json"));
+    ASSERT_NO_THROW(Hero::parse("Dark_Wanderer.json"));
     ASSERT_NO_THROW(Monster::parse("Hosarkany.json"));
 }
 
+
 TEST(Unittest,Monster_parse_test){
 Monster monster{Monster::parse("Sotetvarazslo.json")};
-Monster monster1("Sotetvarazslo", 250, 40, 2.0);
+Monster monster1("Sotetvarazslo", 250, 40,1, 2.0);
 EXPECT_TRUE(monster==monster1);
-}
-
-TEST(Unittest,Hero_parse_test){
-Hero hero{Hero::parse("Langpallos.json")};
-Hero hero1("Langpallos", 180, 11, 9.1, 100, 3, 2, 0.8,0,1);
-EXPECT_TRUE(hero==hero1);
 }
 
 TEST(Unittest,Badscenario_exception_test){
@@ -80,35 +79,7 @@ std::string output = testing::internal::GetCapturedStdout();
 EXPECT_EQ(vart, output);
 }
 
-TEST(Unittest, Hero_Monster_different_test) {
-Hero hero {Hero::parse("Langpallos.json")};
-Monster monster{Monster::parse("Hosarkany.json")};
-std::string tipush = typeid(hero).name();
-std::string tipusm = typeid(monster).name();
-tipush.erase(0, 1);
-tipusm.erase(0, 1);
-EXPECT_EQ(tipush, "Hero");
-EXPECT_EQ(tipusm, "Monster");
-}
-
-TEST(Unittest,Fight_function_test){
-Hero hero {Hero::parse("Langpallos.json")};
-Monster monster{Monster::parse("Hosarkany.json")};
-hero.fightTilDeath(monster);
-EXPECT_TRUE(monster.isAlive());
-EXPECT_FALSE(hero.isAlive());
-}
-
-TEST(Unittest,Private_functions_test){
-Hero hero("Langpallos", 180, 11, 9.1, 100, 3, 2, 0.8, 90, 1);
-Monster monster{Monster::parse("Hosarkany.json")};
-Monster * mptr = &monster;
-hero.tamad(mptr);
-Hero hero1("Langpallos", 183, 13, 7.28, 100, 3, 2, 0.8, 1, 2);
-EXPECT_TRUE(hero1==hero);
-}
-
-TEST(Jsontest,Different_input_equas_test){
+TEST(Jsontest,Different_input_equal_test){
 	std::ifstream f("Hosarkany.json");
 	std::string szoveg = "Hosarkany.json";
 	const char * fajlnev = "Hosarkany.json";
@@ -123,17 +94,74 @@ TEST(Jsontest,Different_input_equas_test){
 	EXPECT_EQ(beolvasas3.get<int>("damage"),beolvasas2.get<int>("damage"));
 	EXPECT_EQ(beolvasas1.get<double>("attack_cooldown"),beolvasas2.get<double>("attack_cooldown"));
 	EXPECT_EQ(beolvasas3.get<double>("attack_cooldown"),beolvasas2.get<double>("attack_cooldown"));
+        EXPECT_EQ(beolvasas1.get<int>("defense"),beolvasas2.get<int>("defense"));
+	EXPECT_EQ(beolvasas3.get<int>("defense"),beolvasas2.get<int>("defense"));
 }
 
 TEST(Unittest,Type_fine_test){
 Monster monster{Monster::parse("Hosarkany.json")};
 std::string type_hp = typeid(monster.getHealthPoints()).name();
 std::string type_dmg = typeid(monster.getDamage()).name();
+std::string type_def = typeid(monster.getDefense()).name();
 std::string type_speed = typeid(monster.getAttackCoolDown()).name();
 EXPECT_TRUE(type_hp == "i");
 EXPECT_TRUE(type_dmg == "i");
+EXPECT_TRUE(type_def == "i");
 EXPECT_TRUE(type_speed == "d");
 }
+
+TEST(Maptest, Getter_test) {
+	ASSERT_NO_THROW(Map("palya1.txt"));
+	Map palya("palya1.txt");
+	EXPECT_EQ(palya.get(4,1),1);
+	EXPECT_EQ(palya.get(4, 0), 0);
+}
+
+TEST(unittests, Exceptions_test) {
+	ASSERT_THROW(Map("Nemletezo_ivek.txt"), std::runtime_error);
+	Map test("palya1.txt");
+	ASSERT_THROW(test.get(-8,2), Map::WrongIndexException);
+	ASSERT_THROW(test.get(3,-2), Map::WrongIndexException);
+	ASSERT_THROW(test.get(300, 400), Map::WrongIndexException);
+}
+
+
+TEST(Unittest, Hero_Monster_different_test) {
+Hero hero {Hero::parse("Dark_Wanderer.json")};
+Monster monster{Monster::parse("Hosarkany.json")};
+std::string tipush = typeid(hero).name();
+std::string tipusm = typeid(monster).name();
+tipush.erase(0, 1);
+tipusm.erase(0, 1);
+EXPECT_EQ(tipush, "Hero");
+EXPECT_EQ(tipusm, "Monster");
+}
+
+
+TEST(Unittest,Fight_function_test){
+Hero hero {Hero::parse("Dark_Wanderer.json")};
+Monster monster{Monster::parse("Hosarkany.json")};
+hero.fightTilDeath(monster);
+EXPECT_TRUE(monster.isAlive());
+EXPECT_FALSE(hero.isAlive());
+}
+
+
+TEST(Unittest,Hero_parse_test){
+Hero hos("Prince Aidan of Khanduras",30,3,1,1.1,20,5,1,1,0.9);
+Hero hero{ Hero::parse("Dark_Wanderer.json") };
+EXPECT_TRUE(hos==hero);
+}
+
+TEST(Unittest,Private_functions_test){
+Hero hero("Langpallos", 180, 17,1, 9.1, 100, 3, 2,1, 0.8, 90, 1);
+Monster monster{Monster::parse("Hosarkany.json")};
+hero.tamad(&monster);
+Hero hero1("Langpallos", 183, 19,2, 7.28, 100, 3, 2,1, 0.8, 4, 2);
+EXPECT_TRUE(hero==hero1);
+}
+
+
 
 
 int main(int argc, char ** argv) {

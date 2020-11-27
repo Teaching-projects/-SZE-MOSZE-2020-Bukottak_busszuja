@@ -21,24 +21,25 @@ class Monster {
         std::string nev;                                                                                                    ///< A szörny neve
         int maxhp;                                                                                                          ///< A szörny maximum életpontja
         int hp;                                                                                                             ///< A szörny életpontjai
-        Damage dmg;                                                                                                         ///< A szörny ütésének erõsege;
+        Damage dmg;                                                                                                         ///< A szörny ütésének erõsege;                                                                                                           ///< A szörny ütésének erõsege
+        int def;
         double speed;                                                                                                       ///< A szörny ütéseinek gyorsasága
         virtual void tamad(Monster* );                                                                                          ///< Egy darab ütést visz be
         friend class Hero;
     public:
-        Monster(std::string nev, int hp, Damage dmg, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), speed(speed) {}   ///< Szörny osztály konstruktora
+        Monster(std::string nev, int hp, Damage dmg, int def, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), def(def), speed(speed) {}   ///< Szörny osztály konstruktora
         Damage getDamage()const;                                                                                                  ///< Lekéri a szörny sebzését
-        int getMagicalDamage()const;
+        int getDefense() const;
         int getMaxHealthPoints() const;                                                                                               ///< Lekéri a szörny maximum HP-ját
-        int getHealthPoints()const;                                                                                                   ///< Lekéri a szörny HP-ját
-        double getAttackCoolDown()const;                                                                                             ///< Lekéri a szörny atackspeedjét
-        std::string getName()const;                                                                                         ///< Lekéri a szörny nevét
+        int getHealthPoints() const;                                                                                                   ///< Lekéri a szörny HP-ját
+        double getAttackCoolDown() const;                                                                                             ///< Lekéri a szörny atackspeedjét
+        std::string getName() const;                                                                                         ///< Lekéri a szörny nevét
         static Monster parse(const std::string& json);                                                               ///< Beolvassa a szörny értékeit
         Monster& operator=(const Monster&);                                                                                   ///< Lehetővé teszi egy szörny értékeinek beállítását egy másikéra
-        Monster(const Monster& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), speed(s2.speed) {};                ///< Lehetővé teszi egy szörny létrehozását egy másiknak a lemásolásával
+        Monster(const Monster& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), def(s2.def), speed(s2.speed) {};                ///< Lehetővé teszi egy szörny létrehozását egy másiknak a lemásolásával
         void fightTilDeath(Monster&);
         bool isAlive() const;                                                                               ///< A parancsori argumentumban megadott két hõst harcoltatja
-	bool operator ==(const Monster & other)const {
-			return (this->hp == other.getHealthPoints() && this->dmg == other.getDamage() && this->nev == other.getName() && this->speed == other.getAttackCoolDown() && this->maxhp==other.getMaxHealthPoints());
+	      bool operator ==(const Monster & other) const {
+			return (this->hp == other.getHealthPoints() && this->dmg == other.getDamage() && this->def == other.getDefense() && this->nev == other.getName() && this->speed == other.getAttackCoolDown() && this->maxhp==other.getMaxHealthPoints());
 		}
 };

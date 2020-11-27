@@ -76,7 +76,7 @@ Hero Hero::parse(const std::string& json) {
         double speed = parsedJSON.get<double>("base_attack_cooldown");
         double speedPerLvl = parsedJSON.get<double>("cooldown_multiplier_per_level");
 
-        return Hero(name , hp, dmg, def, speed, xpPerLvl, hpPerLvl, dmgPerLvl, mdmgPerLvl, speedPerLvl);
+        return Hero(name , hp, dmg, def, speed, xpPerLvl, hpPerLvl, dmgPerLvl, mdmgPerLvl, defPerLvl, speedPerLvl);
 	}
 	else throw JSON::ParseException("Incorrect attributes in " + json + "!");
 }

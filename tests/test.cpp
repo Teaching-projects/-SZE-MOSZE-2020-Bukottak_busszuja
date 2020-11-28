@@ -58,11 +58,6 @@ TEST(Exceptiontest,Nem_letezo_fajl_test){
     ASSERT_THROW(JSON::parseFromFile("Lathatatlan.json"), JSON::ParseException);
 }
 
-TEST(Unittest,Monster_parse_test){
-Monster monster{Monster::parse("Sotetvarazslo.json")};
-Monster monster1("Sotetvarazslo", 250, 40,1, 2.0);
-EXPECT_TRUE(monster==monster1);
-}
 
 TEST(Unittest,Badscenario_exception_test){
 std::string vart = "The provided scenario file is invalid.";

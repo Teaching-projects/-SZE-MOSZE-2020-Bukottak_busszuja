@@ -139,6 +139,15 @@ EXPECT_EQ(tipush, "Hero");
 EXPECT_EQ(tipusm, "Monster");
 }
 
+TEST(Unittest,Monster_parse_test){
+Monster monster{Monster::parse("Sotetvarazslo.json")};
+Damage d;
+d.physical = 40;
+d.magical = 0;
+Monster monster1("Sotetvarazslo", 250, 40,1, 2.0);
+EXPECT_TRUE(monster==monster1);
+}
+
 
 
 int main(int argc, char ** argv) {

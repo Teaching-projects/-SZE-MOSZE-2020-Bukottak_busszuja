@@ -115,6 +115,14 @@ EXPECT_TRUE(type_def == "i");
 EXPECT_TRUE(type_speed == "d");
 }
 
+TEST(Unittest,Fight_function_test){
+Hero hero {Hero::parse("Dark_Wanderer.json")};
+Monster monster{Monster::parse("Hosarkany.json")};
+hero.fightTilDeath(monster);
+EXPECT_TRUE(monster.isAlive());
+EXPECT_FALSE(hero.isAlive());
+}
+
 
 
 int main(int argc, char ** argv) {

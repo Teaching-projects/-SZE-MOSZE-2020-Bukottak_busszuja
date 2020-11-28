@@ -115,26 +115,10 @@ EXPECT_TRUE(type_def == "i");
 EXPECT_TRUE(type_speed == "d");
 }
 
-TEST(Unittest,Fight_function_test){
-Hero hero {Hero::parse("Dark_Wanderer.json")};
-Monster monster{Monster::parse("Hosarkany.json")};
-hero.fightTilDeath(monster);
-EXPECT_TRUE(monster.isAlive());
-EXPECT_FALSE(hero.isAlive());
+TEST(Exceptiontest,Nincs_hibauzenet_test){
+    ASSERT_NO_THROW(Hero::parse("Dark_Wanderer.json"));
+    ASSERT_NO_THROW(Monster::parse("Hosarkany.json"));
 }
-
-TEST(Unittest, Hero_Monster_different_test) {
-Hero hero {Hero::parse("Dark_Wanderer.json")};
-Monster monster{Monster::parse("Hosarkany.json")};
-std::string tipush = typeid(hero).name();
-std::string tipusm = typeid(monster).name();
-tipush.erase(0, 1);
-tipusm.erase(0, 1);
-EXPECT_EQ(tipush, "Hero");
-EXPECT_EQ(tipusm, "Monster");
-}
-
-
 
 
 int main(int argc, char ** argv) {

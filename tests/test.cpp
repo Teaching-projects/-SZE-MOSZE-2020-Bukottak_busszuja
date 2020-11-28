@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "Hero.h"
 #include "Map.h"
+#include "Damage.h"
 #include "gtest/gtest.h"
 
 

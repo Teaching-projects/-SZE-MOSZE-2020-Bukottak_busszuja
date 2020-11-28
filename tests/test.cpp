@@ -165,6 +165,7 @@ d.magical = 1;
 Hero hero {Hero::parse("Dark_Wanderer.json")};
 Monster monster{Monster::parse("Hosarkany.json")};
 hero.tamad(&monster);
+std::cout<<hero.getXP()<<std::endl;
 Hero hos("Prince Aidan of Khanduras",30,d,1,1.1,20,5,1,1,1,0.9);
 EXPECT_TRUE(hos==hero);
 }

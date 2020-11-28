@@ -123,6 +123,18 @@ EXPECT_TRUE(monster.isAlive());
 EXPECT_FALSE(hero.isAlive());
 }
 
+TEST(Unittest, Hero_Monster_different_test) {
+Hero hero {Hero::parse("Dark_Wanderer.json")};
+Monster monster{Monster::parse("Hosarkany.json")};
+std::string tipush = typeid(hero).name();
+std::string tipusm = typeid(monster).name();
+tipush.erase(0, 1);
+tipusm.erase(0, 1);
+EXPECT_EQ(tipush, "Hero");
+EXPECT_EQ(tipusm, "Monster");
+}
+
+
 
 
 int main(int argc, char ** argv) {

@@ -108,8 +108,9 @@ std::string type_hp = typeid(monster.getHealthPoints()).name();
 std::string type_dmg = typeid(monster.getDamage()).name();
 std::string type_def = typeid(monster.getDefense()).name();
 std::string type_speed = typeid(monster.getAttackCoolDown()).name();
+type_dmg.erase(0, 1);
 EXPECT_TRUE(type_hp == "i");
-EXPECT_EQ(type_dmg ,"i");
+EXPECT_EQ(type_dmg ,"Damage");
 EXPECT_TRUE(type_def == "i");
 EXPECT_TRUE(type_speed == "d");
 }

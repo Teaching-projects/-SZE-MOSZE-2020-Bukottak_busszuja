@@ -1,6 +1,6 @@
 #include "Monster.h"
 
-int Monster::getDamage()const {
+Damage Monster::getDamage()const {
 	return dmg;
 }
 
@@ -25,13 +25,14 @@ double Monster::getAttackCoolDown() const {
 }
 
 void Monster::tamad(Monster* a) {
-    if (this->dmg > a->def) a->hp = a->hp - (this->dmg - a->def);
+    if (this->dmg.physical > a->def) a->hp = a->hp - (this->dmg.physical - a->def + this->dmg.magical);
+    else if (this->dmg.physical <= a->def) a->hp = a->hp - this->dmg.magical;
 	if (a->hp < 0) a->hp = 0;
 }
 
 
 Monster Monster::parse(const std::string& json) {
-    std::vector <std::string> keysNeeded {"name", "health_points", "damage", "defense", "attack_cooldown"};
+    std::vector <std::string> keysNeeded {"name", "health_points", "defense", "attack_cooldown"};
     JSON parsedJSON = JSON::parseFromFile(json);
 
     bool okay = true;
@@ -39,11 +40,18 @@ Monster Monster::parse(const std::string& json) {
         	if(!parsedJSON.count(key))
 			okay = false;
 
+    Damage dmg;
+
+    if(parsedJSON.count("damage")) dmg.physical = parsedJSON.get<int>("damage");
+	else dmg.physical = 0;
+
+	if(parsedJSON.count("magical-damage")) dmg.magical = parsedJSON.get<int>("magical-damage");
+	else dmg.magical = 0;
+
 	if (okay) {
 
         std::string name = parsedJSON.get<std::string>("name");
         int hp = parsedJSON.get<int>("health_points");
-        int dmg = parsedJSON.get<int>("damage");
         int def = parsedJSON.get<int>("defense");
         double speed = parsedJSON.get<double>("attack_cooldown");
 

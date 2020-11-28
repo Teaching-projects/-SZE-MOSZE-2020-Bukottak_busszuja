@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "Hero.h"
 #include "Map.h"
+#include "Damage.h"
 #include "gtest/gtest.h"
 
 
@@ -58,17 +59,6 @@ TEST(Exceptiontest,Nem_letezo_fajl_test){
     ASSERT_THROW(JSON::parseFromFile("Lathatatlan.json"), JSON::ParseException);
 }
 
-TEST(Exceptiontest,Nincs_hibauzenet_test){
-    ASSERT_NO_THROW(Hero::parse("Dark_Wanderer.json"));
-    ASSERT_NO_THROW(Monster::parse("Hosarkany.json"));
-}
-
-
-TEST(Unittest,Monster_parse_test){
-Monster monster{Monster::parse("Sotetvarazslo.json")};
-Monster monster1("Sotetvarazslo", 250, 40,1, 2.0);
-EXPECT_TRUE(monster==monster1);
-}
 
 TEST(Unittest,Badscenario_exception_test){
 std::string vart = "The provided scenario file is invalid.";
@@ -77,6 +67,21 @@ JSON scenario = JSON::parseFromFile("badscenario.json");
 if (!(scenario.count("hero") && scenario.count("monsters")))std::cout << "The provided scenario file is invalid.";
 std::string output = testing::internal::GetCapturedStdout();
 EXPECT_EQ(vart, output);
+}
+
+TEST(Maptest, Getter_test) {
+	ASSERT_NO_THROW(Map("palya1.txt"));
+	Map palya("palya1.txt");
+	EXPECT_EQ(palya.get(4,1),1);
+	EXPECT_EQ(palya.get(4, 0), 0);
+}
+
+TEST(unittests, Exceptions_test) {
+	ASSERT_THROW(Map("Nemletezo_ivek.txt"), std::runtime_error);
+	Map test("palya1.txt");
+	ASSERT_THROW(test.get(-8,2), Map::WrongIndexException);
+	ASSERT_THROW(test.get(3,-2), Map::WrongIndexException);
+	ASSERT_THROW(test.get(300, 400), Map::WrongIndexException);
 }
 
 TEST(Jsontest,Different_input_equal_test){
@@ -104,27 +109,25 @@ std::string type_hp = typeid(monster.getHealthPoints()).name();
 std::string type_dmg = typeid(monster.getDamage()).name();
 std::string type_def = typeid(monster.getDefense()).name();
 std::string type_speed = typeid(monster.getAttackCoolDown()).name();
+type_dmg.erase(0, 1);
 EXPECT_TRUE(type_hp == "i");
-EXPECT_TRUE(type_dmg == "i");
+EXPECT_EQ(type_dmg ,"Damage");
 EXPECT_TRUE(type_def == "i");
 EXPECT_TRUE(type_speed == "d");
 }
 
-TEST(Maptest, Getter_test) {
-	ASSERT_NO_THROW(Map("palya1.txt"));
-	Map palya("palya1.txt");
-	EXPECT_EQ(palya.get(4,1),1);
-	EXPECT_EQ(palya.get(4, 0), 0);
+TEST(Exceptiontest,Nincs_hibauzenet_test){
+    ASSERT_NO_THROW(Hero::parse("Dark_Wanderer.json"));
+    ASSERT_NO_THROW(Monster::parse("Hosarkany.json"));
 }
 
-TEST(unittests, Exceptions_test) {
-	ASSERT_THROW(Map("Nemletezo_ivek.txt"), std::runtime_error);
-	Map test("palya1.txt");
-	ASSERT_THROW(test.get(-8,2), Map::WrongIndexException);
-	ASSERT_THROW(test.get(3,-2), Map::WrongIndexException);
-	ASSERT_THROW(test.get(300, 400), Map::WrongIndexException);
+TEST(Unittest,Fight_function_test){
+Hero hero {Hero::parse("Dark_Wanderer.json")};
+Monster monster{Monster::parse("Hosarkany.json")};
+hero.fightTilDeath(monster);
+EXPECT_TRUE(monster.isAlive());
+EXPECT_FALSE(hero.isAlive());
 }
-
 
 TEST(Unittest, Hero_Monster_different_test) {
 Hero hero {Hero::parse("Dark_Wanderer.json")};
@@ -137,29 +140,35 @@ EXPECT_EQ(tipush, "Hero");
 EXPECT_EQ(tipusm, "Monster");
 }
 
-
-TEST(Unittest,Fight_function_test){
-Hero hero {Hero::parse("Dark_Wanderer.json")};
-Monster monster{Monster::parse("Hosarkany.json")};
-hero.fightTilDeath(monster);
-EXPECT_TRUE(monster.isAlive());
-EXPECT_FALSE(hero.isAlive());
+TEST(Unittest,Monster_parse_test){
+Monster monster{Monster::parse("Sotetvarazslo.json")};
+Damage d;
+d.physical = 40;
+d.magical = 0;
+Monster monster1("Sotetvarazslo", 250, d,1, 2.0);
+EXPECT_TRUE(monster==monster1);
 }
 
-
 TEST(Unittest,Hero_parse_test){
-Hero hos("Prince Aidan of Khanduras",30,3,1,1.1,20,5,1,1,0.9);
+Damage d;
+d.physical = 3;
+d.magical = 1;
+Hero hos("Prince Aidan of Khanduras",30,d,1,1.1,20,5,1,1,1,0.9);
 Hero hero{ Hero::parse("Dark_Wanderer.json") };
 EXPECT_TRUE(hos==hero);
 }
 
 TEST(Unittest,Private_functions_test){
-Hero hero("Langpallos", 180, 17,1, 9.1, 100, 3, 2,1, 0.8, 90, 1);
+Damage d;
+d.physical = 3;
+d.magical = 1;
+Hero hero {Hero::parse("Dark_Wanderer.json")};
 Monster monster{Monster::parse("Hosarkany.json")};
 hero.tamad(&monster);
-Hero hero1("Langpallos", 183, 19,2, 7.28, 100, 3, 2,1, 0.8, 4, 2);
-EXPECT_TRUE(hero==hero1);
+Hero hos("Prince Aidan of Khanduras",30,d,1,1.1,20,5,1,1,1,0.9,1,1);
+EXPECT_TRUE(hos==hero);
 }
+
 
 
 

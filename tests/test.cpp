@@ -83,6 +83,25 @@ TEST(unittests, Exceptions_test) {
 	ASSERT_THROW(test.get(300, 400), Map::WrongIndexException);
 }
 
+TEST(Jsontest,Different_input_equal_test){
+	std::ifstream f("Hosarkany.json");
+	std::string szoveg = "Hosarkany.json";
+	const char * fajlnev = "Hosarkany.json";
+	JSON beolvasas1 = JSON::parseFromFile(f);
+	JSON beolvasas2 = JSON::parseFromFile(szoveg);
+	JSON beolvasas3 = JSON::parseFromFile(fajlnev);
+	EXPECT_EQ(beolvasas1.get<std::string>("name"), beolvasas2.get<std::string>("name"));
+	EXPECT_EQ(beolvasas3.get<std::string>("name"), beolvasas2.get<std::string>("name"));
+	EXPECT_EQ(beolvasas1.get<int>("health_points"), beolvasas2.get<int>("health_points"));
+	EXPECT_EQ(beolvasas3.get<int>("health_points"), beolvasas2.get<int>("health_points"));
+	EXPECT_EQ(beolvasas1.get<int>("damage"),beolvasas2.get<int>("damage"));
+	EXPECT_EQ(beolvasas3.get<int>("damage"),beolvasas2.get<int>("damage"));
+	EXPECT_EQ(beolvasas1.get<double>("attack_cooldown"),beolvasas2.get<double>("attack_cooldown"));
+	EXPECT_EQ(beolvasas3.get<double>("attack_cooldown"),beolvasas2.get<double>("attack_cooldown"));
+        EXPECT_EQ(beolvasas1.get<int>("defense"),beolvasas2.get<int>("defense"));
+	EXPECT_EQ(beolvasas3.get<int>("defense"),beolvasas2.get<int>("defense"));
+}
+
 
 
 

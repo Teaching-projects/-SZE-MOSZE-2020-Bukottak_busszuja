@@ -149,6 +149,16 @@ Monster monster1("Sotetvarazslo", 250, d,1, 2.0);
 EXPECT_TRUE(monster==monster1);
 }
 
+TEST(Unittest,Hero_parse_test){
+Damage d;
+d.physical = 3;
+d.magical = 1;
+Hero hos("Prince Aidan of Khanduras",30,d,1,1.1,20,5,1,1,1,0.9);
+Hero hero{ Hero::parse("Dark_Wanderer.json") };
+EXPECT_TRUE(hos==hero);
+}
+
+
 
 
 int main(int argc, char ** argv) {

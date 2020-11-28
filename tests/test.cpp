@@ -145,7 +145,7 @@ Monster monster{Monster::parse("Sotetvarazslo.json")};
 Damage d;
 d.physical = 40;
 d.magical = 0;
-Monster monster1("Sotetvarazslo", 250, 40,1, 2.0);
+Monster monster1("Sotetvarazslo", 250, d,1, 2.0);
 EXPECT_TRUE(monster==monster1);
 }
 

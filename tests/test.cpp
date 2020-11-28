@@ -58,10 +58,36 @@ TEST(Exceptiontest,Nem_letezo_fajl_test){
     ASSERT_THROW(JSON::parseFromFile("Lathatatlan.json"), JSON::ParseException);
 }
 
-TEST(Exceptiontest,Nincs_hibauzenet_test){
-    ASSERT_NO_THROW(Hero::parse("Dark_Wanderer.json"));
-    ASSERT_NO_THROW(Monster::parse("Hosarkany.json"));
+TEST(Unittest,Monster_parse_test){
+Monster monster{Monster::parse("Sotetvarazslo.json")};
+Monster monster1("Sotetvarazslo", 250, 40,1, 2.0);
+EXPECT_TRUE(monster==monster1);
 }
+
+TEST(Unittest,Badscenario_exception_test){
+std::string vart = "The provided scenario file is invalid.";
+testing::internal::CaptureStdout();
+JSON scenario = JSON::parseFromFile("badscenario.json");
+if (!(scenario.count("hero") && scenario.count("monsters")))std::cout << "The provided scenario file is invalid.";
+std::string output = testing::internal::GetCapturedStdout();
+EXPECT_EQ(vart, output);
+}
+
+TEST(Maptest, Getter_test) {
+	ASSERT_NO_THROW(Map("palya1.txt"));
+	Map palya("palya1.txt");
+	EXPECT_EQ(palya.get(4,1),1);
+	EXPECT_EQ(palya.get(4, 0), 0);
+}
+
+TEST(unittests, Exceptions_test) {
+	ASSERT_THROW(Map("Nemletezo_ivek.txt"), std::runtime_error);
+	Map test("palya1.txt");
+	ASSERT_THROW(test.get(-8,2), Map::WrongIndexException);
+	ASSERT_THROW(test.get(3,-2), Map::WrongIndexException);
+	ASSERT_THROW(test.get(300, 400), Map::WrongIndexException);
+}
+
 
 
 

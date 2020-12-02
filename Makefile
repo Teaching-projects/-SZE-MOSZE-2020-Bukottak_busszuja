@@ -33,7 +33,7 @@ Source.o: Source.cpp Game.h
 	$(CC) $(CFLAGS) -c Source.cpp
 
 sca:
-	bash -c ".cppcheck.sh"
+	bash -c "./cppcheck.sh"
 
 memtest:
 	valgrind $(VLGRNDFLAGS) $(VLGRNDPARAM)

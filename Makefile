@@ -1,3 +1,5 @@
+SHELL=/bin/bash
+
 OBJS := JSON.o Monster.o Hero.o Map.o Game.o Source.o
 CFLAGS := -std=c++17 -Wall -Werror -g
 CC := g++-9
@@ -31,7 +33,7 @@ Source.o: Source.cpp Game.h
 	$(CC) $(CFLAGS) -c Source.cpp
 
 sca:
-	cppcheck *.cpp $(CPPCFLAGS)
+	bash -c ".cppcheck.sh"
 
 memtest:
 	valgrind $(VLGRNDFLAGS) $(VLGRNDPARAM)

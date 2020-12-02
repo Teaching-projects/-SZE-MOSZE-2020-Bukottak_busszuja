@@ -31,3 +31,15 @@ Map::type Map::get(int x, int y) const {
 	if (palya[y][x] == ' ') return Map::type::Free;
 	if (palya[y][x] == '#') return Map::type::Wall;
 }
+
+int Map::getMagassag()const {
+	return palya.size();
+}
+
+int Map::getSzelesseg()const {
+	int max = 0;
+	for (int i = 0; i < palya.size(); i++) {
+		if (palya[i].size() > max) max = palya[i].size();
+	}
+	return max;
+}

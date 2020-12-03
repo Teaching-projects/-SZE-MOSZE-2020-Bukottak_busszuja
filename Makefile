@@ -1,7 +1,7 @@
 SHELL=/bin/bash
 
 OBJS := JSON.o Monster.o Hero.o Map.o Game.o Source.o
-CFLAGS := -std=c++17 -Wall -Werror -g
+CFLAGS := -std=c++17 -Wall -Wextra -g
 CC := g++-9
 
 TESTFILES:= scenario1.json

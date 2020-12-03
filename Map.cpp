@@ -15,7 +15,7 @@ Map::Map(const std::string & filename) {
 }
 
 void Map::kiir()const {
-	for (int i = 0; i < palya.size(); i++) {
+	for (unsigned int i = 0; i < palya.size(); i++) {
 		std::cout << palya[i] << std::endl;
 	}
 }
@@ -27,7 +27,7 @@ Map::~Map()
 
 
 Map::type Map::get(int x, int y) const {
-	if (y >= palya.size() || y < 0 || x < 0 || x >= palya[y].length()) throw WrongIndexException("Nem letezo index lett megadva!");
+	if (y >= (int)palya.size() || y < 0 || x < 0 || x >= (int)palya[y].length()) throw WrongIndexException("Nem letezo index lett megadva!");
 	if (palya[y][x] == ' ') return Map::type::Free;
 	if (palya[y][x] == '#') return Map::type::Wall;
 }
@@ -38,8 +38,8 @@ int Map::getMagassag()const {
 
 int Map::getSzelesseg()const {
 	int max = 0;
-	for (int i = 0; i < palya.size(); i++) {
-		if (palya[i].size() > max) max = palya[i].size();
+	for (unsigned int i = 0; i < palya.size(); i++) {
+		if ((int)palya[i].size() > max) max = palya[i].size();
 	}
 	return max;
 }

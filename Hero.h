@@ -3,7 +3,7 @@
 #include<string>
 #include<fstream>
 #include<cmath>
-//#include "gtest/gtest.h"
+#include "gtest/gtest.h"
 #include "Monster.h"
 
 class Hero : public Monster {
@@ -11,7 +11,7 @@ class Hero : public Monster {
         Hero(const std::string& nev, int hp, Damage dmg, int def, double speed, int xpPerLvl, int hpPerLvl, int dmgPerLvl, int mdmgPerLvl, int defPerLvl, double speedPerLvl, int xp=0, int lvl=1) : Monster(nev, hp, dmg, def, speed), xpPerLvl(xpPerLvl), hpPerLvl(hpPerLvl), dmgPerLvl(dmgPerLvl), mdmgPerLvl(mdmgPerLvl), defPerLvl(defPerLvl), speedPerLvl(speedPerLvl), xp(xp), lvl(lvl) {};
         int getXp() const;
         int getLevel() const;
-        //FRIEND_TEST(Unittest,Private_functions_test);
+        FRIEND_TEST(Unittest,Private_functions_test);
         static Hero parse(const std::string& json);
         //Hero& operator=(const Hero&);
     	bool operator ==(const Hero & other)const {

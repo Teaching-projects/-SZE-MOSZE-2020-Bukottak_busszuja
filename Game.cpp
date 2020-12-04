@@ -16,7 +16,7 @@ void Game::setMap(Map map) {
 }
 
 
-void Game::putHero(Hero Hero, int x, int y) {
+void Game::putHero(Hero &Hero, int x, int y) {
 	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet feltenni host!");
 	if (mapready == false)throw Map::WrongIndexException("Meg nincs palyaterkep beallitva!");
 	if (heroready)throw AlreadyHasHeroException("Mar egy hos van az arenaban!");
@@ -27,7 +27,7 @@ void Game::putHero(Hero Hero, int x, int y) {
 	heroready = true;
 }
 
-void Game::putMonster(Monster Monster, int x, int y) {
+void Game::putMonster(Monster &Monster, int x, int y) {
 	if (mapready == false)throw Map::WrongIndexException("Meg nincs palyaterkep beallitva!");
 	if (terkep.get(x, y) == Map::type::Wall) throw OccupiedException("Falra nem kerulhet Monster!");
 	Arenaszorny s;
@@ -140,7 +140,6 @@ void Game::readInput() {
             std::cout << "That move is not feasible. There's an obstacle." << std::endl;
         }
     }
-    std::cerr << "Hiba";
     hos.posx += difX;
     hos.posy += difY;
 }

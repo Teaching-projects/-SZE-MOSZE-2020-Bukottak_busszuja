@@ -44,6 +44,7 @@ void Game::run() {
 
 	while (gamerunning) {
         drawmap();
+        std::cout << std::endl;
         CheckForFight();
 
         if (hos.hero->isAlive() && arenaszornyek.size() != 0) {
@@ -53,14 +54,19 @@ void Game::run() {
         }
 	}
 
-	if (hos.hero->isAlive())
-    {
+	if (hos.hero->isAlive()) {
         std::cout << hos.hero->getName() + " cleared the map." << std::endl;
+
     }
-    else
-    {
+    else {
         std::cout << hos.hero->getName() + " died." << std::endl;
     }
+
+    std::cout << std::endl << "  LVL: " << hos.hero->getLevel() << std::endl
+                  << "   HP: " << hos.hero->getHealthPoints() << "/" << hos.hero->getMaxHealthPoints() << std::endl
+                  << "  DMG: " << hos.hero->getDamage() << std::endl
+                  << "  DEF: " << hos.hero->getDefense() << std::endl
+                  << "  ACD: " << hos.hero->getAttackCoolDown() << std::endl;
 }
 
 void Game::CheckForFight() {
@@ -70,6 +76,7 @@ void Game::CheckForFight() {
 
     for (unsigned int i = 0; i <(int)arenaszornyek.size(); i++) {
         if (arenaszornyek[i].posx == heroX && arenaszornyek[i].posy == heroY) {
+            std::cout << hos.hero->getName() << "(" << hos.hero->getLevel() << ") vs " << arenaszornyek[i].monster->getName() << std::endl << std::endl;
             hos.hero->fightTilDeath(*arenaszornyek[i].monster);
             if (arenaszornyek[i].monster->isAlive() == false) arenaszornyek.erase(arenaszornyek.begin()+i);
         }
@@ -79,39 +86,40 @@ void Game::CheckForFight() {
 void Game::drawmap() {
 	int szelesseg = terkep.getSzelesseg();
 	int magassag = terkep.getMagassag();
-	char Balfel = 201;
-	char Jobbfel = 187;
-	char Balle = 200;
-	char Jobble = 188;
-	char vizszint = 205;
-	char szabad = 177;
-	char fal = 178;
-	char balhos = 195;
-	char jobbhos = 180;
-	char fuggoleges = 186;
-	std::cout << Balfel;
-	for (int i = 0; i < szelesseg; i++) std::cout << vizszint<<vizszint;
-	std::cout <<vizszint<< Jobbfel << std::endl;
+	/*char Balfel = "╔";
+	char Jobbfel = "╗";
+	char Balle = "╚";
+	char Jobble = "╝";
+	char vizszint = "═";
+	char szabad = "░";
+	char fal = "█";
+	char balhos = "┣";
+	char jobbhos = "┫";
+	char fuggoleges = "║";*/
+
+	std::cout << "╔" << "═";
+	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
+	std::cout << "═" << "╗" << std::endl;
 	for (int i = 0; i < magassag; i++) {
-		std::cout << fuggoleges<<fuggoleges;
+		std::cout << "║" << "║";
 		for (int j = 0; j < szelesseg; j++) {
 			try {
-				if (terkep.get(j, i) == Map::type::Wall) std::cout << fal<<fal;
-				else if (hos.posx == j && hos.posy == i) std::cout << balhos<<jobbhos;
+				if (terkep.get(j, i) == Map::type::Wall) std::cout << "█" << "█";
+				else if (hos.posx == j && hos.posy == i) std::cout << "┣" << "┫";
 				else {
 					int monsterdb = getMonsterdb(j,i);
-					if (monsterdb == 1) std::cout << "M"<<szabad;
+					if (monsterdb == 1) std::cout << "M" << "░";
 					else if (monsterdb > 1) std::cout << "MM";
-					else std::cout << szabad<<szabad;
+					else std::cout << "░" << "░";
 				}
 			}
-			catch (Map::WrongIndexException& e) { std::cout << szabad<<szabad; }
+			catch (Map::WrongIndexException& e) { std::cout << "░" << "░"; }
 		}
-		std::cout << fuggoleges<<std::endl;
+		std::cout << "║" << "║" <<std::endl;
 	}
-	std::cout << Balle;
-	for (int i = 0; i < szelesseg; i++) std::cout << vizszint<<vizszint;
-	std::cout <<vizszint<< Jobble << std::endl;
+	std::cout << "╚" << "═";
+	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
+	std::cout << "═" << "╝" << std::endl;
 
 }
 
@@ -130,6 +138,7 @@ void Game::readInput() {
         {
             std::cout << "Which way do you wish to go?" << std::endl << "(N)orth, (S)outh, (E)ast, (W)est" << std::endl;
             std::cin >> way;
+            std::cout << std::endl;
             TranslateUserInput(way, difX, difY, correctInput);
         }
 

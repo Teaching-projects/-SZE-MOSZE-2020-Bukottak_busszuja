@@ -1,0 +1,33 @@
+╔════════════╗
+║║██████████║║
+║║██┣┫░░M░██║║
+║║██████████║║
+╚════════════╝
+
+Which way do you wish to go?
+(N)orth, (S)outh, (E)ast, (W)est
+
+╔════════════╗
+║║██████████║║
+║║██░░┣┫M░██║║
+║║██████████║║
+╚════════════╝
+
+Which way do you wish to go?
+(N)orth, (S)outh, (E)ast, (W)est
+
+╔════════════╗
+║║██████████║║
+║║██░░░░┣┫██║║
+║║██████████║║
+╚════════════╝
+
+Prince Aidan of Khanduras(1) vs Training Dummy
+
+Prince Aidan of Khanduras cleared the map.
+
+  LVL: 13
+   HP: 90/90
+  DMG: Physical: 15, Magical: 13
+  DEF: 13
+  ACD: 0.310672

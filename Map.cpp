@@ -37,9 +37,9 @@ int Map::getMagassag()const {
 }
 
 int Map::getSzelesseg()const {
-	int max = 0;
+	int width = 0;
 	for (unsigned int i = 0; i < palya.size(); i++) {
-		if ((int)palya[i].size() > max) max = palya[i].size();
+		if ((int)palya[i].size() > width) width = palya[i].size();
 	}
-	return max;
+	return width;
 }

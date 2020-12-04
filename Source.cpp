@@ -79,6 +79,6 @@ int main(int argc, char** argv){
     Monster monster1("Sotetvarazslo", 250, d, 1, 2.0);
     jatek.putHero(hos,1,1);
     jatek.putMonster(monster1,1,3);
-    jatek.run();
+    //jatek.run();
     return 0;
 }

@@ -27,9 +27,7 @@ jobs:
         run: ./harc.sh 
 
       - name: I/O test 1
-        run: diff scenario_1_output.txt output1.txt
-      - name: I/O test 2
-        run: diff scenario_2_output.txt output2.txt
+        run: diff scenario_1_output.txt output.txt
 
       - name: Valgrind memory check
         run: make memtest

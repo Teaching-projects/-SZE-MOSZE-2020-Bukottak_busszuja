@@ -15,8 +15,11 @@ private:
 public:
 	enum type { Wall, Free };
 	Map(const std::string &);
+	Map(){}
 	virtual ~Map();
 	void kiir()const;
+	int getSzelesseg()const;
+	int getMagassag()const;
 	Map::type get(int x, int y) const;
 	class WrongIndexException : public std::runtime_error {
 	public:

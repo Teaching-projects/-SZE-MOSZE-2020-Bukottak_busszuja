@@ -3,6 +3,7 @@
 #include "Hero.h"
 #include "Map.h"
 #include "Damage.h"
+#include "Game.h"
 #include "gtest/gtest.h"
 
 
@@ -72,8 +73,8 @@ EXPECT_EQ(vart, output);
 TEST(Maptest, Getter_test) {
 	ASSERT_NO_THROW(Map("palya1.txt"));
 	Map palya("palya1.txt");
-	EXPECT_EQ(palya.get(4,1),1);
-	EXPECT_EQ(palya.get(4, 0), 0);
+	EXPECT_EQ(palya.get(1,1),1);
+	EXPECT_EQ(palya.get(1,0), 0);
 }
 
 TEST(unittests, Exceptions_test) {
@@ -167,6 +168,84 @@ Monster monster{Monster::parse("Hosarkany.json")};
 hero.tamad(&monster);
 Hero hos("Prince Aidan of Khanduras",30,d,1,1.1,20,5,1,1,1,0.9,1,1);
 EXPECT_TRUE(hos==hero);
+}
+
+
+TEST(GameTest,Map_is_not_init_test){
+Game jatek;
+Damage d;
+d.physical = 3;
+d.magical = 1;
+Monster monster1("Sotetvarazslo", 250, d, 1, 2.0);
+Hero hos("Prince Aidan of Khanduras", 30, d, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
+ASSERT_THROW(jatek.putHero(hos,1,1), Map::WrongIndexException);
+ASSERT_THROW(jatek.putMonster(monster1,1,3), Map::WrongIndexException);
+}
+
+TEST(GameTest,Only_one_hero_test){
+Game jatek;
+Damage d;
+d.physical = 3;
+d.magical = 1;
+Map palya("palya1.txt");
+jatek.setMap(palya);
+Hero hos("Prince Aidan of Khanduras", 30, d, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
+Hero hos2("Hosarkany", 30, d, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
+jatek.putHero(hos,1,1);
+ASSERT_THROW(jatek.putHero(hos2,1,3), Game::AlreadyHasHeroException);
+}
+
+TEST(GameTest,Monster_Hero_Wall_test){
+Game jatek;
+Damage d;
+d.physical = 3;
+d.magical = 1;
+Map palya("palya1.txt");
+jatek.setMap(palya);
+Hero hos("Prince Aidan of Khanduras", 30, d, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
+ASSERT_THROW(jatek.putHero(hos,1,0), Game::OccupiedException);
+}
+
+TEST(GameTest,Map_has_units_test){
+Game jatek;
+Damage d;
+d.physical = 3;
+d.magical = 1;
+Map palya("palya1.txt");
+jatek.setMap(palya);
+Hero hos("Prince Aidan of Khanduras", 30, d, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
+jatek.putHero(hos,1,1);
+ASSERT_THROW(jatek.setMap(palya), Game::AlreadyHasUnitsException);
+}
+
+TEST(GameTest,Gamenotinitial_test){
+Game jatek;
+Damage d;
+d.physical = 3;
+d.magical = 1;
+Map palya("palya1.txt");
+Hero hos("Prince Aidan of Khanduras", 30, d, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
+ASSERT_THROW(jatek.run(), Game::NotInitializedException);
+jatek.setMap(palya);
+ASSERT_THROW(jatek.run(), Game::NotInitializedException);
+}
+
+TEST(GameTest,GetMonsterdb_test){
+Game jatek;
+Damage d;
+d.physical = 3;
+d.magical = 1;
+Map palya("palya1.txt");
+Monster monster1("Sotetvarazslo", 250, d, 1, 2.0);
+Hero hos("Prince Aidan of Khanduras", 30, d, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
+jatek.setMap(palya);
+Monster monster2("Hosarkany", 300, d, 1, 2.4);
+jatek.putHero(hos,1,1);
+jatek.putMonster(monster1,1,3);
+jatek.putMonster(monster2,1,3);
+EXPECT_EQ(jatek.getMonsterdb(1,3),2);
+
+
 }
 
 

@@ -10,15 +10,25 @@
 #include "JSON.h"
 #include "Hero.h"
 #include "Monster.h"
+#include "Game.h"
+#include "Map.h"
 
+enum mode {
+    Scenario,
+    Test
+};
 
-
+const std::map<std::string, mode> modes = {
+    {"scenario", mode::Scenario},
+    {"test", mode::Test},
+};
 
 const std::map<int,std::string> error_messages = {
-    { 1 , "Bad number of arguments. Only a single scenario file should be provided." },
+    { 1 , "Bad number of arguments. Only a mode and a single scenario file should be provided." },
     { 2 , "The provided scenario file is not accessible." },
     { 3 , "The provided scenario file is invalid." },
-    { 4 , "JSON parsing error." }
+    { 4 , "JSON parsing error." },
+    { 5 , "The provided mode is invalid (scenario / test)"}
 };
 
 void bad_exit(int exitcode){
@@ -28,45 +38,87 @@ void bad_exit(int exitcode){
     exit(exitcode);
 }
 
-int main(int argc, char** argv){
-    if (argc != 2) bad_exit(1);
-    if (!std::filesystem::exists(argv[1])) bad_exit(2);
+void scenarioMode(std::string scenarioFile) {
+    if (!std::filesystem::exists(scenarioFile)) bad_exit(3);
 
     std::string hero_file;
     std::list<std::string> monster_files;
+
     try {
-        JSON scenario = JSON::parseFromFile(argv[1]);
-        if (!(scenario.count("hero")&&scenario.count("monsters"))) bad_exit(3);
+        JSON scenario = JSON::parseFromFile(scenarioFile);
+        if (!(scenario.count("hero") && scenario.count("monsters")))
+            bad_exit(3);
         else {
-            hero_file=scenario.get<std::string>("hero");
-            JSON::list monster_file_list=scenario.get<JSON::list>("monsters");
-            for(auto monster_file : monster_file_list)
+            hero_file = scenario.get<std::string>("hero");
+            JSON::list monster_file_list = scenario.get<JSON::list>("monsters");
+            for (auto monster_file : monster_file_list)
                 monster_files.push_back(std::get<std::string>(monster_file));
         }
-    } catch (const JSON::ParseException& e) {bad_exit(4);}
+    }
+    catch (const JSON::ParseException &e) {
+        bad_exit(4);
+    }
 
     try {
         Hero hero{Hero::parse(hero_file)};
         std::list<Monster> monsters;
-        for (const auto& monster_file : monster_files)
+        for (const auto &monster_file : monster_files)
             monsters.push_back(Monster::parse(monster_file));
 
-        while (hero.isAlive() && !monsters.empty()) {
-            std::cout
-                << hero.getName() << "(" << hero.getLevel()<<")"
-                << " vs "
-                << monsters.front().getName()
-                <<std::endl;
-            hero.fightTilDeath(monsters.front());
-            if (!monsters.front().isAlive()) monsters.pop_front();
+        Map palya("palya1.txt");
+
+        Game jatek;
+
+        jatek.setMap(palya);
+
+        jatek.putHero(hero, 1, 1);
+
+        jatek.putMonster(monsters.front(), 4, 0);
+        if (monsters.size() >= 4) {
+            monsters.pop_front();
+            monsters.pop_front();
+            jatek.putMonster(monsters.front(), 3, 0);
         }
-        std::cout << (hero.isAlive() ? "The hero won." : "The hero died.") << std::endl;
-        std::cout << hero.getName() << ": LVL" << hero.getLevel() << std::endl
-                  << "   HP: "<<hero.getHealthPoints()<<"/"<<hero.getMaxHealthPoints()<<std::endl
-                  << "  DMG: "<<hero.getDamage()<<std::endl
-                  << "  DEF: "<<hero.getDefense()<<std::endl
-                  << "  ACD: "<<hero.getAttackCoolDown()<<std::endl
-                  ;
-    } catch (const JSON::ParseException& e) {bad_exit(4);}
+
+        jatek.run();
+    }
+    catch (const JSON::ParseException &e) {
+        bad_exit(4);
+    }
+}
+
+void testMode() {
+    Damage dhero, dmonster;
+    dhero.physical = 3;
+    dhero.magical = 1;
+    dmonster.physical = 0;
+    dmonster.magical = 0;
+    Game jatek;
+    Map palya("testmap.txt");
+    jatek.setMap(palya);
+    Hero hos("Prince Aidan of Khanduras", 30, dhero, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
+    Monster monster1("Training Dummy", 250, dmonster, 1, 2.0);
+    jatek.putHero(hos,1,1);
+    jatek.putMonster(monster1,3,1);
+    jatek.run();
+}
+
+//usage <mode> <scenario file>
+int main(int argc, char **argv)
+{
+    if (argc != 3) bad_exit(1);
+
+    if (!modes.count(argv[1])) bad_exit(5);
+
+    switch (modes.at(argv[1])) {
+    case mode::Scenario:
+        scenarioMode(argv[2]);
+        break;
+
+    case mode::Test:
+        testMode();
+        break;
+    }
+
     return 0;
 }

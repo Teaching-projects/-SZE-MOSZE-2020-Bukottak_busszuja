@@ -31,6 +31,6 @@ jobs:
       ##- name: I/O test 2
       ##  run: diff scenario_2_output.txt output2.txt
 
-      ##- name: Valgrind memory check
-      ##  run: make memtest
+      - name: Valgrind memory check
+        run: make memtest
 

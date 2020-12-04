@@ -87,7 +87,7 @@ void scenarioMode(std::string scenarioFile) {
     }
 }
 
-void testMode(char mode) {
+void testMode() {
     Damage dhero, dmonster;
     dhero.physical = 3;
     dhero.magical = 1;
@@ -100,7 +100,7 @@ void testMode(char mode) {
     Monster monster1("Training Dummy", 250, dmonster, 1, 2.0);
     jatek.putHero(hos,1,1);
     jatek.putMonster(monster1,3,1);
-    jatek.run(mode);
+    jatek.run();
 }
 
 //usage <mode> <scenario file>
@@ -116,7 +116,7 @@ int main(int argc, char **argv)
         break;
 
     case mode::Test:
-        testMode('t');
+        testMode();
         break;
     }
 

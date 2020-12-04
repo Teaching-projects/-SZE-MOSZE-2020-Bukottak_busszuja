@@ -4,10 +4,6 @@ OBJS := JSON.o Monster.o Hero.o Map.o Game.o Source.o
 CFLAGS := -std=c++17 -Wall -Wextra -g
 CC := g++-9
 
-TESTFILES:= test scenario1.json
-VLGRNDFLAGS:= --leak-check=full --error-exitcode=3
-VLGRNDPARAM:=  ./output $(TESTFILES)
-
 build: $(OBJS)
 	$(CC) $(CFLAGS) -o output $(OBJS)
 
@@ -33,7 +29,7 @@ sca:
 	bash -c "./cppcheck.sh"
 
 memtest:
-	valgrind $(VLGRNDFLAGS) $(VLGRNDPARAM)
+	bash -c "./valgrind.sh"
 	
 unittest:
 	cd tests && ./runTests

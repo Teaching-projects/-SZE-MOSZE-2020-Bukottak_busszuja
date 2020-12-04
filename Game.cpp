@@ -38,7 +38,7 @@ void Game::putMonster(Monster Monster, int x, int y) {
 	monsterready = true;
 }
 
-void Game::run(char mode) {
+void Game::run() {
 	if (mapready == false || heroready == false) throw NotInitializedException("Nem indithato a jatek, nincs megadva palya vagy hos!");
 	gamerunning = true;
 
@@ -47,15 +47,7 @@ void Game::run(char mode) {
         CheckForFight();
 
         if (hos.hero->isAlive() && arenaszornyek.size() != 0) {
-            switch(mode) {
-            case 'n':
-                readInput();
-                break;
-            case 't':
-                hos.posx += 1;
-                break;
-            }
-
+            readInput();
         } else {
             gamerunning = false;
         }
@@ -155,12 +147,12 @@ void Game::readInput() {
 
 void Game::TranslateUserInput (char way, int &difX, int &difY, bool &correctInput) {
     switch (way) {
-    case 'E':
+    case 'W':
         difX = -1;
         difY = 0;
         correctInput = true;
         break;
-    case 'e':
+    case 'w':
         difX = -1;
         difY = 0;
         correctInput = true;
@@ -175,12 +167,12 @@ void Game::TranslateUserInput (char way, int &difX, int &difY, bool &correctInpu
         difY = 1;
         correctInput = true;
         break;
-    case 'W':
+    case 'E':
         difX = 1;
         difY = 0;
         correctInput = true;
         break;
-    case 'w':
+    case 'e':
         difX = 1;
         difY = 0;
         correctInput = true;

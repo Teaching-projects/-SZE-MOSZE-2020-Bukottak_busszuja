@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wrongindexexception',['WrongIndexException',['../classMap_1_1WrongIndexException.html',1,'Map']]]
+  ['notinitializedexception',['NotInitializedException',['../classGame_1_1NotInitializedException.html',1,'Game']]]
 ];

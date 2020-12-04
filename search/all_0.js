@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['damage',['Damage',['../structDamage.html',1,'']]],
-  ['dmg',['dmg',['../classMonster.html#ab55d039c841cf8274b08127fbd09c7af',1,'Monster']]]
+  ['alreadyhasheroexception',['AlreadyHasHeroException',['../classGame_1_1AlreadyHasHeroException.html',1,'Game']]],
+  ['alreadyhasunitsexception',['AlreadyHasUnitsException',['../classGame_1_1AlreadyHasUnitsException.html',1,'Game']]],
+  ['arenahos',['Arenahos',['../structArenahos.html',1,'']]],
+  ['arenaszorny',['Arenaszorny',['../structArenaszorny.html',1,'']]]
 ];

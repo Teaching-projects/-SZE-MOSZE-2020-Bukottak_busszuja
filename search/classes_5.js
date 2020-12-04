@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['szörny',['Szörny',['../classSz_xC3_xB6rny.html',1,'']]]
+  ['map',['Map',['../classMap.html',1,'']]],
+  ['monster',['Monster',['../classMonster.html',1,'']]]
 ];

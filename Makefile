@@ -4,7 +4,7 @@ OBJS := JSON.o Monster.o Hero.o Map.o Game.o Source.o
 CFLAGS := -std=c++17 -Wall -Wextra -g
 CC := g++-9
 
-TESTFILES:= scenario1.json
+TESTFILES:= test scenario1.json
 VLGRNDFLAGS:= --leak-check=full --error-exitcode=3
 VLGRNDPARAM:=  ./output $(TESTFILES)
 

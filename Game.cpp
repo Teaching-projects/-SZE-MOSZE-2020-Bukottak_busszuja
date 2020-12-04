@@ -27,18 +27,18 @@ void Game::putHero(Hero Hero, int x, int y) {
 	heroready = true;
 }
 
-void Game::putMonster(Monster szorny, int x, int y) {
+void Game::putMonster(Monster Monster, int x, int y) {
 	if (mapready == false)throw Map::WrongIndexException("Meg nincs palyaterkep beallitva!");
 	if (terkep.get(x, y) == Map::type::Wall) throw OccupiedException("Falra nem kerulhet Monster!");
 	Arenaszorny s;
-	s.monster = &szorny;
+	s.monster = &Monster;
 	s.posx = x;
 	s.posy = y;
 	arenaszornyek.push_back(s);
 	monsterready = true;
 }
 
-void Game::run() {
+void Game::run(char mode) {
 	if (mapready == false || heroready == false) throw NotInitializedException("Nem indithato a jatek, nincs megadva palya vagy hos!");
 	gamerunning = true;
 
@@ -47,7 +47,15 @@ void Game::run() {
         CheckForFight();
 
         if (hos.hero->isAlive() && arenaszornyek.size() != 0) {
-            readInput();
+            switch(mode) {
+            case 'n':
+                readInput();
+                break;
+            case 't':
+                hos.posx += 1;
+                break;
+            }
+
         } else {
             gamerunning = false;
         }
@@ -147,42 +155,42 @@ void Game::readInput() {
 
 void Game::TranslateUserInput (char way, int &difX, int &difY, bool &correctInput) {
     switch (way) {
-    case 'N':
-        difX = -1;
-        difY = 0;
-        correctInput = true;
-        break;
-    case 'n':
-        difX = -1;
-        difY = 0;
-        correctInput = true;
-        break;
     case 'E':
-        difX = 0;
-        difY = 1;
+        difX = -1;
+        difY = 0;
         correctInput = true;
         break;
     case 'e':
+        difX = -1;
+        difY = 0;
+        correctInput = true;
+        break;
+    case 'S':
         difX = 0;
         difY = 1;
         correctInput = true;
         break;
-    case 'S':
-        difX = 1;
-        difY = 0;
-        correctInput = true;
-        break;
     case 's':
-        difX = 1;
-        difY = 0;
+        difX = 0;
+        difY = 1;
         correctInput = true;
         break;
     case 'W':
+        difX = 1;
+        difY = 0;
+        correctInput = true;
+        break;
+    case 'w':
+        difX = 1;
+        difY = 0;
+        correctInput = true;
+        break;
+    case 'N':
         difX = 0;
         difY = -1;
         correctInput = true;
         break;
-    case 'w':
+    case 'n':
         difX = 0;
         difY = -1;
         correctInput = true;

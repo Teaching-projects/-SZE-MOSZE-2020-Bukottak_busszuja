@@ -27,7 +27,7 @@ public:
 	void putHero(Hero hero, int x, int y);
 	void putMonster(Monster monster, int x, int y);
 	int getMonsterdb(int x, int y);
-	void run();
+	void run(char mode = 'n');
 
 	class AlreadyHasHeroException : public std::runtime_error {
         public:

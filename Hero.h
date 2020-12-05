@@ -3,7 +3,7 @@
 #include<string>
 #include<fstream>
 #include<cmath>
-//#include "gtest/gtest.h"
+#include "gtest/gtest.h"
 #include "Monster.h"
 
 class Hero : public Monster {
@@ -12,7 +12,7 @@ class Hero : public Monster {
         int getXp() const;
         int getLevel() const;
          int getLightradius() const;
-        //FRIEND_TEST(Unittest,Private_functions_test);
+        FRIEND_TEST(Unittest,Private_functions_test);
         static Hero parse(const std::string& json);
         //Hero& operator=(const Hero&);
     	bool operator ==(const Hero & other)const {

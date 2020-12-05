@@ -100,3 +100,7 @@ const int JSON::count(const std::string& key){
     if (m.find(key) != m.end()) return 1;
     else return 0;
 }
+
+int JSON::GetDataCount() const {
+	return m.size();
+}

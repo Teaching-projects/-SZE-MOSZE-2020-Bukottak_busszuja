@@ -61,23 +61,30 @@ void scenarioMode(std::string scenarioFile) {
 
     try {
         Hero hero{Hero::parse(hero_file)};
-        std::list<Monster> monsters;
+        std::vector<Monster> monsters;
+        std::vector<int> monstersX,  monstersY;
         for (const auto &monster_file : monster_files)
             monsters.push_back(Monster::parse(monster_file));
 
-        Map palya("palya1.txt");
+        MarkedMap palya("markedmap.txt");
 
         Game jatek;
 
         jatek.setMap(palya);
 
-        jatek.putHero(hero, 1, 1);
+        int heroX = palya.getHeroPosition().x;
+        int heroY = palya.getHeroPosition().y;
+        jatek.putHero(hero, heroX, heroY);
 
-        jatek.putMonster(monsters.front(), 4, 0);
-        if (monsters.size() >= 4) {
-            monsters.pop_front();
-            monsters.pop_front();
-            jatek.putMonster(monsters.front(), 3, 0);
+        for (int i = 0; i < monsters.size(); i++) {
+            std::string sIdx = std::to_string(i+1);
+            char cIdx = sIdx[0];
+
+            std::vector<Koordinata> monsterPositions = palya.getMonsterPositions(cIdx);
+            for (int j = 0; j < monsterPositions.size(); j++) {
+                    std::cerr << cIdx << std::endl << monsters.at(i).getName() << std::endl;
+                jatek.putMonster(monsters.at(i), monsterPositions[j].x, monsterPositions[j].y);
+            }
         }
 
         jatek.run();

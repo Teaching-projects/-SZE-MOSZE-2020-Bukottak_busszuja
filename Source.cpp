@@ -93,11 +93,11 @@ void testMode() {
     dhero.magical = 1;
     dmonster.physical = 0;
     dmonster.magical = 0;
-    Game jatek("markedmap.txt");
-    MarkedMap palya("markedmap.txt");
+    //Game jatek("markedmap.txt");
+    MarkedMap jatek("markedmap.txt");
     Hero hos("Prince Aidan of Khanduras", 30, dhero, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
     Monster monster1("Training Dummy", 250, dmonster, 1, 2.0);
-    jatek.addMarkedMapunits(palya,hos,monster1);
+    jatek.addMarkedMapunits(jatek,hos,monster1);
     jatek.run();
 }
 

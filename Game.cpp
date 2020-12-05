@@ -74,7 +74,7 @@ void Game::CheckForFight() {
     int heroY = hos.posy;
     std::vector<int> deadMonsters;
 
-    for (unsigned int i = 0; i <(int)arenaszornyek.size(); i++) {
+    for (int i = 0; i <(int)arenaszornyek.size(); i++) {
         if (arenaszornyek[i].posx == heroX && arenaszornyek[i].posy == heroY) {
             std::cout << hos.hero->getName() << "(" << hos.hero->getLevel() << ") vs " << arenaszornyek[i].monster->getName() << std::endl << std::endl;
             hos.hero->fightTilDeath(*arenaszornyek[i].monster);
@@ -84,8 +84,12 @@ void Game::CheckForFight() {
 }
 
 void Game::drawmap() {
-	int szelesseg = terkep.getSzelesseg();
-	int magassag = terkep.getMagassag();
+	int lightradius = hos.hero->getLightradius();
+    int negativewidth;
+    int positivewidth;
+    int negativeheight;
+    int positiveheight;
+
 	/*char Balfel = "╔";
 	char Jobbfel = "╗";
 	char Balle = "╚";
@@ -97,12 +101,24 @@ void Game::drawmap() {
 	char jobbhos = "┫";
 	char fuggoleges = "║";*/
 
+	if ((hos.posx - lightradius) < 0) negativewidth = 0;
+	else negativewidth = hos.posx - lightradius;
+
+	if ((hos.posx + lightradius) > terkep.getSzelesseg()) positivewidth = terkep.getSzelesseg()- 1;
+	else positivewidth = hos.posx + lightradius;
+
+	if ((hos.posy - lightradius) < 0) negativeheight = 0;
+	else negativeheight = hos.posy - lightradius;
+
+	if ((hos.posy + lightradius) > terkep.getMagassag()) positiveheight = terkep.getMagassag() - 1;
+	else positiveheight = hos.posy + lightradius;
+
 	std::cout << "╔" << "═";
-	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
+	for (int i = negativewidth; i <= positivewidth; i++) std::cout << "═" << "═";
 	std::cout << "═" << "╗" << std::endl;
-	for (int i = 0; i < magassag; i++) {
+	for (int i = negativeheight; i <= positiveheight; i++) {
 		std::cout << "║" << "║";
-		for (int j = 0; j < szelesseg; j++) {
+		for (int j = negativewidth; j <= positivewidth; j++) {
 			try {
 				if (terkep.get(j, i) == Map::type::Wall) std::cout << "█" << "█";
 				else if (hos.posx == j && hos.posy == i) std::cout << "┣" << "┫";
@@ -118,7 +134,7 @@ void Game::drawmap() {
 		std::cout << "║" << "║" <<std::endl;
 	}
 	std::cout << "╚" << "═";
-	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
+	for (int i = negativewidth; i <= positivewidth; i++) std::cout << "═" << "═";
 	std::cout << "═" << "╝" << std::endl;
 
 }
@@ -203,7 +219,7 @@ void Game::TranslateUserInput (char way, int &difX, int &difY, bool &correctInpu
 
 int Game::getMonsterdb(int x,int y) {
 	int db = 0;
-	for (unsigned int i = 0; i <(int)arenaszornyek.size(); i++) {
+	for (int i = 0; i <(int)arenaszornyek.size(); i++) {
 		if (arenaszornyek[i].posx == x && arenaszornyek[i].posy == y) db++;
 	}
 	return db;

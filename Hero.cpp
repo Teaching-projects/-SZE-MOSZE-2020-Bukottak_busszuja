@@ -11,6 +11,10 @@ int Hero::getLevel()const {
 	return lvl;
 }
 
+int Hero::getLightradius()const {
+	return lightradius;
+}
+
 void Hero::lvlUp() {
     xp = xp-xpPerLvl;
     lvl++;
@@ -20,6 +24,7 @@ void Hero::lvlUp() {
     dmg.magical += mdmgPerLvl;
     def += defPerLvl;
     speed *= speedPerLvl;
+    lightradius += lightradiusPerLvl;
 }
 
 void Hero::xpGain(int gain) {
@@ -56,12 +61,20 @@ Hero Hero::parse(const std::string& json) {
 			okay = false;
 
     Damage dmg;
+    int lr;
+    int lrPerLvl;
 
     if(parsedJSON.count("damage")) dmg.physical = parsedJSON.get<int>("damage");
 	else dmg.physical = 0;
 
 	if(parsedJSON.count("magical-damage")) dmg.magical = parsedJSON.get<int>("magical-damage");
 	else dmg.magical = 0;
+
+	if(parsedJSON.count("base_lightradius")) lr = parsedJSON.get<int>("base_lightradius");
+	else lr = 1;
+
+	if(parsedJSON.count("light_radius_bonus_per_level")) lrPerLvl = parsedJSON.get<int>("light_radius_bonus_per_level");
+	else lrPerLvl = 1;
 
 	if (okay) {
 
@@ -76,7 +89,7 @@ Hero Hero::parse(const std::string& json) {
         double speed = parsedJSON.get<double>("base_attack_cooldown");
         double speedPerLvl = parsedJSON.get<double>("cooldown_multiplier_per_level");
 
-        return Hero(name , hp, dmg, def, speed, xpPerLvl, hpPerLvl, dmgPerLvl, mdmgPerLvl, defPerLvl, speedPerLvl);
+        return Hero(name , hp, dmg, def, speed, xpPerLvl, hpPerLvl, dmgPerLvl, mdmgPerLvl, defPerLvl, speedPerLvl, lr, lrPerLvl);
 	}
 	else throw JSON::ParseException("Incorrect attributes in " + json + "!");
 }

@@ -87,23 +87,31 @@ void scenarioMode(std::string scenarioFile) {
     }
 }
 
-void testMode() {
+void testMode(std::string mapname) {
     Damage dhero, dmonster;
     dhero.physical = 3;
     dhero.magical = 1;
     dmonster.physical = 0;
     dmonster.magical = 0;
     Game jatek;
-    Map palya("testmap.txt");
+    Map palya(mapname);
     jatek.setMap(palya);
     Hero hos("Prince Aidan of Khanduras", 30, dhero, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
     Monster monster1("Training Dummy", 250, dmonster, 1, 2.0);
+    Monster monster2("Training Dummy", 250, dmonster, 1, 2.0);
     jatek.putHero(hos,1,1);
-    jatek.putMonster(monster1,3,1);
+    if (mapname == "testmap.txt") {
+        jatek.putMonster(monster1,3,1);
+    } else if (mapname == "testmap2.txt") {
+        jatek.putMonster(monster1,4,1);
+        jatek.putMonster(monster2,1,3);
+    }
+
     jatek.run();
 }
 
-//usage <mode> <scenario file>
+//usage scenario    <scenario file>
+//      test        <mapfile>
 int main(int argc, char **argv)
 {
     if (argc != 3) bad_exit(1);
@@ -116,7 +124,7 @@ int main(int argc, char **argv)
         break;
 
     case mode::Test:
-        testMode();
+        testMode(argv[2]);
         break;
     }
 

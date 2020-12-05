@@ -216,18 +216,18 @@ void Game::addMarkedMapunits(MarkedMap & kesz, Hero & hero,Monster & monster) {
 	Koordinata hos = kesz.getHeroPosition();
 	this->putHero(hero, hos.x, hos.y);
 	std::vector<Koordinata>v = kesz.getMonsterPositions('1');
-	for (int i = 0; i < v.size(); i++) {
+	for (int i = 0; i < (int) v.size(); i++) {
 		this->putMonster(monster, v[i].x, v[i].y);
 	}
 	v.clear();
 	v= kesz.getMonsterPositions('2');
-	for (int i = 0; i < v.size(); i++) {
+	for (int i = 0; i < (int) v.size(); i++) {
 		this->putMonster(monster, v[i].x, v[i].y);
 		this->putMonster(monster, v[i].x, v[i].y);
 	}
 	v.clear();
 	v = kesz.getMonsterPositions('3');
-	for (int i = 0; i < v.size(); i++) {
+	for (int i = 0; i < (int) v.size(); i++) {
 		this->putMonster(monster, v[i].x, v[i].y);
 		this->putMonster(monster, v[i].x, v[i].y);
 		this->putMonster(monster, v[i].x, v[i].y);

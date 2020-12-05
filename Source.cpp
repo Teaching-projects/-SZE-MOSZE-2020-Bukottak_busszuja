@@ -97,15 +97,6 @@ void testMode() {
     MarkedMap palya("markedmap.txt");
     Hero hos("Prince Aidan of Khanduras", 30, dhero, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
     Monster monster1("Training Dummy", 250, dmonster, 1, 2.0);
-/*
-    jatek.setMap(palya);
-    int heroX = palya.getHeroPosition().x;
-    int heroY = palya.getHeroPosition().y;
-    int monster1X = palya.getMonsterPositions('1').back().x;
-    int monster1Y = palya.getMonsterPositions('1').back().y;
-    jatek.putHero(hos,heroX,heroY);
-    jatek.putMonster(monster1,monster1X,monster1Y);
-*/
     jatek.addMarkedMapunits(palya, hos,monster1);
     jatek.run();
 }

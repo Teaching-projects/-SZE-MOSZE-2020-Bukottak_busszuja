@@ -9,15 +9,23 @@ void Game::setMap(Map map) {
 	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet palyat megadni!");
 	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyaterkep,ami mar rendelkezik egysegekkel!");
 	terkep = map;
-	
+
 	mapready = true;
 	heroready = false;
 	monsterready = false;
 	gamerunning = false;
 }
 
+void Game::setMap(MarkedMap map) {
+	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet palyat megadni!");
+	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyaterkep,ami mar rendelkezik egysegekkel!");
+	terkep = map;
 
-
+	mapready = true;
+	heroready = false;
+	monsterready = false;
+	gamerunning = false;
+}
 
 void Game::putHero(Hero &Hero, int x, int y) {
 	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet feltenni host!");
@@ -89,16 +97,6 @@ void Game::CheckForFight() {
 void Game::drawmap() {
 	int szelesseg = terkep.getSzelesseg();
 	int magassag = terkep.getMagassag();
-	/*char Balfel = "╔";
-	char Jobbfel = "╗";
-	char Balle = "╚";
-	char Jobble = "╝";
-	char vizszint = "═";
-	char szabad = "░";
-	char fal = "█";
-	char balhos = "┣";
-	char jobbhos = "┫";
-	char fuggoleges = "║";*/
 
 	std::cout << "╔" << "═";
 	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
@@ -210,26 +208,4 @@ int Game::getMonsterdb(int x,int y) {
 		if (arenaszornyek[i].posx == x && arenaszornyek[i].posy == y) db++;
 	}
 	return db;
-}
-
-void Game::addMarkedMapunits(MarkedMap & kesz, Hero & hero,Monster & monster) {
-	Koordinata hos = kesz.getHeroPosition();
-	this->putHero(hero, hos.x, hos.y);
-	std::vector<Koordinata>v = kesz.getMonsterPositions('1');
-	for (int i = 0; i < (int) v.size(); i++) {
-		this->putMonster(monster, v[i].x, v[i].y);
-	}
-	v.clear();
-	v= kesz.getMonsterPositions('2');
-	for (int i = 0; i < (int) v.size(); i++) {
-		this->putMonster(monster, v[i].x, v[i].y);
-		this->putMonster(monster, v[i].x, v[i].y);
-	}
-	v.clear();
-	v = kesz.getMonsterPositions('3');
-	for (int i = 0; i < (int) v.size(); i++) {
-		this->putMonster(monster, v[i].x, v[i].y);
-		this->putMonster(monster, v[i].x, v[i].y);
-		this->putMonster(monster, v[i].x, v[i].y);
-	}
 }

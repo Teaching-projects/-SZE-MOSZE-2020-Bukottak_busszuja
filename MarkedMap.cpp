@@ -6,29 +6,29 @@ MarkedMap::~MarkedMap()
 }
 
 Koordinata MarkedMap::getHeroPosition() {
-	Koordinata hos;
+	Koordinata heroCoord;
 	for (unsigned int i = 0; i < palya.size(); i++) {
 		for (unsigned int j = 0; j < palya[i].size(); j++) {
 			if (palya[i][j] == 'H') {
-				hos.x = j;
-				hos.y = i;
+				heroCoord.x = j;
+				heroCoord.y = i;
 			}
 		}
 	}
-	return hos;
+	return heroCoord;
 }
 
 std::vector<Koordinata>MarkedMap::getMonsterPositions(char c)const {
-	std::vector<Koordinata> v;
+	std::vector<Koordinata> monsterCoordVector;
 	for (unsigned int i = 0; i < palya.size(); i++) {
 		for (unsigned int j = 0; j < palya[i].size(); j++) {
 			if (palya[i][j] == c) {
-				Koordinata szorny;
-				szorny.x = j;
-				szorny.y = i;
-				v.push_back(szorny);
+				Koordinata monsterCoord;
+				monsterCoord.x = j;
+				monsterCoord.y = i;
+				monsterCoordVector.push_back(monsterCoord);
 			}
 		}
 	}
-	return v;
+	return monsterCoordVector;
 }

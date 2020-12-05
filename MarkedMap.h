@@ -11,7 +11,7 @@ typedef struct Koordinata {
 class MarkedMap :public Map
 {
 public:
-	MarkedMap(std::string fajlnev) :Map(fajlnev) {}
+	MarkedMap(const std::string &fajlnev) :Map(fajlnev) {}
 	virtual ~MarkedMap();
 	Koordinata getHeroPosition();
 	std::vector<Koordinata> getMonsterPositions(char c) const;

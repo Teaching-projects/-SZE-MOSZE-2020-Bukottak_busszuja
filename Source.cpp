@@ -88,18 +88,11 @@ void scenarioMode(std::string scenarioFile) {
 }
 
 void testMode() {
-    Damage dhero, dmonster;
-    dhero.physical = 3;
-    dhero.magical = 1;
-    dmonster.physical = 0;
-    dmonster.magical = 0;
-    Game jatek;
-    Map palya("testmap.txt");
-    jatek.setMap(palya);
+    Game jatek("marked.txt");
+    MarkedMap palya("testmap.txt");
     Hero hos("Prince Aidan of Khanduras", 30, dhero, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
     Monster monster1("Training Dummy", 250, dmonster, 1, 2.0);
-    jatek.putHero(hos,1,1);
-    jatek.putMonster(monster1,3,1);
+    jatek.addMarkedMapunits(palya,hos,monster1);
     jatek.run();
 }
 

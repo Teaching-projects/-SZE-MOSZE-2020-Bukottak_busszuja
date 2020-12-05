@@ -88,6 +88,11 @@ void scenarioMode(std::string scenarioFile) {
 }
 
 void testMode() {
+    Damage dhero, dmonster;
+    dhero.physical = 3;
+    dhero.magical = 1;
+    dmonster.physical = 0;
+    dmonster.magical = 0;
     Game jatek("marked.txt");
     MarkedMap palya("testmap.txt");
     Hero hos("Prince Aidan of Khanduras", 30, dhero, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);

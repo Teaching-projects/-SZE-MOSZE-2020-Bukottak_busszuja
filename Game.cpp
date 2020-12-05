@@ -7,13 +7,16 @@ Game::Game(std::string terkepfajlnev) {
 
 void Game::setMap(Map map) {
 	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet palyat megadni!");
-	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyterkep,ami mar rendelkezik egysegekkel!");
+	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyaterkep,ami mar rendelkezik egysegekkel!");
 	terkep = map;
+	
 	mapready = true;
 	heroready = false;
 	monsterready = false;
 	gamerunning = false;
 }
+
+
 
 
 void Game::putHero(Hero &Hero, int x, int y) {
@@ -86,40 +89,40 @@ void Game::CheckForFight() {
 void Game::drawmap() {
 	int szelesseg = terkep.getSzelesseg();
 	int magassag = terkep.getMagassag();
-	/*char Balfel = "╔";
-	char Jobbfel = "╗";
-	char Balle = "╚";
-	char Jobble = "╝";
-	char vizszint = "═";
-	char szabad = "░";
-	char fal = "█";
-	char balhos = "┣";
-	char jobbhos = "┫";
-	char fuggoleges = "║";*/
+	char Balfel = 201;
+	char Jobbfel = 187;
+	char Balle = 200;
+	char Jobble = 188;
+	char vizszint = 205;
+	char szabad = 177;
+	char fal = 178;
+	char balhos = 195;
+	char jobbhos = 180;
+	char fuggoleges = 186;
 
-	std::cout << "╔" << "═";
-	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
-	std::cout << "═" << "╗" << std::endl;
+	std::cout << Balfel << vizszint;
+	for (int i = 0; i < szelesseg; i++) std::cout << vizszint <<vizszint;
+	std::cout << vizszint << Jobbfel << std::endl;
 	for (int i = 0; i < magassag; i++) {
-		std::cout << "║" << "║";
+		std::cout << fuggoleges << fuggoleges;
 		for (int j = 0; j < szelesseg; j++) {
 			try {
-				if (terkep.get(j, i) == Map::type::Wall) std::cout << "█" << "█";
-				else if (hos.posx == j && hos.posy == i) std::cout << "┣" << "┫";
+				if (terkep.get(j, i) == Map::type::Wall) std::cout << fal<< fal;
+				else if (hos.posx == j && hos.posy == i) std::cout << balhos<<jobbhos;
 				else {
 					int monsterdb = getMonsterdb(j,i);
-					if (monsterdb == 1) std::cout << "M" << "░";
+					if (monsterdb == 1) std::cout << "M" << szabad;
 					else if (monsterdb > 1) std::cout << "MM";
-					else std::cout << "░" << "░";
+					else std::cout << szabad <<szabad;
 				}
 			}
-			catch (Map::WrongIndexException& e) { std::cout << "░" << "░"; }
+			catch (Map::WrongIndexException& e) { std::cout << szabad << szabad; }
 		}
-		std::cout << "║" << "║" <<std::endl;
+		std::cout << fuggoleges <<fuggoleges<<std::endl;
 	}
-	std::cout << "╚" << "═";
-	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
-	std::cout << "═" << "╝" << std::endl;
+	std::cout << Balle << vizszint;
+	for (int i = 0; i < szelesseg; i++) std::cout << vizszint << vizszint;
+	std::cout << vizszint <<Jobble << std::endl;
 
 }
 
@@ -142,7 +145,7 @@ void Game::readInput() {
             TranslateUserInput(way, difX, difY, correctInput);
         }
 
-        if (terkep.get(heroX + difX, heroY + difY) == Map::type::Free)
+        if (terkep.get(heroX + difX, heroY + difY) != Map::type::Wall)
             correctMove = true;
         else {
             correctInput = false;
@@ -207,4 +210,26 @@ int Game::getMonsterdb(int x,int y) {
 		if (arenaszornyek[i].posx == x && arenaszornyek[i].posy == y) db++;
 	}
 	return db;
+}
+
+void Game::addMarkedMapunits(MarkedMap & kesz, Hero & hero,Monster & monster) {
+	Koordinata hos = kesz.getHeroPosition();
+	this->putHero(hero, hos.x, hos.y);
+	std::vector<Koordinata>v = kesz.getMonsterPositions('1');
+	for (int i = 0; i < v.size(); i++) {
+		this->putMonster(monster, v[i].x, v[i].y);
+	}
+	v.clear();
+	v= kesz.getMonsterPositions('2');
+	for (int i = 0; i < v.size(); i++) {
+		this->putMonster(monster, v[i].x, v[i].y);
+		this->putMonster(monster, v[i].x, v[i].y);
+	}
+	v.clear();
+	v = kesz.getMonsterPositions('3');
+	for (int i = 0; i < v.size(); i++) {
+		this->putMonster(monster, v[i].x, v[i].y);
+		this->putMonster(monster, v[i].x, v[i].y);
+		this->putMonster(monster, v[i].x, v[i].y);
+	}
 }

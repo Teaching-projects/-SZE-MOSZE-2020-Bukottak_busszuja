@@ -3,7 +3,7 @@
 
 #include "Monster.h"
 #include "Hero.h"
-#include "Map.h"
+#include "MarkedMap.h"
 #include <vector>
 
 struct Arenaszorny {
@@ -24,6 +24,7 @@ public:
 	Game(std::string);
 	void setMap(Map map);
 	void putHero(Hero &hero, int x, int y);
+	void addMarkedMapunits(MarkedMap &, Hero &,Monster &);
 	void putMonster(Monster &monster, int x, int y);
 	int getMonsterdb(int x, int y);
 	void run();

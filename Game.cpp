@@ -89,40 +89,40 @@ void Game::CheckForFight() {
 void Game::drawmap() {
 	int szelesseg = terkep.getSzelesseg();
 	int magassag = terkep.getMagassag();
-	char Balfel = 201;
-	char Jobbfel = 187;
-	char Balle = 200;
-	char Jobble = 188;
-	char vizszint = 205;
-	char szabad = 177;
-	char fal = 178;
-	char balhos = 195;
-	char jobbhos = 180;
-	char fuggoleges = 186;
+	/*char Balfel = "╔";
+	char Jobbfel = "╗";
+	char Balle = "╚";
+	char Jobble = "╝";
+	char vizszint = "═";
+	char szabad = "░";
+	char fal = "█";
+	char balhos = "┣";
+	char jobbhos = "┫";
+	char fuggoleges = "║";*/
 
-	std::cout << Balfel << vizszint;
-	for (int i = 0; i < szelesseg; i++) std::cout << vizszint <<vizszint;
-	std::cout << vizszint << Jobbfel << std::endl;
+	std::cout << "╔" << "═";
+	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
+	std::cout << "═" << "╗" << std::endl;
 	for (int i = 0; i < magassag; i++) {
-		std::cout << fuggoleges << fuggoleges;
+		std::cout << "║" << "║";
 		for (int j = 0; j < szelesseg; j++) {
 			try {
-				if (terkep.get(j, i) == Map::type::Wall) std::cout << fal<< fal;
-				else if (hos.posx == j && hos.posy == i) std::cout << balhos<<jobbhos;
+				if (terkep.get(j, i) == Map::type::Wall) std::cout << "█" << "█";
+				else if (hos.posx == j && hos.posy == i) std::cout << "┣" << "┫";
 				else {
 					int monsterdb = getMonsterdb(j,i);
-					if (monsterdb == 1) std::cout << "M" << szabad;
+					if (monsterdb == 1) std::cout << "M" << "░";
 					else if (monsterdb > 1) std::cout << "MM";
-					else std::cout << szabad <<szabad;
+					else std::cout << "░" << "░";
 				}
 			}
-			catch (Map::WrongIndexException& e) { std::cout << szabad << szabad; }
+			catch (Map::WrongIndexException& e) { std::cout << "░" << "░"; }
 		}
-		std::cout << fuggoleges <<fuggoleges<<std::endl;
+		std::cout << "║" << "║" <<std::endl;
 	}
-	std::cout << Balle << vizszint;
-	for (int i = 0; i < szelesseg; i++) std::cout << vizszint << vizszint;
-	std::cout << vizszint <<Jobble << std::endl;
+	std::cout << "╚" << "═";
+	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
+	std::cout << "═" << "╝" << std::endl;
 
 }
 

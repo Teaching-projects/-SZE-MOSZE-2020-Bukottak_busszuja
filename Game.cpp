@@ -77,7 +77,7 @@ void Game::CheckForFight() {
     int heroY = hos.posy;
     std::vector<int> deadMonsters;
 
-    for (unsigned int i = 0; i <(int)arenaszornyek.size(); i++) {
+    for (int i = 0; i <(int)arenaszornyek.size(); i++) {
         if (arenaszornyek[i].posx == heroX && arenaszornyek[i].posy == heroY) {
             std::cout << hos.hero->getName() << "(" << hos.hero->getLevel() << ") vs " << arenaszornyek[i].monster->getName() << std::endl << std::endl;
             hos.hero->fightTilDeath(*arenaszornyek[i].monster);
@@ -206,7 +206,7 @@ void Game::TranslateUserInput (char way, int &difX, int &difY, bool &correctInpu
 
 int Game::getMonsterdb(int x,int y) {
 	int db = 0;
-	for (unsigned int i = 0; i <(int)arenaszornyek.size(); i++) {
+	for (int i = 0; i <(int)arenaszornyek.size(); i++) {
 		if (arenaszornyek[i].posx == x && arenaszornyek[i].posy == y) db++;
 	}
 	return db;

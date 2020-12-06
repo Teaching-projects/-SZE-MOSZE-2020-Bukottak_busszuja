@@ -12,6 +12,7 @@
 #include "Monster.h"
 #include "Game.h"
 #include "Map.h"
+#include "PreparedGame.h"
 
 enum mode {
     Scenario,
@@ -41,57 +42,11 @@ void bad_exit(int exitcode){
 void scenarioMode(std::string scenarioFile) {
     if (!std::filesystem::exists(scenarioFile)) bad_exit(3);
 
-    std::string hero_file;
-    std::list<std::string> monster_files;
-
     try {
-        JSON scenario = JSON::parseFromFile(scenarioFile);
-        if (!(scenario.count("hero") && scenario.count("monsters")))
-            bad_exit(3);
-        else {
-            hero_file = scenario.get<std::string>("hero");
-            JSON::list monster_file_list = scenario.get<JSON::list>("monsters");
-            for (auto monster_file : monster_file_list)
-                monster_files.push_back(std::get<std::string>(monster_file));
-        }
-    }
-    catch (const JSON::ParseException &e) {
-        bad_exit(4);
-    }
+        PreparedGame game(scenarioFile);
+        game.run();
+    } catch (const JSON::ParseException& e) {bad_exit(4);}
 
-    try {
-        Hero hero{Hero::parse(hero_file)};
-        std::vector<Monster> monsters;
-        std::vector<int> monstersX,  monstersY;
-        for (const auto &monster_file : monster_files)
-            monsters.push_back(Monster::parse(monster_file));
-
-        MarkedMap palya("markedmap.txt");
-
-        Game jatek;
-
-        jatek.setMap(palya);
-
-        int heroX = palya.getHeroPosition().x;
-        int heroY = palya.getHeroPosition().y;
-        jatek.putHero(hero, heroX, heroY);
-
-        for (int i = 0; i < monsters.size(); i++) {
-            std::string sIdx = std::to_string(i+1);
-            char cIdx = sIdx[0];
-
-            std::vector<Koordinata> monsterPositions = palya.getMonsterPositions(cIdx);
-            for (int j = 0; j < monsterPositions.size(); j++) {
-                    std::cerr << cIdx << std::endl << monsters.at(i).getName() << std::endl;
-                jatek.putMonster(monsters.at(i), monsterPositions[j].x, monsterPositions[j].y);
-            }
-        }
-
-        jatek.run();
-    }
-    catch (const JSON::ParseException &e) {
-        bad_exit(4);
-    }
 }
 
 void testMode() {

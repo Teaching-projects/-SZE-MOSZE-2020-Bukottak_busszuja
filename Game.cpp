@@ -83,7 +83,6 @@ void Game::run() {
 void Game::CheckForFight() {
     int heroX = hos.posx;
     int heroY = hos.posy;
-    std::vector<int> deadMonsters;
 
     for (int i = 0; i <(int)arenaszornyek.size(); i++) {
         if (arenaszornyek[i].posx == heroX && arenaszornyek[i].posy == heroY) {

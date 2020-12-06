@@ -2,6 +2,7 @@
 #define MARKEDMAP_H
 
 #include "Map.h"
+#include <regex>
 
 typedef struct Koordinata {
 	int x;
@@ -15,6 +16,7 @@ public:
 	virtual ~MarkedMap();
 	Koordinata getHeroPosition();
 	std::vector<Koordinata> getMonsterPositions(char c) const;
-
+	int getMonsterNumber();
 };
+
 #endif

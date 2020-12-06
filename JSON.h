@@ -28,6 +28,8 @@ public:
 	~JSON();
 	const int count(const std::string& key);
 
+	int GetDataCount() const;
+
     template <typename T>
 	inline typename std::enable_if<std::is_same<T, JSON::list>::value, T>::type
 	get(const std::string& key){

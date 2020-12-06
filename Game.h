@@ -3,7 +3,7 @@
 
 #include "Monster.h"
 #include "Hero.h"
-#include "Map.h"
+#include "MarkedMap.h"
 #include <vector>
 
 struct Arenaszorny {
@@ -23,7 +23,9 @@ public:
 	Game():mapready(false),heroready(false),monsterready(false),gamerunning(false){}
 	Game(std::string);
 	void setMap(Map map);
+	void setMap(MarkedMap map);
 	void putHero(Hero &hero, int x, int y);
+	void addMarkedMapunits(MarkedMap &, Hero &,Monster &);
 	void putMonster(Monster &monster, int x, int y);
 	int getMonsterdb(int x, int y);
 	void run();
@@ -56,10 +58,10 @@ private:
 	Map terkep;
 	std::vector <Arenaszorny> arenaszornyek;
 	Arenahos hos;
-	bool mapready;
-	bool heroready;
-	bool monsterready;
-	bool gamerunning;
+	bool mapready = false;
+	bool heroready = false;
+	bool monsterready = false;
+	bool gamerunning = false;
 	void CheckForFight();
 	void drawmap();
 	void readInput();

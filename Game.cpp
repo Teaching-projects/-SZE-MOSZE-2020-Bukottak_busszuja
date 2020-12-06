@@ -7,14 +7,25 @@ Game::Game(std::string terkepfajlnev) {
 
 void Game::setMap(Map map) {
 	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet palyat megadni!");
-	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyterkep,ami mar rendelkezik egysegekkel!");
+	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyaterkep,ami mar rendelkezik egysegekkel!");
 	terkep = map;
+
 	mapready = true;
 	heroready = false;
 	monsterready = false;
 	gamerunning = false;
 }
 
+void Game::setMap(MarkedMap map) {
+	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet palyat megadni!");
+	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyaterkep,ami mar rendelkezik egysegekkel!");
+	terkep = map;
+
+	mapready = true;
+	heroready = false;
+	monsterready = false;
+	gamerunning = false;
+}
 
 void Game::putHero(Hero &Hero, int x, int y) {
 	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet feltenni host!");
@@ -74,7 +85,7 @@ void Game::CheckForFight() {
     int heroY = hos.posy;
     std::vector<int> deadMonsters;
 
-    for (unsigned int i = 0; i <(int)arenaszornyek.size(); i++) {
+    for (int i = 0; i <(int)arenaszornyek.size(); i++) {
         if (arenaszornyek[i].posx == heroX && arenaszornyek[i].posy == heroY) {
             std::cout << hos.hero->getName() << "(" << hos.hero->getLevel() << ") vs " << arenaszornyek[i].monster->getName() << std::endl << std::endl;
             hos.hero->fightTilDeath(*arenaszornyek[i].monster);
@@ -86,16 +97,6 @@ void Game::CheckForFight() {
 void Game::drawmap() {
 	int szelesseg = terkep.getSzelesseg();
 	int magassag = terkep.getMagassag();
-	/*char Balfel = "╔";
-	char Jobbfel = "╗";
-	char Balle = "╚";
-	char Jobble = "╝";
-	char vizszint = "═";
-	char szabad = "░";
-	char fal = "█";
-	char balhos = "┣";
-	char jobbhos = "┫";
-	char fuggoleges = "║";*/
 
 	std::cout << "╔" << "═";
 	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
@@ -142,7 +143,7 @@ void Game::readInput() {
             TranslateUserInput(way, difX, difY, correctInput);
         }
 
-        if (terkep.get(heroX + difX, heroY + difY) == Map::type::Free)
+        if (terkep.get(heroX + difX, heroY + difY) != Map::type::Wall)
             correctMove = true;
         else {
             correctInput = false;
@@ -203,7 +204,7 @@ void Game::TranslateUserInput (char way, int &difX, int &difY, bool &correctInpu
 
 int Game::getMonsterdb(int x,int y) {
 	int db = 0;
-	for (unsigned int i = 0; i <(int)arenaszornyek.size(); i++) {
+	for (int i = 0; i <(int)arenaszornyek.size(); i++) {
 		if (arenaszornyek[i].posx == x && arenaszornyek[i].posy == y) db++;
 	}
 	return db;

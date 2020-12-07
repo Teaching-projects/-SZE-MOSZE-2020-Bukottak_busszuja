@@ -84,8 +84,25 @@ void Game::CheckForFight() {
     int heroX = hos.posx;
     int heroY = hos.posy;
 
+
+
     for (int i = 0; i <(int)arenaszornyek.size(); i++) {
         if (arenaszornyek[i].posx == heroX && arenaszornyek[i].posy == heroY) {
+                    std::cerr<<hos.hero->getName()<<std::endl;
+    std::cerr<<hos.hero->getAttackCoolDown()<<std::endl;
+    std::cerr<<hos.hero->getDamage()<<std::endl;
+    std::cerr<<hos.hero->getDefense()<<std::endl;
+    std::cerr<<hos.hero->getHealthPoints()<<std::endl;
+    std::cerr<<hos.hero->getLevel()<<std::endl;
+    std::cerr<<hos.hero->getMaxHealthPoints()<<std::endl;
+
+    std::cerr<<arenaszornyek[i].monster->getName()<<std::endl;
+    std::cerr<<arenaszornyek[i].monster->getAttackCoolDown()<<std::endl;
+    std::cerr<<arenaszornyek[i].monster->getDamage()<<std::endl;
+    std::cerr<<arenaszornyek[i].monster->getDefense()<<std::endl;
+    std::cerr<<arenaszornyek[i].monster->getHealthPoints()<<std::endl;
+    std::cerr<<arenaszornyek[i].monster->getMaxHealthPoints()<<std::endl;
+
             std::cout << hos.hero->getName() << "(" << hos.hero->getLevel() << ") vs " << arenaszornyek[i].monster->getName() << std::endl << std::endl;
             hos.hero->fightTilDeath(*arenaszornyek[i].monster);
             if (arenaszornyek[i].monster->isAlive() == false) arenaszornyek.erase(arenaszornyek.begin()+i);

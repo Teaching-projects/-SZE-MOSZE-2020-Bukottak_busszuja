@@ -268,8 +268,7 @@ EXPECT_EQ(vart, output);
 }
 
 TEST(PreparedGameTest,Run_test){
-PreparedGame jatek("Scenario.json");
-ASSERT_NO_THROW(jatek.run());
+ASSERT_NO_THROW(PreparedGame jatek("Scenario.json"));
 }
 
 

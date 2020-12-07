@@ -1,0 +1,8 @@
+{
+  "name" : "Arnykiraly",
+  "health_points" : 200,
+  "damage" : 48,
+  "defense" : 2,
+  "attack_cooldown" : 1.6
+}
+

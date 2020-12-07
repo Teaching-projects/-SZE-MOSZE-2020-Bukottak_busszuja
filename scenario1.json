@@ -4,10 +4,10 @@
 
   "hero" : "Dark_Wanderer.json",
 
-  "monster-1" : "Hosarkany.json",
+  "monster-1" : "Zombie.json",
 
-  "monster-2" : "Arnykiraly.json",
+  "monster-2" : "Blood_raven.json",
 
-  "monster-3" : "Sotetvarazslo.json"
+  "monster-3" : "Fallen.json"
 
 }

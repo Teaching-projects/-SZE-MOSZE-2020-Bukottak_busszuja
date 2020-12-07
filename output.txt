@@ -82,12 +82,12 @@ Which way do you wish to go?
 ║║██████████████████████║║
 ╚════════════════════════╝
 
-Prince Aidan of Khanduras(4) vs Blood Raven
+Prince Aidan of Khanduras(7) vs Blood Raven
 
 Prince Aidan of Khanduras cleared the map.
 
-  LVL: 32
-   HP: 185/185
-  DMG: Physical: 34, Magical: 32
-  DEF: 32
-  ACD: 0.0419672
+  LVL: 35
+   HP: 200/200
+  DMG: Physical: 37, Magical: 35
+  DEF: 35
+  ACD: 0.0305941

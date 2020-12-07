@@ -20,12 +20,10 @@ struct Arenahos {
 
 class Game {
 public:
-	Game():mapready(false),heroready(false),monsterready(false),gamerunning(false){}
-	Game(std::string);
+    Game(): terkep(Map()) {};
+	Game(const std::string& mapFileName) : terkep(Map(mapFileName)) {};
 	void setMap(Map map);
-	void setMap(MarkedMap map);
 	void putHero(Hero &hero, int x, int y);
-	void addMarkedMapunits(MarkedMap &, Hero &,Monster &);
 	void putMonster(Monster &monster, int x, int y);
 	int getMonsterdb(int x, int y);
 	void run();

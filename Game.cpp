@@ -1,10 +1,5 @@
 ﻿#include "Game.h"
 
-Game::Game(std::string terkepfajlnev) {
-	Map Terkep(terkepfajlnev);
-	setMap(Terkep);
-}
-
 void Game::setMap(Map map) {
 	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet palyat megadni!");
 	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyaterkep,ami mar rendelkezik egysegekkel!");
@@ -16,33 +11,22 @@ void Game::setMap(Map map) {
 	gamerunning = false;
 }
 
-void Game::setMap(MarkedMap map) {
-	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet palyat megadni!");
-	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyaterkep,ami mar rendelkezik egysegekkel!");
-	terkep = map;
-
-	mapready = true;
-	heroready = false;
-	monsterready = false;
-	gamerunning = false;
-}
-
-void Game::putHero(Hero &Hero, int x, int y) {
+void Game::putHero(Hero &hero, int x, int y) {
 	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet feltenni host!");
 	if (mapready == false)throw Map::WrongIndexException("Meg nincs palyaterkep beallitva!");
 	if (heroready)throw AlreadyHasHeroException("Mar egy hos van az arenaban!");
 	if (terkep.get(x, y) == Map::type::Wall) throw OccupiedException("Falra nem kerulhet Hero!");
-	hos.hero = &Hero;
+	hos.hero = new Hero(hero);
 	hos.posx = x;
 	hos.posy = y;
 	heroready = true;
 }
 
-void Game::putMonster(Monster &Monster, int x, int y) {
+void Game::putMonster(Monster &monster, int x, int y) {
 	if (mapready == false)throw Map::WrongIndexException("Meg nincs palyaterkep beallitva!");
 	if (terkep.get(x, y) == Map::type::Wall) throw OccupiedException("Falra nem kerulhet Monster!");
 	Arenaszorny s;
-	s.monster = &Monster;
+	s.monster = new Monster(monster);
 	s.posx = x;
 	s.posy = y;
 	arenaszornyek.push_back(s);
@@ -83,26 +67,12 @@ void Game::run() {
 void Game::CheckForFight() {
     int heroX = hos.posx;
     int heroY = hos.posy;
+    Hero tmphero = *hos.hero;
 
 
 
     for (int i = 0; i <(int)arenaszornyek.size(); i++) {
         if (arenaszornyek[i].posx == heroX && arenaszornyek[i].posy == heroY) {
-                    std::cerr<<hos.hero->getName()<<std::endl;
-    std::cerr<<hos.hero->getAttackCoolDown()<<std::endl;
-    std::cerr<<hos.hero->getDamage()<<std::endl;
-    std::cerr<<hos.hero->getDefense()<<std::endl;
-    std::cerr<<hos.hero->getHealthPoints()<<std::endl;
-    std::cerr<<hos.hero->getLevel()<<std::endl;
-    std::cerr<<hos.hero->getMaxHealthPoints()<<std::endl;
-
-    std::cerr<<arenaszornyek[i].monster->getName()<<std::endl;
-    std::cerr<<arenaszornyek[i].monster->getAttackCoolDown()<<std::endl;
-    std::cerr<<arenaszornyek[i].monster->getDamage()<<std::endl;
-    std::cerr<<arenaszornyek[i].monster->getDefense()<<std::endl;
-    std::cerr<<arenaszornyek[i].monster->getHealthPoints()<<std::endl;
-    std::cerr<<arenaszornyek[i].monster->getMaxHealthPoints()<<std::endl;
-
             std::cout << hos.hero->getName() << "(" << hos.hero->getLevel() << ") vs " << arenaszornyek[i].monster->getName() << std::endl << std::endl;
             hos.hero->fightTilDeath(*arenaszornyek[i].monster);
             if (arenaszornyek[i].monster->isAlive() == false) arenaszornyek.erase(arenaszornyek.begin()+i);

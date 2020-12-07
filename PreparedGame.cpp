@@ -14,9 +14,9 @@ PreparedGame::PreparedGame(std::string scenariofile) {
 
     MarkedMap scenario_map(scenario.get<std::string>("map"));
     setMap(scenario_map);
+
     hero_file = scenario.get<std::string>("hero");
     Hero heroToPut{Hero::parse(hero_file)};
-    //Hero heroToPut = Hero::parse(scenario.get<std::string>("hero"));
     int heroX = scenario_map.getHeroPosition().x;
     int heroY = scenario_map.getHeroPosition().y;
     putHero(heroToPut,heroX, heroY);
@@ -25,7 +25,6 @@ PreparedGame::PreparedGame(std::string scenariofile) {
     for (int i = 1; i <= maxMonsterNumber; i++)
     {
         std::string monsterName = "monster-"+std::to_string(i);
-        std::cerr<<monsterName << std::endl << std::endl;
         if (scenario.count(monsterName))
         {
             std::string sIdx = std::to_string(i);
@@ -35,10 +34,10 @@ PreparedGame::PreparedGame(std::string scenariofile) {
             {
                 monster_file = scenario.get<std::string>(monsterName);
                 Monster monsterToPut = Monster::parse(monster_file);
-                std::cerr<<monsterToPut.getName() << std::endl << std::endl;
                 putMonster(monsterToPut, monsterPositions[i].x, monsterPositions[i].y);
 
             }
         }
     }
+
 }

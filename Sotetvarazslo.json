@@ -1,0 +1,8 @@
+{
+  "name" : "Sotetvarazslo",
+  "health_points" : 250,
+  "damage" : 40,
+  "defense" : 1,
+  "attack_cooldown" : 2.0
+}
+

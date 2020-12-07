@@ -5,6 +5,7 @@
 #include "Damage.h"
 #include "MarkedMap.h"
 #include "Game.h"
+#include "PreparedGame.h"
 #include "gtest/gtest.h"
 
 
@@ -264,6 +265,10 @@ for (int i = 0; i < v.size(); i++) {
 }
 std::string output = testing::internal::GetCapturedStdout();
 EXPECT_EQ(vart, output);
+}
+
+TEST(PreparedGameTest,Run_test){
+ASSERT_NO_THROW(PreparedGame jatek("Scenario.json"));
 }
 
 

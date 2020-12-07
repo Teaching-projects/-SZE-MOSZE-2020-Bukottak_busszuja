@@ -1,4 +1,4 @@
-name: JsonParser Tests
+name: Unit Tests
 on: push
 jobs:
   unit_tests:

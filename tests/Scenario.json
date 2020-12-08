@@ -1,0 +1,13 @@
+{
+
+  "map"  : "markedmap.txt",
+
+  "hero" : "Dark_Wanderer.json",
+
+  "monster-1" : "Hosarkany.json",
+
+  "monster-2" : "Arnykiraly.json",
+
+  "monster-3" : "Sotetvarazslo.json"
+
+}

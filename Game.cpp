@@ -1,37 +1,32 @@
 ﻿#include "Game.h"
 
-Game::Game(std::string terkepfajlnev) {
-	Map Terkep(terkepfajlnev);
-	setMap(Terkep);
-}
-
 void Game::setMap(Map map) {
 	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet palyat megadni!");
-	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyterkep,ami mar rendelkezik egysegekkel!");
+	if (heroready || monsterready) throw AlreadyHasUnitsException("Van mar palyaterkep,ami mar rendelkezik egysegekkel!");
 	terkep = map;
+
 	mapready = true;
 	heroready = false;
 	monsterready = false;
 	gamerunning = false;
 }
 
-
-void Game::putHero(Hero &Hero, int x, int y) {
+void Game::putHero(Hero &hero, int x, int y) {
 	if (gamerunning)throw GameAlreadyStartedException("A jatek mar elindult,mar nem lehet feltenni host!");
 	if (mapready == false)throw Map::WrongIndexException("Meg nincs palyaterkep beallitva!");
 	if (heroready)throw AlreadyHasHeroException("Mar egy hos van az arenaban!");
 	if (terkep.get(x, y) == Map::type::Wall) throw OccupiedException("Falra nem kerulhet Hero!");
-	hos.hero = &Hero;
+	hos.hero = new Hero(hero);
 	hos.posx = x;
 	hos.posy = y;
 	heroready = true;
 }
 
-void Game::putMonster(Monster &Monster, int x, int y) {
+void Game::putMonster(Monster &monster, int x, int y) {
 	if (mapready == false)throw Map::WrongIndexException("Meg nincs palyaterkep beallitva!");
 	if (terkep.get(x, y) == Map::type::Wall) throw OccupiedException("Falra nem kerulhet Monster!");
 	Arenaszorny s;
-	s.monster = &Monster;
+	s.monster = new Monster(monster);
 	s.posx = x;
 	s.posy = y;
 	arenaszornyek.push_back(s);
@@ -72,7 +67,9 @@ void Game::run() {
 void Game::CheckForFight() {
     int heroX = hos.posx;
     int heroY = hos.posy;
-    std::vector<int> deadMonsters;
+    Hero tmphero = *hos.hero;
+
+
 
     for (int i = 0; i <(int)arenaszornyek.size(); i++) {
         if (arenaszornyek[i].posx == heroX && arenaszornyek[i].posy == heroY) {
@@ -89,17 +86,6 @@ void Game::drawmap() {
     int positivewidth;
     int negativeheight;
     int positiveheight;
-
-	/*char Balfel = "╔";
-	char Jobbfel = "╗";
-	char Balle = "╚";
-	char Jobble = "╝";
-	char vizszint = "═";
-	char szabad = "░";
-	char fal = "█";
-	char balhos = "┣";
-	char jobbhos = "┫";
-	char fuggoleges = "║";*/
 
 	if ((hos.posx - lightradius) < 0) negativewidth = 0;
 	else negativewidth = hos.posx - lightradius;
@@ -158,7 +144,7 @@ void Game::readInput() {
             TranslateUserInput(way, difX, difY, correctInput);
         }
 
-        if (terkep.get(heroX + difX, heroY + difY) == Map::type::Free)
+        if (terkep.get(heroX + difX, heroY + difY) != Map::type::Wall)
             correctMove = true;
         else {
             correctInput = false;

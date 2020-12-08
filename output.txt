@@ -22,12 +22,72 @@ Which way do you wish to go?
 ║║██████║║
 ╚════════╝
 
-Prince Aidan of Khanduras(1) vs Training Dummy
+Prince Aidan of Khanduras(1) vs Fallen
+
+Which way do you wish to go?
+(N)orth, (S)outh, (E)ast, (W)est
+
+╔════════════════════════╗
+║║██████████████████████║║
+║║██░░░░░░┣┫M░░░M░░░M░██║║
+║║██████████████████████║║
+╚════════════════════════╝
+
+Which way do you wish to go?
+(N)orth, (S)outh, (E)ast, (W)est
+
+╔════════════════════════╗
+║║██████████████████████║║
+║║██░░░░░░░░┣┫░░M░░░M░██║║
+║║██████████████████████║║
+╚════════════════════════╝
+
+Prince Aidan of Khanduras(2) vs Zombie
+
+Which way do you wish to go?
+(N)orth, (S)outh, (E)ast, (W)est
+
+╔════════════════════════╗
+║║██████████████████████║║
+║║██░░░░░░░░░░┣┫M░░░M░██║║
+║║██████████████████████║║
+╚════════════════════════╝
+
+Which way do you wish to go?
+(N)orth, (S)outh, (E)ast, (W)est
+
+╔════════════════════════╗
+║║██████████████████████║║
+║║██░░░░░░░░░░░░┣┫░░M░██║║
+║║██████████████████████║║
+╚════════════════════════╝
+
+Prince Aidan of Khanduras(4) vs Zombie
+
+Which way do you wish to go?
+(N)orth, (S)outh, (E)ast, (W)est
+
+╔════════════════════════╗
+║║██████████████████████║║
+║║██░░░░░░░░░░░░░░┣┫M░██║║
+║║██████████████████████║║
+╚════════════════════════╝
+
+Which way do you wish to go?
+(N)orth, (S)outh, (E)ast, (W)est
+
+╔════════════════════════╗
+║║██████████████████████║║
+║║██░░░░░░░░░░░░░░░░┣┫██║║
+║║██████████████████████║║
+╚════════════════════════╝
+
+Prince Aidan of Khanduras(7) vs Blood Raven
 
 Prince Aidan of Khanduras cleared the map.
 
-  LVL: 13
-   HP: 90/90
-  DMG: Physical: 15, Magical: 13
-  DEF: 13
-  ACD: 0.310672
+  LVL: 35
+   HP: 200/200
+  DMG: Physical: 37, Magical: 35
+  DEF: 35
+  ACD: 0.0305941

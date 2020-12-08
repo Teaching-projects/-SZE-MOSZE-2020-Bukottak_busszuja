@@ -12,6 +12,7 @@
 #include "Monster.h"
 #include "Game.h"
 #include "Map.h"
+#include "PreparedGame.h"
 
 enum mode {
     Scenario,
@@ -41,50 +42,11 @@ void bad_exit(int exitcode){
 void scenarioMode(std::string scenarioFile) {
     if (!std::filesystem::exists(scenarioFile)) bad_exit(3);
 
-    std::string hero_file;
-    std::list<std::string> monster_files;
-
     try {
-        JSON scenario = JSON::parseFromFile(scenarioFile);
-        if (!(scenario.count("hero") && scenario.count("monsters")))
-            bad_exit(3);
-        else {
-            hero_file = scenario.get<std::string>("hero");
-            JSON::list monster_file_list = scenario.get<JSON::list>("monsters");
-            for (auto monster_file : monster_file_list)
-                monster_files.push_back(std::get<std::string>(monster_file));
-        }
-    }
-    catch (const JSON::ParseException &e) {
-        bad_exit(4);
-    }
+        PreparedGame game(scenarioFile);
+        game.run();
+    } catch (const JSON::ParseException& e) {bad_exit(4);}
 
-    try {
-        Hero hero{Hero::parse(hero_file)};
-        std::list<Monster> monsters;
-        for (const auto &monster_file : monster_files)
-            monsters.push_back(Monster::parse(monster_file));
-
-        Map palya("palya1.txt");
-
-        Game jatek;
-
-        jatek.setMap(palya);
-
-        jatek.putHero(hero, 1, 1);
-
-        jatek.putMonster(monsters.front(), 4, 0);
-        if (monsters.size() >= 4) {
-            monsters.pop_front();
-            monsters.pop_front();
-            jatek.putMonster(monsters.front(), 3, 0);
-        }
-
-        jatek.run();
-    }
-    catch (const JSON::ParseException &e) {
-        bad_exit(4);
-    }
 }
 
 void testMode(std::string mapname) {
@@ -93,20 +55,17 @@ void testMode(std::string mapname) {
     dhero.magical = 1;
     dmonster.physical = 0;
     dmonster.magical = 0;
-    Game jatek;
-    Map palya(mapname);
+    Game jatek("markedmap.txt");
+    MarkedMap palya("markedmap.txt");
     jatek.setMap(palya);
     Hero hos("Prince Aidan of Khanduras", 30, dhero, 1, 1.1, 20, 5, 1, 1, 1, 0.9, 1, 1);
     Monster monster1("Training Dummy", 250, dmonster, 1, 2.0);
-    Monster monster2("Training Dummy", 250, dmonster, 1, 2.0);
-    jatek.putHero(hos,1,1);
-    if (mapname == "testmap.txt") {
-        jatek.putMonster(monster1,3,1);
-    } else if (mapname == "testmap2.txt") {
-        jatek.putMonster(monster1,4,1);
-        jatek.putMonster(monster2,1,3);
-    }
-
+    int heroX = palya.getHeroPosition().x;
+    int heroY = palya.getHeroPosition().y;
+    int monster1X = palya.getMonsterPositions('1').back().x;
+    int monster1Y = palya.getMonsterPositions('1').back().y;
+    jatek.putHero(hos,heroX,heroY);
+    jatek.putMonster(monster1,monster1X,monster1Y);
     jatek.run();
 }
 

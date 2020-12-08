@@ -1,5 +1,10 @@
 #include "MarkedMap.h"
 
+bool is_digits(const std::string &str)
+{
+    return std::all_of(str.begin(), str.end(), ::isdigit); // C++11
+}
+
 MarkedMap::~MarkedMap()
 {
 	palya.clear();
@@ -31,4 +36,19 @@ std::vector<Koordinata>MarkedMap::getMonsterPositions(char c)const {
 		}
 	}
 	return monsterCoordVector;
+}
+
+int MarkedMap::getMonsterNumber() {
+    int monsterNumber = 1;
+
+    for (unsigned int i = 0; i < palya.size(); i++) {
+		for (unsigned int j = 0; j < palya[i].size(); j++) {
+			if (isdigit(palya[i][j])) {
+                if (std::stoi(&palya[i][j]) > monsterNumber)
+                    monsterNumber = std::stoi(&palya[i][j]);
+			}
+		}
+	}
+
+    return monsterNumber;
 }

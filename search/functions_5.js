@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['parse',['parse',['../classMonster.html#ad16b0342a5353a6cd3c09b4b435f119a',1,'Monster']]]
+  ['kiir',['kiir',['../classMap.html#ade2b41ffcbcb4939e55a173123a64401',1,'Map']]]
 ];

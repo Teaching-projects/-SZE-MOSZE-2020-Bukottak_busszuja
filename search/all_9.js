@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['map',['Map',['../classMap.html',1,'']]],
-  ['markedmap',['MarkedMap',['../classMarkedMap.html',1,'']]],
-  ['maxhp',['maxhp',['../classMonster.html#a3935c40431f7f6dbdf0a4729c551679b',1,'Monster']]],
-  ['monster',['Monster',['../classMonster.html',1,'Monster'],['../classMonster.html#adc91cd67d0b69350baffc69e3440c885',1,'Monster::Monster()']]]
+  ['list',['list',['../classJSON.html#a200052290120970f650695312ad847b7',1,'JSON']]],
+  ['lvl',['lvl',['../classHero.html#a7a48b0379b1b070b886de42a887c465b',1,'Hero']]],
+  ['lvlup',['lvlUp',['../classHero.html#a3ca6f160b1eccfb8d7a9852ca686f832',1,'Hero']]]
 ];

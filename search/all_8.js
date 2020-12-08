@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['list',['list',['../classJSON.html#a200052290120970f650695312ad847b7',1,'JSON']]]
+  ['kiir',['kiir',['../classMap.html#ade2b41ffcbcb4939e55a173123a64401',1,'Map']]],
+  ['koordinata',['Koordinata',['../structKoordinata.html',1,'']]]
 ];

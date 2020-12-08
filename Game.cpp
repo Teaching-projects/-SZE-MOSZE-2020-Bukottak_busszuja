@@ -61,7 +61,8 @@ void Game::run() {
                   << "   HP: " << hos.hero->getHealthPoints() << "/" << hos.hero->getMaxHealthPoints() << std::endl
                   << "  DMG: " << hos.hero->getDamage() << std::endl
                   << "  DEF: " << hos.hero->getDefense() << std::endl
-                  << "  ACD: " << hos.hero->getAttackCoolDown() << std::endl;
+                  << "  ACD: " << hos.hero->getAttackCoolDown() << std::endl
+                  << "  LR: " << hos.hero->getLightradius() << std::endl;
 }
 
 void Game::CheckForFight() {
@@ -81,22 +82,22 @@ void Game::CheckForFight() {
 }
 
 void Game::drawmap() {
-	int lightradius = hos.hero->getLightradius();
+    int lightradius = hos.hero->getLightradius();
     int negativewidth;
     int positivewidth;
     int negativeheight;
     int positiveheight;
 
-	if ((hos.posx - lightradius) < 0) negativewidth = 0;
+	if ((hos.posx - lightradius) <= 0) negativewidth = 0;
 	else negativewidth = hos.posx - lightradius;
 
-	if ((hos.posx + lightradius) > terkep.getSzelesseg()) positivewidth = terkep.getSzelesseg()- 1;
+	if ((hos.posx + lightradius) >= terkep.getSzelesseg()) positivewidth = terkep.getSzelesseg()- 1;
 	else positivewidth = hos.posx + lightradius;
 
-	if ((hos.posy - lightradius) < 0) negativeheight = 0;
+	if ((hos.posy - lightradius) <= 0) negativeheight = 0;
 	else negativeheight = hos.posy - lightradius;
 
-	if ((hos.posy + lightradius) > terkep.getMagassag()) positiveheight = terkep.getMagassag() - 1;
+	if ((hos.posy + lightradius) >= terkep.getMagassag()) positiveheight = terkep.getMagassag() - 1;
 	else positiveheight = hos.posy + lightradius;
 
 	std::cout << "╔" << "═";

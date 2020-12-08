@@ -93,21 +93,3 @@ Hero Hero::parse(const std::string& json) {
 	}
 	else throw JSON::ParseException("Incorrect attributes in " + json + "!");
 }
-
-/*Hero& Hero::operator=(const Hero &other) {
-    maxhp = other.getMaxHealthPoints();
-    hp = other.getHealthPoints();
-    dmg = other.getDamage();
-    def = other.getDefense();
-    nev = other.getName();
-    speed = other.getAttackCoolDown();
-    xp = 0;
-    lvl = 1;
-    xpPerLvl = other.xpPerLvl;
-    dmgPerLvl = other.dmgPerLvl;
-    defPerLvl = other.defPerLvl;
-    speedPerLvl = other.speedPerLvl;
-    return *this;
-}*/
-
-

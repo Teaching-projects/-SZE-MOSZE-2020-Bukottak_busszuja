@@ -1,0 +1,12 @@
+{
+    "name" : "Langpallos",
+    "base_health_points" : 180,
+    "base_damage" : 11,
+    "base_attack_cooldown" : 9.1,
+    "experience_per_level" : 100,
+    "health_point_bonus_per_level" : 3,
+    "damage_bonus_per_level" : 2,
+    "cooldown_multiplier_per_level": 0.8
+    "base_defense" : 1,
+    "defense_bonus_per_level" : 1
+}

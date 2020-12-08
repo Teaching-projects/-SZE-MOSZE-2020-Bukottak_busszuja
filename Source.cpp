@@ -49,7 +49,7 @@ void scenarioMode(std::string scenarioFile) {
 
 }
 
-void testMode(std::string mapname) {
+void testMode() {
     Damage dhero, dmonster;
     dhero.physical = 3;
     dhero.magical = 1;
@@ -69,8 +69,7 @@ void testMode(std::string mapname) {
     jatek.run();
 }
 
-//usage scenario    <scenario file>
-//      test        <mapfile>
+//usage <mode> <scenario file>
 int main(int argc, char **argv)
 {
     if (argc != 3) bad_exit(1);
@@ -83,7 +82,7 @@ int main(int argc, char **argv)
         break;
 
     case mode::Test:
-        testMode(argv[2]);
+        testMode();
         break;
     }
 

@@ -18,7 +18,7 @@
 
 class PreparedGame : public Game {
     public:
-        PreparedGame(std::string scenariojson);		///< Egy forgatokonyv alapjan elindit egy játékot
+        PreparedGame(std::string scenariojson);		///< Egy forgatokonyv alapjan elindit egy jatekot
         using Game::run;
 };
 

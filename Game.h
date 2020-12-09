@@ -3,7 +3,7 @@
  *
  * \brief Game class
  *
- * \author Haban András, Tranta Mate, Toth Norbert
+ * \author Haban Andras, Tranta Mate, Toth Norbert
  *
  * Created on: 2020/12/07 17:38
 */
@@ -16,13 +16,13 @@
 #include <vector>
 
 struct Arenaszorny {
-	Monster *monster; 						///< Szorny strukturaja a játekban
+	Monster *monster; 						///< Szorny strukturaja a jatekban
 	int posx;								
 	int posy;
 };
 
 struct Arenahos {
-	Hero *hero;							 	///< Hos strukturaja a játékban
+	Hero *hero;							 	///< Hos strukturaja a jatekban
 	int posx;
 	int posy;
 };
@@ -34,7 +34,7 @@ public:
 	void setMap(Map map);													///< Egy jatekhoz terkepet rendel
 	void putHero(Hero &hero, int x, int y);									///< Egy host elhelyez a terkepen a jatekon belul
 	void putMonster(Monster &monster, int x, int y);						///< Egy szornyet elhelyez a terkepen a jatekon belul 
-	int getMonsterdb(int x, int y);											///< Lekeri a szornyek számát egy adott pozicion
+	int getMonsterdb(int x, int y);											///< Lekeri a szornyek szamat egy adott pozicion
 	void run();																///< Elinditja a jatekot
 
 	class AlreadyHasHeroException : public std::runtime_error {

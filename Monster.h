@@ -40,6 +40,6 @@ class Monster {
         void fightTilDeath(Monster&);
         bool isAlive() const;                                                                               ///< A parancsori argumentumban megadott ket host harcoltatja
 	      bool operator ==(const Monster & other) const {
-			return (this->hp == other.getHealthPoints() && this->dmg == other.getDamage() && this->def == other.getDefense() && this->nev == other.getName() && this->speed == other.getAttackCoolDown() && this->maxhp==other.getMaxHealthPoints());	///< Operator ami összehasonlit ket szörny objektumot
+			return (this->hp == other.getHealthPoints() && this->dmg == other.getDamage() && this->def == other.getDefense() && this->nev == other.getName() && this->speed == other.getAttackCoolDown() && this->maxhp==other.getMaxHealthPoints());	///< Operator ami osszehasonlit ket szorny objektumot
 		}
 };

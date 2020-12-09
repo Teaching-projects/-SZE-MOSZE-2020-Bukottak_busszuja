@@ -61,7 +61,8 @@ void Game::run() {
                   << "   HP: " << hos.hero->getHealthPoints() << "/" << hos.hero->getMaxHealthPoints() << std::endl
                   << "  DMG: " << hos.hero->getDamage() << std::endl
                   << "  DEF: " << hos.hero->getDefense() << std::endl
-                  << "  ACD: " << hos.hero->getAttackCoolDown() << std::endl;
+                  << "  ACD: " << hos.hero->getAttackCoolDown() << std::endl
+                  << "  LR: " << hos.hero->getLightradius() << std::endl;
 }
 
 void Game::CheckForFight() {
@@ -81,15 +82,30 @@ void Game::CheckForFight() {
 }
 
 void Game::drawmap() {
-	int szelesseg = terkep.getSzelesseg();
-	int magassag = terkep.getMagassag();
+    int lightradius = hos.hero->getLightradius();
+    int negativewidth;
+    int positivewidth;
+    int negativeheight;
+    int positiveheight;
+
+	if ((hos.posx - lightradius) <= 0) negativewidth = 0;
+	else negativewidth = hos.posx - lightradius;
+
+	if ((hos.posx + lightradius) >= terkep.getSzelesseg()) positivewidth = terkep.getSzelesseg()- 1;
+	else positivewidth = hos.posx + lightradius;
+
+	if ((hos.posy - lightradius) <= 0) negativeheight = 0;
+	else negativeheight = hos.posy - lightradius;
+
+	if ((hos.posy + lightradius) >= terkep.getMagassag()) positiveheight = terkep.getMagassag() - 1;
+	else positiveheight = hos.posy + lightradius;
 
 	std::cout << "╔" << "═";
-	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
+	for (int i = negativewidth; i <= positivewidth; i++) std::cout << "═" << "═";
 	std::cout << "═" << "╗" << std::endl;
-	for (int i = 0; i < magassag; i++) {
+	for (int i = negativeheight; i <= positiveheight; i++) {
 		std::cout << "║" << "║";
-		for (int j = 0; j < szelesseg; j++) {
+		for (int j = negativewidth; j <= positivewidth; j++) {
 			try {
 				if (terkep.get(j, i) == Map::type::Wall) std::cout << "█" << "█";
 				else if (hos.posx == j && hos.posy == i) std::cout << "┣" << "┫";
@@ -105,7 +121,7 @@ void Game::drawmap() {
 		std::cout << "║" << "║" <<std::endl;
 	}
 	std::cout << "╚" << "═";
-	for (int i = 0; i < szelesseg; i++) std::cout << "═" << "═";
+	for (int i = negativewidth; i <= positivewidth; i++) std::cout << "═" << "═";
 	std::cout << "═" << "╝" << std::endl;
 
 }

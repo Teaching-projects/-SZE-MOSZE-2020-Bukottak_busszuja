@@ -1,9 +1,9 @@
 /**
- * \class Szörny
+ * \class Szorny
  *
- * \brief Szörny class
+ * \brief Szorny class
  *
- * \author Habán András, Tranta Máté, Tóth Norbert
+ * \author Haban Andras, Tranta Mate, Toth Norbert
  *
  * Created on: 2020/10/14 17:15
 */
@@ -18,28 +18,28 @@
 
 class Monster {
     protected:
-        std::string nev;                                                                                                    ///< A szörny neve
-        int maxhp;                                                                                                          ///< A szörny maximum életpontja
-        int hp;                                                                                                             ///< A szörny életpontjai
-        Damage dmg;                                                                                                         ///< A szörny ütésének erõsege;                                                                                                           ///< A szörny ütésének erõsege
-        int def;
-        double speed;                                                                                                       ///< A szörny ütéseinek gyorsasága
-        virtual void tamad(Monster* );                                                                                          ///< Egy darab ütést visz be
+        std::string nev;                                                                                                    ///< A szorny neve
+        int maxhp;                                                                                                          ///< A szorny maximum eletpontja
+        int hp;                                                                                                             ///< A szorny eletpontjai
+        Damage dmg;                                                                                                         ///< A szorny utesenek erosege;                                                                                                           
+        int def;																											///< A vedelmenek erosege;				
+        double speed;                                                                                                       ///< A szorny uteseinek gyorsasaga
+        virtual void tamad(Monster* );                                                                                          ///< Egy darab utest visz be
         friend class Hero;
     public:
-        Monster(std::string nev, int hp, Damage dmg, int def, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), def(def), speed(speed) {}   ///< Szörny osztály konstruktora
-        Damage getDamage()const;                                                                                                  ///< Lekéri a szörny sebzését
+        Monster(std::string nev, int hp, Damage dmg, int def, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), def(def), speed(speed) {}   ///< Szorny osztaly konstruktora
+        Damage getDamage()const;                                                                                                  ///< Lekeri a sorny sebzeset
         int getDefense() const;
-        int getMaxHealthPoints() const;                                                                                               ///< Lekéri a szörny maximum HP-ját
-        int getHealthPoints() const;                                                                                                   ///< Lekéri a szörny HP-ját
-        double getAttackCoolDown() const;                                                                                             ///< Lekéri a szörny atackspeedjét
-        std::string getName() const;                                                                                         ///< Lekéri a szörny nevét
-        static Monster parse(const std::string& json);                                                               ///< Beolvassa a szörny értékeit
-        Monster& operator=(const Monster&);                                                                                   ///< Lehetővé teszi egy szörny értékeinek beállítását egy másikéra
-        Monster(const Monster& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), def(s2.def), speed(s2.speed) {};                ///< Lehetővé teszi egy szörny létrehozását egy másiknak a lemásolásával
+        int getMaxHealthPoints() const;                                                                                               ///< Lekeri a szorny maximum HP-jat
+        int getHealthPoints() const;                                                                                                   ///< Lekeri a szorny HP-jat
+        double getAttackCoolDown() const;                                                                                             ///< Lekeri a szorny atackspeedjet
+        std::string getName() const;                                                                                         ///< Lekeri a szorny nevet
+        static Monster parse(const std::string& json);                                                               ///< Beolvassa a szorny ertekeit
+        Monster& operator=(const Monster&);                                                                                   ///< Lehetove teszi egy szorny ertekeinek bealitasat egy mmasikra
+        Monster(const Monster& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), def(s2.def), speed(s2.speed) {};                ///< Lehetove teszi egy szorny letrehozasat egy maik a lemasolasaval
         void fightTilDeath(Monster&);
-        bool isAlive() const;                                                                               ///< A parancsori argumentumban megadott két hõst harcoltatja
+        bool isAlive() const;                                                                               ///< A parancsori argumentumban megadott ket host harcoltatja
 	      bool operator ==(const Monster & other) const {
-			return (this->hp == other.getHealthPoints() && this->dmg == other.getDamage() && this->def == other.getDefense() && this->nev == other.getName() && this->speed == other.getAttackCoolDown() && this->maxhp==other.getMaxHealthPoints());	///< Oper�tor ami �sszehasonl�t k�t sz�rny objektumot
+			return (this->hp == other.getHealthPoints() && this->dmg == other.getDamage() && this->def == other.getDefense() && this->nev == other.getName() && this->speed == other.getAttackCoolDown() && this->maxhp==other.getMaxHealthPoints());	///< Operator ami osszehasonlit ket szorny objektumot
 		}
 };

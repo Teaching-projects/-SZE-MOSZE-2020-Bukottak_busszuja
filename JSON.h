@@ -3,7 +3,7 @@
  *
  * \brief json Class
  *
- * \author Habán András, Tranta Máté, Tóth Norbert
+ * \author Haban Andras, Tranta Mate, Toth Norbert
  *
  * Created on: 2020/12/07 18:13
 */
@@ -25,21 +25,21 @@
 
 class JSON {
 public:
-  typedef std::list<std::variant<std::string, int, double>> list;				///< Egy listÃ¡t definiÃ¡l, aminek szÃ¶veg, egÃ©sz, vagy double tagja lehet
+  typedef std::list<std::variant<std::string, int, double>> list;				///< Egy listat definial, aminek szoveg, egesz, vagy double tagja lehet
 
 
-	JSON(std::ifstream &);							///< Json konstruktora fájlváltozot vár
-	JSON(const std::string&);						///< Json konstruktora stringet vár
-	JSON(const char *);								///< Json konstruktora fájlnevet vár
-	static JSON parseFromFile(std::ifstream &);		///< Meghívja json fájlváltozót váró konstruktorát (statikus függvény)
-	static JSON parseFromFile(const std::string&);	///< Meghívja json sztringet váró konstruktorát (statikus függvény)
-	static JSON parseFromFile(const char *);		///< Meghívja json fájlnevet váró konstruktorát (statikus függvény)
-	~JSON();										///< Json osztály destruktora
-	const int count(const std::string& key);		///< Megnézi létezik-e az adott kulcs
+	JSON(std::ifstream &);							///< Json konstruktora fajlvaltozot var
+	JSON(const std::string&);						///< Json konstruktora stringet var
+	JSON(const char *);								///< Json konstruktora fajlnevet var
+	static JSON parseFromFile(std::ifstream &);		///< Meghivja json fajlvaltozot varo konstruktorat (statikus fuggveny)
+	static JSON parseFromFile(const std::string&);	///< Meghivja json sztringet varo konstruktorat (statikus fuggveny)
+	static JSON parseFromFile(const char *);		///< Meghivja json fajlnevet varo konstruktorat (statikus fuggveny)
+	~JSON();										///< Json osztaly destruktora
+	const int count(const std::string& key);		///< Megnezi letezik-e az adott kulcs
 
-	int GetDataCount() const;						///< Lekéri a map méretét amiben az értékek vannak
+	int GetDataCount() const;						///< Lekeri a map meretet amiben az ertekek vannak
 
-    template <typename T>							///< Getter függvény ami lekér egy listát
+    template <typename T>							///< Getter fuggveny ami leker egy listat
 	inline typename std::enable_if<std::is_same<T, JSON::list>::value, T>::type
 	get(const std::string& key){
 		if (!count(key)) throw ParseException("Key does not exist in map!");
@@ -54,7 +54,7 @@ public:
 			}
 		}
 
-	template <typename T> 							///< Getter függvény ami lekér egy értéket
+	template <typename T> 							///< Getter fuggveny ami leker egy erteket
 	inline typename std::enable_if<!std::is_same<T, JSON::list>::value, T>::type 
 	get(const std::string& key){
        	if (!count(key)) throw ParseException("Key does not exist in map!");
@@ -67,8 +67,8 @@ public:
     };
 
 private:
-	void Jsonprsr(std::ifstream &);										///< Jsonparser fõlogikája
-	std::map <std::string, std::variant<std::string, int, double>> m;	///< map ami tartalmazza a beolvasott kulcsokat és értékeket
+	void Jsonprsr(std::ifstream &);										///< Jsonparser fologikaja
+	std::map <std::string, std::variant<std::string, int, double>> m;	///< map ami tartalmazza a beolvasott kulcsokat és ertekeket
 };
 
 #endif

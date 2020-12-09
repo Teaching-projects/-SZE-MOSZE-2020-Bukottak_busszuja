@@ -3,7 +3,7 @@
  *
  * \brief Map Class
  *
- * \author Habán András, Tranta Máté, Tóth Norbert
+ * \author Haban Andras, Tranta Mate, Toth Norbert
  *
  * Created on: 2020/12/07 18:25
 */
@@ -20,16 +20,16 @@
 class Map
 {
 protected:
-	std::vector <std::string> palya;			///< Vektor ami a pálya sorait tartalmazza
+	std::vector <std::string> palya;			///< Vektor ami a palya sorait tartalmazza
 public:
-	enum type { Wall, Free,Unknow};				///< Egy mezõ lehetséges típusai
-	Map(const std::string &);					///< Map osztály construktora
-	Map(){}										///< Map osztály default konstruktora
-	virtual ~Map();								///< Map ostály destruktora
-	void kiir()const;							///< függvény ami kiírja a beolvasott pálya tartalmát
-	int getSzelesseg()const;					///< lekéri a pálya szélességét
-	int getMagassag()const;						///< lekéri a pálya magasságát
-	Map::type get(int x, int y) const;			///< visszaadja a pálya egy mezõjének típusát koordináta alapján
+	enum type { Wall, Free,Unknow};				///< Egy mezo lehetseges tipusai
+	Map(const std::string &);					///< Map osztaly konstruktora
+	Map(){}										///< Map osztaly default konstruktora
+	virtual ~Map();								///< Map osztaly destruktora
+	void kiir()const;							///< fuggveny ami kiirja a beolvasott palya tartalmat
+	int getSzelesseg()const;					///< lekeri a palya szelesseget
+	int getMagassag()const;						///< lekeri a palya magassagat
+	Map::type get(int x, int y) const;			///< visszaadja a palya egy mezojenek tipusat koordinata alapjan
 	class WrongIndexException : public std::runtime_error {
 	public:
 		WrongIndexException(const std::string& hibauzenet) : std::runtime_error(hibauzenet) {}

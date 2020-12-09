@@ -12,7 +12,7 @@
 
 struct Damage {
     int physical;			///< A damage physical tipusanak deklaracioja
-    int magical;			///< A damage magical tipusának deklaracioja
+    int magical;			///< A damage magical tipusanak deklaracioja
 
     bool operator==(const Damage &other) const{									///< Operator ami megvizsgalja ket damage egyenlo-e
         return(this->physical == other.physical && this->magical == other.magical);

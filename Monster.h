@@ -33,7 +33,7 @@ class Monster {
         int getMaxHealthPoints() const;                                                                                               ///< Lekeri a szorny maximum HP-jat
         int getHealthPoints() const;                                                                                                   ///< Lekeri a szorny HP-jat
         double getAttackCoolDown() const;                                                                                             ///< Lekeri a szorny atackspeedjet
-        std::string getName() const;                                                                                         ///< Lekeri a szorny nevA©t
+        std::string getName() const;                                                                                         ///< Lekeri a szorny nevet
         static Monster parse(const std::string& json);                                                               ///< Beolvassa a szorny ertekeit
         Monster& operator=(const Monster&);                                                                                   ///< Lehetove teszi egy szorny ertekeinek bealitasat egy mmasikra
         Monster(const Monster& s2) : nev(s2.nev), maxhp(s2.maxhp), hp(s2.hp), dmg(s2.dmg), def(s2.def), speed(s2.speed) {};                ///< Lehetove teszi egy szorny letrehozasat egy maik a lemasolasaval

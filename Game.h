@@ -3,7 +3,7 @@
  *
  * \brief Game class
  *
- * \author Habán András, Tranta Máté, Tóth Norbert
+ * \author Haban András, Tranta Mate, Toth Norbert
  *
  * Created on: 2020/12/07 17:38
 */
@@ -16,26 +16,26 @@
 #include <vector>
 
 struct Arenaszorny {
-	Monster *monster; 						///< Szörny struktúrája a játékban
+	Monster *monster; 						///< Szorny strukturaja a játekban
 	int posx;								
 	int posy;
 };
 
 struct Arenahos {
-	Hero *hero;							 	///< Hõs struktúrája a játékban
+	Hero *hero;							 	///< Hos strukturaja a játékban
 	int posx;
 	int posy;
 };
 
 class Game {								
 public:
-    Game(): terkep(Map()) {};												///< Egy játékot inicializál üres térképpel
-	Game(const std::string& mapFileName) : terkep(Map(mapFileName)) {};		///< Egy játékot inicializál egy megadott térképpel
-	void setMap(Map map);													///< Egy játékhoz térképet rendel
-	void putHero(Hero &hero, int x, int y);									///< Egy hõst elhelyez a térképen a játékon belül
-	void putMonster(Monster &monster, int x, int y);						///< Egy szörnyet elhelyez a térképen a játékon belül 
-	int getMonsterdb(int x, int y);											///< Lekéri a szörnyek számát egy adott pozicion
-	void run();																///< Elindítja a játékot
+    Game(): terkep(Map()) {};												///< Egy jatekot inicializal ures terkeppel
+	Game(const std::string& mapFileName) : terkep(Map(mapFileName)) {};		///< Egy jatekot inicializal egy megadott terkeppel
+	void setMap(Map map);													///< Egy jatekhoz terkepet rendel
+	void putHero(Hero &hero, int x, int y);									///< Egy host elhelyez a terkepen a jatekon belul
+	void putMonster(Monster &monster, int x, int y);						///< Egy szornyet elhelyez a terkepen a jatekon belul 
+	int getMonsterdb(int x, int y);											///< Lekeri a szornyek számát egy adott pozicion
+	void run();																///< Elinditja a jatekot
 
 	class AlreadyHasHeroException : public std::runtime_error {
         public:
@@ -62,17 +62,17 @@ public:
             GameAlreadyStartedException(const std::string& hibauzenet) : std::runtime_error(hibauzenet) {}
 	};
 private:
-	Map terkep;															///< Pálya térkép
-	std::vector <Arenaszorny> arenaszornyek;							///< Játékban szereplõ szörnyek
-	Arenahos hos;														///< Játékban szereplõ hõs
-	bool mapready = false;												///< Változó ami megadja, hogy van-e pálya rendelve a játékhoz
-	bool heroready = false;												///< Változó ami megadja, hogy van-e hõs a játékhoz rendelve
-	bool monsterready = false;											///< Változó ami megadja, hogy van-e szörny rendelve a játékhoz
-	bool gamerunning = false;											///< Változó ami megadja, hogy van-e éppen futó játék
-	void CheckForFight();												///< leellenõrzi, hogy a hõs pozicióján van-e szörny és ha van akkor küzdelmet indít 
-	void drawmap();														///< kirajzolja a pályát a kimenetre
-	void readInput();													///< felhasználó imputját várja és az alapján mozgat hõst
-	void TranslateUserInput(char, int&, int&, bool&);					///< az inputot alakítja mozgássá
+	Map terkep;															///< Palya terkep
+	std::vector <Arenaszorny> arenaszornyek;							///< Jatekban szereplo szornyek
+	Arenahos hos;														///< Jatekban szereplo hos
+	bool mapready = false;												///< Valtozo ami megadja, hogy van-e palya rendelve a jatekhoz
+	bool heroready = false;												///< Valtozo ami megadja, hogy van-e hos a jatekhoz rendelve
+	bool monsterready = false;											///< Valtozo ami megadja, hogy van-e szorny rendelve a jatekhoz
+	bool gamerunning = false;											///< Változo ami megadja, hogy van-e eppen futo jaték
+	void CheckForFight();												///< leellenorzi, hogy a hos poziciojan van-e szorny es ha van akkor kuzdelmet indit 
+	void drawmap();														///< kirajzolja a palyat a kimenetre
+	void readInput();													///< felhasznalo imputjat varja és az alapjan mozgat host
+	void TranslateUserInput(char, int&, int&, bool&);					///< az inputot alakitja mozgassa
 
 };
 

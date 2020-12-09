@@ -3,7 +3,7 @@
  *
  * \brief PreparedGame Class
  *
- * \author Habán András, Tranta Máté, Tóth Norbert
+ * \author Haban Andras, Tranta Mate, Toth Norbert
  *
  * Created on: 2020/12/07 18:35
 */
@@ -18,7 +18,7 @@
 
 class PreparedGame : public Game {
     public:
-        PreparedGame(std::string scenariojson);		///< Egy forgatókönyv alapján elindít egy játékot
+        PreparedGame(std::string scenariojson);		///< Egy forgatokonyv alapjan elindit egy játékot
         using Game::run;
 };
 

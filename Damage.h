@@ -3,7 +3,7 @@
  *
  * \brief Damage Struct
  *
- * \author Habán András, Tranta Máté, Tóth Norbert
+ * \author Habán Andras, Tranta Mate, Toth Norbert
  *
  * Created on: 2020/12/07 17:55
 */
@@ -11,33 +11,33 @@
 #include<iostream>
 
 struct Damage {
-    int physical;			///< A damage physical tipusának deklarációja
-    int magical;			///< A damage magical tipusának deklarációja
+    int physical;			///< A damage physical tipusanak deklaracioja
+    int magical;			///< A damage magical tipusának deklaracioja
 
-    bool operator==(const Damage &other) const{									///< Operátor ami megvizsgálja két damage egyenlõ-e
+    bool operator==(const Damage &other) const{									///< Operator ami megvizsgalja ket damage egyenlo-e
         return(this->physical == other.physical && this->magical == other.magical);
     }
 
-    Damage operator+(const Damage &other) {										///< Operátor ami két damaget ad össze
+    Damage operator+(const Damage &other) {										///< Operator ami ket damaget ad össze
         Damage addeddmg;
         addeddmg.physical = this->physical + other.physical;
         addeddmg.magical = this->magical + other.magical;
         return(addeddmg);
     }
 
-    Damage operator+=(const Damage &other) {									///< Operátor ami egy damage-hez hozzáad még egy damaget
+    Damage operator+=(const Damage &other) {									///< Operator ami egy damage-hez hozzaad meg egy damaget
         this->physical += other.physical;
         this->magical += other.magical;
         return(*this);
     }
 
-    Damage operator*=(const Damage &other) {									///< Operátor ami egy damaget megszoroz egy másik damage-el
+    Damage operator*=(const Damage &other) {									///< Operator ami egy damaget megszoroz egy masik damage-el
         this->physical *= other.physical;
         this->magical *= other.magical;
         return(*this);
     }
 
-    friend std::ostream& operator<<(std::ostream& out, const Damage& dmg){		///< Operátor egy damage kiiratására
+    friend std::ostream& operator<<(std::ostream& out, const Damage& dmg){		///< Operator egy damage kiiratására
             out<<"Physical: "<<dmg.physical<<", Magical: "<<dmg.magical;
             return out;
     }

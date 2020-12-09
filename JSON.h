@@ -25,7 +25,7 @@
 
 class JSON {
 public:
-  typedef std::list<std::variant<std::string, int, double>> list;				///< Egy listÃ¡t definiÃ¡l, aminek szÃ¶veg, egÃ©sz, vagy double tagja lehet
+  typedef std::list<std::variant<std::string, int, double>> list;				///< Egy listat definial, aminek szoveg, egesz, vagy double tagja lehet
 
 
 	JSON(std::ifstream &);							///< Json konstruktora fájlváltozot vár

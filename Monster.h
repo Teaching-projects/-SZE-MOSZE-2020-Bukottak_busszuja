@@ -28,7 +28,7 @@ class Monster {
         friend class Hero;
     public:
         Monster(std::string nev, int hp, Damage dmg, int def, double speed) :nev(nev), maxhp(hp), hp(maxhp), dmg(dmg), def(def), speed(speed) {}   ///< Szorny osztaly konstruktora
-        Damage getDamage()const;                                                                                                  ///< Lekeri a sorny sebzeset
+        Damage getDamage()const;                                                                                                  ///< Lekeri a szorny sebzeset
         int getDefense() const;
         int getMaxHealthPoints() const;                                                                                               ///< Lekeri a szorny maximum HP-jat
         int getHealthPoints() const;                                                                                                   ///< Lekeri a szorny HP-jat
